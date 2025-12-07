@@ -16,6 +16,7 @@
   --zephyr: rgba(0,230,214,.14);
   --ipblue: rgba(0,200,255,.45);
   --text-light: rgba(240,255,255,.9);
+  --info-blue: #9be6ff;
 }
 
 *{ box-sizing:border-box; margin:0; padding:0; }
@@ -52,7 +53,7 @@ h1,h2{
   margin: 0.65em 0 0.35em;
 }
 
-p{ margin: .35em auto; color: var(--text-light); }
+p{ margin: .35em auto; color: var(--info-blue); }
 
 header{ position:relative; z-index:2; padding: 54px 18px 16px; }
 
@@ -69,18 +70,18 @@ header{ position:relative; z-index:2; padding: 54px 18px 16px; }
 .ip-box{
   display:inline-block;
   margin-top: 14px;
-  padding: 10px 18px;
-  border-radius: 12px;
+  padding: 12px 22px;
+  border-radius: 14px;
   font-weight: 900;
   letter-spacing: .2px;
   cursor: pointer;
   background: linear-gradient(135deg, var(--ipblue), rgba(0,200,255,.25));
   border: 1px solid rgba(0,200,255,.5);
-  box-shadow: 0 0 22px rgba(0,200,255,.28);
+  box-shadow: 0 0 28px rgba(0,200,255,.32);
   color: #fff;
   transition: transform .2s ease, box-shadow .2s ease;
 }
-.ip-box:hover{ transform: scale(1.06); box-shadow: 0 0 30px rgba(0,200,255,.4); }
+.ip-box:hover{ transform: scale(1.06); box-shadow: 0 0 36px rgba(0,200,255,.45); }
 
 /* NAVIGATION */
 nav{ position:relative; z-index:2;
@@ -111,7 +112,7 @@ section{ display:block; padding: 12px 10px 6px; }
 body.has-js section.tab-section{ display: none; }
 body.has-js section.tab-section.active{ display: block; }
 
-/* CARDS - zephyr style */
+/* CARDS */
 .card-container{
   display:flex;
   flex-wrap:wrap;
@@ -131,7 +132,8 @@ body.has-js section.tab-section.active{ display: block; }
   transition: transform .22s ease, box-shadow .22s ease;
 }
 .card:hover{ transform: translateY(-4px); box-shadow: 0 0 26px rgba(0,230,214,.22); }
-.card h3, .card p{ color: var(--text-light); }
+.card h3{ color: var(--text-light); margin-bottom:6px; }
+.card p{ color: var(--info-blue); }
 
 /* SNEAK PEEK */
 #sneakpeek .gallery{
@@ -205,17 +207,62 @@ footer{ position:relative; z-index:2; margin: 34px 0 22px; }
 </nav>
 
 <main>
-  <!-- SAMPLE SECTION -->
+  <!-- TEAM ROLES -->
   <section id="roles" class="tab-section active">
     <h2>TEAM ROLES</h2>
     <div class="card-container">
       <div class="card"><h3>⟆ CAPTAIN ⋆ RAFAY ⟆</h3><p>Captain | Strategist | Fearless</p></div>
       <div class="card"><h3>⟆ GAMER ⋆ AFFAN ⟆</h3><p>Owner — Server foundation & direction</p></div>
-      <div class="card"><h3>Ahmed | Blaze</h3><p>Co-Owner — Creative Leadership</p></div>
+      <div class="card"><h3>AHMED | BLAZE</h3><p>Co-Owner — Creative Leadership</p></div>
+      <div class="card"><h3>ALI | SHADOW</h3><p>Moderator — Community Management</p></div>
+      <div class="card"><h3>SAM | LIGHT</h3><p>Builder — World & Structures</p></div>
+      <div class="card"><h3>ZARA | PIXEL</h3><p>Developer — Plugins & Mechanics</p></div>
     </div>
   </section>
 
-  <!-- ADD OTHER SECTIONS (features, rules, reviews, shop) SIMILARLY -->
+  <!-- FEATURES -->
+  <section id="features" class="tab-section">
+    <h2>FEATURES</h2>
+    <div class="card-container">
+      <div class="card"><h3>Survival Mode</h3><p>Experience modern survival gameplay with custom twists.</p></div>
+      <div class="card"><h3>Custom Plugins</h3><p>Enhanced mechanics for PvP, economy & quests.</p></div>
+      <div class="card"><h3>Events</h3><p>Weekly server-wide events and challenges for players.</p></div>
+      <div class="card"><h3>24/7 Uptime</h3><p>Always online with stable performance & backup systems.</p></div>
+    </div>
+  </section>
+
+  <!-- RULES -->
+  <section id="rules" class="tab-section">
+    <h2>RULES</h2>
+    <div class="card-container">
+      <div class="card"><h3>Rule #1</h3><p>Be respectful to all players & staff.</p></div>
+      <div class="card"><h3>Rule #2</h3><p>No griefing or stealing others' builds/items.</p></div>
+      <div class="card"><h3>Rule #3</h3><p>Use appropriate language; no hate speech.</p></div>
+      <div class="card"><h3>Rule #4</h3><p>Report bugs and exploits responsibly.</p></div>
+      <div class="card"><h3>Rule #5</h3><p>Have fun & play fair!</p></div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section id="reviews" class="tab-section">
+    <h2>REVIEWS</h2>
+    <div class="card-container">
+      <div class="card"><h3>Player: Jaxon</h3><p>"The server is amazing, love the custom plugins!"</p></div>
+      <div class="card"><h3>Player: Mia</h3><p>"Great community & events, 5/5 stars!"</p></div>
+      <div class="card"><h3>Player: Leo</h3><p>"Smooth gameplay and friendly staff."</p></div>
+      <div class="card"><h3>Player: Ava</h3><p>"Highly recommend for anyone looking for an active SMP."</p></div>
+    </div>
+  </section>
+
+  <!-- SHOP -->
+  <section id="shop" class="tab-section">
+    <h2>SHOP</h2>
+    <div class="card-container">
+      <div class="card"><h3>Rank Upgrades</h3><p>Get exclusive ranks with perks & cosmetics.</p></div>
+      <div class="card"><h3>Cosmetic Items</h3><p>Custom skins, pets & particle effects.</p></div>
+      <div class="card"><h3>Boosts</h3><p>Speed up progress with in-game boosts.</p></div>
+    </div>
+  </section>
 
   <!-- SNEAK PEEK -->
   <section id="sneakpeek" class="tab-section">
