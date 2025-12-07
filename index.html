@@ -127,10 +127,18 @@ body.has-js section.tab-section.active{ display: block; }
 /* SNEAK PEEK */
 #sneakpeek .gallery{
   display:grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 220px);
   gap: 16px;
-  margin-top: 20px;
 }
+
+#sneakpeek .gallery .peek:nth-child(4),
+#sneakpeek .gallery .peek:nth-child(5){
+  grid-column: 2 / span 2; /* middle row spans 2 columns */
+  grid-row: 2;
+  height: 220px;
+}
+
 .peek{
   border-radius: 16px;
   overflow: hidden;
@@ -207,19 +215,18 @@ footer{ position:relative; z-index:2; margin: 34px 0 22px; }
     </div>
   </section>
 
-<!-- RULES -->
-<section id="rules" class="tab-section">
-  <h2>RULES</h2>
-  <ul style="color:black; text-align:left; padding-left:20px; line-height:1.6; font-weight:700;">
-    <li>Be respectful to all players & staff.</li>
-    <li>No griefing or stealing others' builds/items.</li>
-    <li>Use appropriate language; no hate speech.</li>
-    <li>Report bugs and exploits responsibly.</li>
-    <li>No cheating or using unfair mods.</li>
-    <li>Have fun & play fair!</li>
-  </ul>
-</section>
-
+  <!-- RULES -->
+  <section id="rules" class="tab-section">
+    <h2>RULES</h2>
+    <ul style="color: var(--info-blue); text-align:left; padding-left:20px; line-height:1.8; font-weight:700; font-size:1.05em;">
+      <li>Be respectful to all players & staff.</li>
+      <li>No griefing or stealing others' builds/items.</li>
+      <li>Use appropriate language; no hate speech.</li>
+      <li>Report bugs and exploits responsibly.</li>
+      <li>No cheating or using unfair mods.</li>
+      <li>Have fun & play fair!</li>
+    </ul>
+  </section>
 
   <!-- REVIEWS -->
   <section id="reviews" class="tab-section">
@@ -232,22 +239,21 @@ footer{ position:relative; z-index:2; margin: 34px 0 22px; }
     </div>
   </section>
 
-<!-- SHOP -->
-<section id="shop" class="tab-section">
-  <h2>DIAMA SMP SHOP</h2>
-  <div class="card-container">
-    <div class="card"><h3>ELITE</h3><p>550K OwO</p></div>
-    <div class="card"><h3>OMEGA</h3><p>400K OwO</p></div>
-    <div class="card"><h3>IMMORTAL</h3><p>375K OwO</p></div>
-    <div class="card"><h3>BOOSTER KIT</h3><p>350K OwO</p></div>
-    <div class="card"><h3>ULTRA KIT</h3><p>250K OwO</p></div>
-    <div class="card"><h3>VIP KIT</h3><p>100K OwO</p></div>
-  </div>
-  <p style="margin-top:12px; color: var(--info-blue); font-weight:600;">
-    ⏱ Requirements: Must have patience. No refunds once bought.
-  </p>
-</section>
-
+  <!-- SHOP -->
+  <section id="shop" class="tab-section">
+    <h2>DIAMA SMP SHOP</h2>
+    <div class="card-container">
+      <div class="card"><h3>ELITE</h3><p>550K OwO</p></div>
+      <div class="card"><h3>OMEGA</h3><p>400K OwO</p></div>
+      <div class="card"><h3>IMMORTAL</h3><p>375K OwO</p></div>
+      <div class="card"><h3>BOOSTER KIT</h3><p>350K OwO</p></div>
+      <div class="card"><h3>ULTRA KIT</h3><p>250K OwO</p></div>
+      <div class="card"><h3>VIP KIT</h3><p>100K OwO</p></div>
+    </div>
+    <p style="margin-top:12px; color: var(--info-blue); font-weight:600;">
+      ⏱ Requirements: Must have patience. No refunds once bought.
+    </p>
+  </section>
 
   <!-- SNEAK PEEK -->
   <section id="sneakpeek" class="tab-section">
