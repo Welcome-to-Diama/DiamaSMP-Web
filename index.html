@@ -34,17 +34,6 @@ body{
     linear-gradient(180deg, #061a22 0%, #0a2b3a 34%, #0c3c52 62%, #0e3f57 100%);
 }
 
-body::before{
-  content:"";
-  position:fixed;
-  inset:-2px;
-  background:
-    radial-gradient(1200px 900px at 50% 0%, rgba(255,255,255,.22), transparent 64%),
-    radial-gradient(1400px 900px at 72% 30%, rgba(255,255,255,.14), transparent 68%);
-  pointer-events:none;
-  z-index:0;
-}
-
 h1,h2{
   font-family:"Press Start 2P",cursive;
   letter-spacing:.2px;
@@ -172,21 +161,6 @@ footer{ position:relative; z-index:2; margin: 34px 0 22px; }
   transition: transform .2s ease;
 }
 .discord:hover{ transform: scale(1.06); }
-
-/* PARTICLES */
-.particle{
-  position: fixed;
-  z-index: 0;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(178,255,255,.9), transparent 68%);
-  opacity: .65;
-  animation: floatUp linear infinite;
-  pointer-events: none;
-}
-@keyframes floatUp{
-  from{ transform: translateY(105vh) scale(.5); opacity:.55; }
-  to  { transform: translateY(-12vh) scale(1.2); opacity:0; }
-}
 </style>
 </head>
 <body>
@@ -224,23 +198,26 @@ footer{ position:relative; z-index:2; margin: 34px 0 22px; }
   <section id="features" class="tab-section">
     <h2>FEATURES</h2>
     <div class="card-container">
-      <div class="card"><h3>Survival Mode</h3><p>Experience modern survival gameplay with custom twists.</p></div>
-      <div class="card"><h3>Custom Plugins</h3><p>Enhanced mechanics for PvP, economy & quests.</p></div>
-      <div class="card"><h3>Events</h3><p>Weekly server-wide events and challenges for players.</p></div>
-      <div class="card"><h3>24/7 Uptime</h3><p>Always online with stable performance & backup systems.</p></div>
+      <div class="card"><h3>✅ Fast Lifesteal</h3><p>Regain health by dealing damage to other players.</p></div>
+      <div class="card"><h3>✅ Custom Kits</h3><p>Start with unique gear and abilities tailored for Lifesteal battles.</p></div>
+      <div class="card"><h3>✅ Weekly Events</h3><p>Special Lifesteal events with rewards and leaderboards.</p></div>
+      <div class="card"><h3>⚠ Hardcore PvP</h3><p>Death penalizes your stats, making fights intense.</p></div>
+      <div class="card"><h3>⚠ Limited Resources</h3><p>Scarce ores and items make survival more challenging.</p></div>
+      <div class="card"><h3>⚠ Risk vs Reward</h3><p>High-stakes duels and boss fights with great rewards but high risk.</p></div>
     </div>
   </section>
 
   <!-- RULES -->
   <section id="rules" class="tab-section">
     <h2>RULES</h2>
-    <div class="card-container">
-      <div class="card"><h3>Rule #1</h3><p>Be respectful to all players & staff.</p></div>
-      <div class="card"><h3>Rule #2</h3><p>No griefing or stealing others' builds/items.</p></div>
-      <div class="card"><h3>Rule #3</h3><p>Use appropriate language; no hate speech.</p></div>
-      <div class="card"><h3>Rule #4</h3><p>Report bugs and exploits responsibly.</p></div>
-      <div class="card"><h3>Rule #5</h3><p>Have fun & play fair!</p></div>
-    </div>
+    <ul style="color:black; text-align:left; padding-left:20px; line-height:1.6;">
+      <li>Be respectful to all players & staff.</li>
+      <li>No griefing or stealing others' builds/items.</li>
+      <li>Use appropriate language; no hate speech.</li>
+      <li>Report bugs and exploits responsibly.</li>
+      <li>No cheating or using unfair mods.</li>
+      <li>Have fun & play fair!</li>
+    </ul>
   </section>
 
   <!-- REVIEWS -->
@@ -309,20 +286,6 @@ function copyIP(){
   }
 
   buttons.forEach(b=>b.addEventListener("click",()=>activate(b.getAttribute("data-target"),b)));
-})();
-
-(function spawnParticles(){
-  for(let i=0;i<22;i++){
-    const p=document.createElement("div");
-    p.className="particle";
-    const size=Math.random()*9+4;
-    p.style.width=`${size}px`;
-    p.style.height=`${size}px`;
-    p.style.left=`${Math.random()*100}vw`;
-    p.style.animationDuration=`${8+Math.random()*7}s`;
-    p.style.animationDelay=`${Math.random()*5}s`;
-    document.body.appendChild(p);
-  }
 })();
 </script>
 </body>
