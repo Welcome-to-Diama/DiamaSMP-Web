@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Diama SMP Portal</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Poppins:wght@400;600;800&display=swap');
+
+    :root{
+      --teal: #00e6d6;
+      --aqua: #2cc9ff;
+      --mint: #cafff6;
+      --ink:  #051a22;
+      --night:#081f2a;
+      --stroke: rgba(0,255,255,.24);
+    }
+
+    *{ box-sizing:border-box; }
+
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family:"Poppins",sans-serif;
+      color:#e9fbff;
+      text-align:center;
+      overflow-x:hidden;
+      position:relative;
+
+      /* cascade + zephyr (lighter) background */
+      background:
+        radial-gradient(1200px 900px at 15% 10%, rgba(44,201,255,.55), transparent 62%),
+        radial-gradient(1100px 900px at 90% 15%, rgba(0,230,214,.34), transparent 64%),
+        linear-gradient(180deg, #071e28 0%, #082a38 34%, #0b3c51 62%, #eafcff 100%);
+      background-attachment: fixed;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:-2px;
+      background:
+        radial-gradient(1200px 900px at 50% 0%, rgba(255,255,255,.14), transparent 64%),
+        radial-gradient(1400px 900px at 72% 30%, rgba(255,255,255,.10), transparent 68%);
+      pointer-events:none;
+      z-index:0;
+    }
+
+    h1,h2{
+      font-family:"Press Start 2P",cursive;
+      letter-spacing:.2px;
+      color: var(--mint);
+      text-shadow: 0 0 14px rgba(0,230,214,.55), 0 0 34px rgba(44,201,255,.35);
+      margin: 0.65em 0 0.35em;
+    }
+
+    p{ margin: .35em auto; color: rgba(233,251,255,.92); }
+
+    header{ position:relative; z-index:2; padding: 54px 18px 16px; }
+    .logo{
+      width: 128px;
+      border-radius: 18px;
+      box-shadow: 0 0 24px rgba(0,230,214,.22), 0 0 46px rgba(44,201,255,.18);
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.16);
+    }
+
+    .subline{ margin-top: 10px; font-weight: 600; letter-spacing: .2px; }
+
+    .ip-box{
+      display:inline-block;
+      margin-top: 14px;
+      padding: 10px 18px;
+      border-radius: 12px;
+      font-weight: 800;
+      letter-spacing: .2px;
+      cursor: pointer;
+      background: linear-gradient(135deg, rgba(0,230,214,.22), rgba(44,201,255,.12));
+      border: 1px solid rgba(0,255,255,.24);
+      box-shadow: 0 0 18px rgba(0,230,214,.14);
+      transition: transform .22s ease, background .22s ease, box-shadow .22s ease;
+    }
+    .ip-box:hover{ transform: scale(1.06); background: rgba(255,255,255,.10); box-shadow: 0 0 24px rgba(0,230,214,.24); }
+
+    /* NAV (in your requested order) */
+    nav{
+      position:relative;
+      z-index:2;
+      display:flex;
+      justify-content:center;
+      flex-wrap:wrap;
+      gap: 12px;
+      padding: 18px 14px 6px;
+      margin: 0 auto;
+      max-width: 980px;
+    }
+
+    nav button{
+      border:none;
+      cursor:pointer;
+      font-family:"Press Start 2P", cursive;
+      font-size: .78em;
+      letter-spacing: .2px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      color: #061923;
+      background: linear-gradient(135deg, #7cf8ff, #2cc9ff);
+      box-shadow: 0 0 14px rgba(44,201,255,.22);
+      transition: transform .18s ease, filter .18s ease;
+      white-space: nowrap;
+    }
+    nav button:hover{ transform: scale(1.08); filter: brightness(1.03); }
+    nav button.active{
+      background: linear-gradient(135deg, #a6fff0, #00e6d6);
+      box-shadow: 0 0 24px rgba(0,230,214,.35);
+    }
+
+    main{ position:relative; z-index:2; padding: 8px 12px 28px; max-width: 1080px; margin: 0 auto; }
+
+    section{
+      display:none;
+      opacity:0;
+      transform: translateY(10px);
+      transition: opacity .28s ease, transform .28s ease;
+      padding: 12px 10px 6px;
+    }
+    section.active{ display:block; opacity:1; transform: translateY(0); }
+
+    /* Cards */
+    .card-container{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap: 18px;
+      margin-top: 16px;
+    }
+
+    .card{
+      width: 268px;
+      padding: 18px 16px;
+      border-radius: 16px;
+      background: linear-gradient(180deg, rgba(255,255,255,.12), rgba(4,25,35,.18));
+      border: 1px solid rgba(0,255,255,.22);
+      box-shadow: 0 0 18px rgba(44,201,255,.16);
+      backdrop-filter: blur(6px);
+      transition: transform .22s ease, box-shadow .22s ease;
+      text-align:left;
+    }
+
+    .card:hover{
+      transform: translateY(-4px);
+      box-shadow: 0 0 26px rgba(0,230,214,.22);
+    }
+
+    .card h3{
+      margin: 0 0 6px;
+      font-size: .98em;
+      letter-spacing: .2px;
+      color: rgba(246,255,255,.98);
+    }
+    .card p{ margin: 0; color: rgba(232,251,255,.86); }
+
+    /* shop tone */
+    #shop .card{ background: linear-gradient(180deg, rgba(0,230,214,.14), rgba(4,25,35,.24)); }
+    #shop h3{ color: #cafff6; }
+
+    /* Sneak peek gallery (new section) */
+    #sneakpeek .gallery{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 14px;
+    }
+    @media (max-width: 560px){
+      #sneakpeek .gallery{ grid-template-columns: 1fr; }
+    }
+
+    .peek{
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(0,255,255,.22);
+      background: rgba(255,255,255,.08);
+      box-shadow: 0 0 18px rgba(44,201,255,.14);
+      aspect-ratio: 16 / 10;
+      position: relative;
+    }
+    .peek img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display:block;
+    }
+    .peek .cap{
+      position: absolute;
+      left: 10px;
+      bottom: 10px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(0, 25, 35, .72);
+      border: 1px solid rgba(255,255,255,.22);
+      font-size: .72em;
+      letter-spacing: .2px;
+      color: rgba(232,251,255,.92);
+    }
+
+    footer{ position:relative; z-index:2; margin: 34px 0 22px; }
+
+    .discord{
+      display:inline-block;
+      padding: 12px 22px;
+      border-radius: 999px;
+      text-decoration:none;
+      font-weight: 800;
+      letter-spacing:.1px;
+      background: linear-gradient(135deg, #5865f2, #2e5bff);
+      color:#fff;
+      box-shadow: 0 0 24px rgba(88,101,242,.34);
+      transition: transform .2s ease;
+    }
+    .discord:hover{ transform: scale(1.06); }
+
+    /* particles (zephyr feel) */
+    .particle{
+      position: fixed;
+      z-index: 0;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(178,255,255,.9), transparent 68%);
+      opacity: .65;
+      animation: floatUp linear infinite;
+      pointer-events: none;
+    }
+    @keyframes floatUp{
+      from { transform: translateY(105vh) scale(.5); opacity: .55; }
+      to   { transform: translateY(-12vh) scale(1.2); opacity: 0; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <img src="Diama logo.png" alt="Diama SMP Logo" class="logo">
+    <h1>Diama SMP</h1>
+    <p class="subline">20+ active players • 24/7 online • Version 1.21.6 • Modern Minecraft Community</p>
+    <div class="ip-box" onclick="copyIP()">in01.arialnodes.in:25517</div>
+  </header>
+
+  <!-- 1) TEAM ROLES  2) FEATURES  3) RULES  4) REVIEWS  5) SHOP  6) SNEAK PEEK -->
+  <nav>
+    <button class="active" onclick="showTab('roles', this)">TEAM ROLES</button>
+    <button onclick="showTab('features', this)">FEATURES</button>
+    <button onclick="showTab('rules', this)">RULES</button>
+    <button onclick="showTab('reviews', this)">REVIEWS</button>
+    <button onclick="showTab('shop', this)">SHOP</button>
+    <button onclick="showTab('sneakpeek', this)">SNEAK PEEK</button>
+  </nav>
+
+  <main>
+    <!-- 1) ROLES -->
+    <section id="roles" class="active">
+      <h2>TEAM ROLES</h2>
+      <div class="card-container">
+        <div class="card"><h3>⟆ CAPTAIN ⋆ RAFAY ⟆</h3><p>𝐂𝐚𝐩𝐭𝐚𝐢𝐧 | 𝐒𝐭𝐫𝐚𝐭𝐞𝐠𝐢𝐬𝐭 | 𝐅𝐞𝐚𝐫𝐥𝐞𝐬𝐬</p></div>
+        <div class="card"><h3>⟆ GAMER ⋆ AFFAN ⟆</h3><p>Owner — Server foundation & direction</p></div>
+        <div class="card"><h3>Ahmed | Blaze</h3><p>Co-Owner — Creative Leadership</p></div>
+      </div>
+      <div class="card-container">
+        <div class="card"><h3>FireX | Blaze</h3><p>Manager — Events & player support</p></div>
+        <div class="card"><h3>🌊 Water Hashira</h3><p>Admin — Experienced Staff & support</p></div>
+      </div>
+    </section>
+
+    <!-- 2) FEATURES -->
+    <section id="features">
+      <h2>FEATURES</h2>
+      <div class="card-container">
+        <div class="card"><h3>🌍 24/7 Server</h3><p>Always available for grind and fun sessions.</p></div>
+        <div class="card"><h3>🛡️ Active Staff</h3><p>Helpful team ready anytime.</p></div>
+        <div class="card"><h3>⚔️ PvP Adventures</h3><p>Battle, raid and explore together.</p></div>
+        <div class="card"><h3>🧠 Strategy</h3><p>Collaborate and build empires.</p></div>
+        <div class="card"><h3>🎁 Events</h3><p>Weekly competitions and rewards.</p></div>
+        <div class="card"><h3>🌲 Survival Economy</h3><p>Trade, earn, and grow your in-game wealth!</p></div>
+      </div>
+    </section>
+
+    <!-- 3) RULES -->
+    <section id="rules">
+      <h2>SERVER RULES</h2>
+      <div style="max-width:800px;margin:0 auto;text-align:left;line-height:1.9;">
+        <p>✅ <strong>Respect everyone</strong> — no hate speech or toxicity.</p>
+        <p>❌ <strong>No hacks or exploits.</strong></p>
+        <p>🏠 <strong>No spawn killing or griefing.</strong></p>
+        <p>⚔️ <strong>Fair PvP only.</strong></p>
+        <p>📛 <strong>Follow staff instructions.</strong></p>
+      </div>
+    </section>
+
+    <!-- 4) REVIEWS -->
+    <section id="reviews">
+      <h2>CREW REVIEWS</h2>
+      <div class="card-container">
+        <div class="card"><h3>Bhalutenx</h3><p>Best SMP I never feel bored</p></div>
+        <div class="card"><h3>CookieDevil</h3><p>Friendly staff, active gameplay, and fun events.</p></div>
+        <div class="card"><h3>DiedGV</h3><p>Lively and loyal community — love it here!</p></div>
+      </div>
+    </section>
+
+    <!-- 5) SHOP -->
+    <section id="shop">
+      <h2>🛒 DIAMA SMP SHOP</h2>
+      <div class="card-container">
+        <div class="card"><h3>ELITE</h3><p>550K OwO</p></div>
+        <div class="card"><h3>OMEGA</h3><p>400K OwO</p></div>
+        <div class="card"><h3>IMMORTAL</h3><p>375K OwO</p></div>
+        <div class="card"><h3>BOOSTER KIT</h3><p>350K OwO</p></div>
+        <div class="card"><h3>ULTRA KIT</h3><p>250K OwO</p></div>
+        <div class="card"><h3>VIP KIT</h3><p>100K OwO</p></div>
+      </div>
+      <p style="margin-top:20px; color: rgba(202,255,246,.9);">🕓 Requirements: Must have patience. No refunds once bought.</p>
+    </section>
+
+    <!-- 6) SNEAK PEEK (NEW SECTION) -->
+    <section id="sneakpeek">
+      <h2>SNEAK PEEK</h2>
+      <div class="gallery">
+        <div class="peek"><img src="smp1.jpg" alt="SMP preview 1"><div class="cap">SMP 01</div></div>
+        <div class="peek"><img src="smp2.jpg" alt="SMP preview 2"><div class="cap">SMP 02</div></div>
+        <div class="peek"><img src="smp3.jpg" alt="SMP preview 3"><div class="cap">SMP 03</div></div>
+        <div class="peek"><img src="smp4.jpg" alt="SMP preview 4"><div class="cap">SMP 04</div></div>
+        <div class="peek"><img src="smp5.jpg" alt="SMP preview 5"><div class="cap">SMP 05</div></div>
+        <div class="peek"><img src="smp6.jpg" alt="SMP preview 6"><div class="cap">SMP 06</div></div>
+        <div class="peek"><img src="smp7.jpg" alt="SMP preview 7"><div class="cap">SMP 07</div></div>
+        <div class="peek"><img src="smp8.jpg" alt="SMP preview 8"><div class="cap">SMP 08</div></div>
+        <div class="peek"><img src="smp9.jpg" alt="SMP preview 9"><div class="cap">SMP 09</div></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <a class="discord" href="https://discord.gg/2UVgQdTjRZ" target="_blank">Join Our Discord 💬</a>
+  </footer>
+
+  <script>
+    function copyIP(){
+      navigator.clipboard.writeText("in01.arialnodes.in:25517");
+      alert("✅ IP copied to clipboard!");
+    }
+
+    function showTab(tabId, btn){
+      document.querySelectorAll("main section").forEach(sec => sec.style.display = "none");
+      document.querySelectorAll("nav button").forEach(b => b.classList.remove("active"));
+
+      const next = document.getElementById(tabId);
+      if (next) next.style.display = "block";
+
+      if (btn) btn.classList.add("active");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    (function spawnParticles(){
+      const count = 22;
+      for (let i = 0; i < count; i++){
+        const p = document.createElement("div");
+        p.className = "particle";
+        const size = Math.random() * 9 + 4;
+        p.style.width = `${size}px`;
+        p.style.height = `${size}px`;
+        p.style.left = `${Math.random() * 100}vw`;
+        p.style.animationDuration = `${8 + Math.random() * 7}s`;
+        p.style.animationDelay = `${Math.random() * 5}s`;
+        document.body.appendChild(p);
+      }
+    })();
+  </script>
+</body>
+</html>
