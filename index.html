@@ -82,7 +82,7 @@ h1, h2 {
   box-shadow: 0 0 20px var(--neon-glow);
 }
 
-/* SHOP CARDS (matching your image) */
+/* SHOP CARDS */
 .shop-container {
   display: flex;
   flex-wrap: wrap;
@@ -105,19 +105,6 @@ h1, h2 {
 .shop-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 0 35px var(--neon-glow-strong);
-}
-
-.shop-card h3 {
-  color: var(--neon-text);
-  font-size: 1.3em;
-  font-weight: 800;
-  margin-bottom: 10px;
-}
-
-.shop-card p {
-  color: var(--neon-text);
-  font-size: 1.1em;
-  font-weight: 600;
 }
 
 /* FEATURES GRID */
@@ -169,6 +156,35 @@ h1, h2 {
   text-align: left;
 }
 
+/* SNEAK PEAK GALLERY */
+.gallery {
+  width: 90%;
+  margin: auto;
+  margin-top: 20px;
+}
+
+.gallery-row {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  margin-bottom: 25px;
+}
+
+.gallery img {
+  width: 260px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 18px;
+  border: 1px solid var(--neon-border);
+  box-shadow: 0 0 20px var(--neon-glow);
+  transition: 0.25s;
+}
+
+.gallery img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 30px var(--neon-glow-strong);
+}
+
 .small-note {
   margin-top: 40px;
   color: #ccc;
@@ -180,7 +196,7 @@ h1, h2 {
 <body>
 
 <!-- LOGO -->
-<img src="Diama logo.png" class="logo-img" alt="Diama SMP Logo">
+<img src="Diama logo.jpg" class="logo-img" alt="Diama SMP Logo">
 
 <!-- TITLE -->
 <h1>Diama SMP</h1>
@@ -196,6 +212,7 @@ h1, h2 {
   <button class="nav-btn" onclick="openTab('rules')">RULES</button>
   <button class="nav-btn" onclick="openTab('reviews')">REVIEWS</button>
   <button class="nav-btn" onclick="openTab('shop')">SHOP</button>
+  <button class="nav-btn" onclick="openTab('sneakpeak')">SNEAK PEAK</button>
 </div>
 
 <!-- DEFAULT OPEN TAB -->
@@ -218,12 +235,12 @@ h1, h2 {
 <section id="roles" class="tab-section">
   <h2>TEAM ROLES</h2>
 
-  <div class="role-box">👑 **Owner:** Dhruv</div>
-  <div class="role-box">🛡 **Co-Owner:** Rex</div>
-  <div class="role-box">⚔ **Admin:** Frost</div>
-  <div class="role-box">🔧 **Developer:** Stryker</div>
-  <div class="role-box">📢 **Moderator:** Blaze</div>
-  <div class="role-box">✨ **Helper:** Nova</div>
+  <div class="role-box">👑 Owner: Dhruv</div>
+  <div class="role-box">🛡 Co-Owner: Rex</div>
+  <div class="role-box">⚔ Admin: Frost</div>
+  <div class="role-box">🔧 Developer: Stryker</div>
+  <div class="role-box">📢 Moderator: Blaze</div>
+  <div class="role-box">✨ Helper: Nova</div>
 </section>
 
 <!-- FEATURES -->
@@ -234,7 +251,6 @@ h1, h2 {
     <div class="feature-box">❤️ Lifesteal Hearts System</div>
     <div class="feature-box">⚔ Custom PVP Enhancements</div>
     <div class="feature-box">🏰 Clan & Team System</div>
-
     <div class="feature-box">💰 Balanced Economy</div>
     <div class="feature-box">🌍 Custom World Generation</div>
     <div class="feature-box">🎁 Daily Rewards & Crates</div>
@@ -256,20 +272,44 @@ h1, h2 {
 <section id="reviews" class="tab-section">
   <h2>PLAYER REVIEWS</h2>
 
-  <div class="review-box">⭐ **Amazing SMP!**  
-    The lifesteal balance is perfect and players are super friendly.
-  </div>
+  <div class="review-box">⭐ Amazing SMP! The lifesteal balance is perfect and players are super friendly.</div>
 
-  <div class="review-box">⭐ **Best Server I’ve played!**  
-    Staff are active 24/7 and events are fun.
-  </div>
+  <div class="review-box">⭐ Best Server I’ve played! Staff are active 24/7 and events are fun.</div>
 
-  <div class="review-box">⭐ **Very smooth gameplay**  
-    No lag, great community, and active updates!
-  </div>
+  <div class="review-box">⭐ Very smooth gameplay — no lag, great community, active updates!</div>
 </section>
 
-  <script>
+<!-- ⭐⭐⭐ SNEAK PEAK SECTION ⭐⭐⭐ -->
+<section id="sneakpeak" class="tab-section">
+  <h2>SNEAK PEAK</h2>
+
+  <div class="gallery">
+
+    <!-- TOP ROW (3) -->
+    <div class="gallery-row">
+      <img src="smp1.jpg">
+      <img src="smp2.jpg">
+      <img src="smp3.jpg">
+    </div>
+
+    <!-- MIDDLE ROW (2) -->
+    <div class="gallery-row">
+      <img src="smp4.jpg">
+      <img src="smp5.jpg">
+    </div>
+
+    <!-- BOTTOM ROW (3) -->
+    <div class="gallery-row">
+      <img src="smp67.jpg">
+      <img src="smp7.jpg">
+      <img src="smp8.jpg">
+    </div>
+
+  </div>
+
+</section>
+
+<script>
 function openTab(tab) {
   document.querySelectorAll(".tab-section").forEach(sec => sec.style.display = "none");
   document.getElementById(tab).style.display = "block";
