@@ -1,301 +1,283 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Diama SMP Portal</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Poppins:wght@400;600;800&display=swap');
 
+:root {
+  --neon-bg1: #00151c;
+  --neon-bg2: #000b11;
+  --neon-border: #00ffe0;
+  --neon-text: #aaffee;
+  --neon-glow: #00f0ff80;
+  --neon-glow-strong: #00f0ffcc;
+  --blue-text: #35c9ff;
+}
+
+/* GLOBAL PAGE SETTINGS */
 body {
   margin: 0;
   font-family: "Poppins", sans-serif;
-  background: #000814;
-  color: #89d2ff;
-}
-
-header {
+  background: #06131f;
+  color: white;
   text-align: center;
-  padding: 30px 0;
 }
 
-header img {
-  width: 180px;
-  filter: drop-shadow(0 0 15px #00eaff);
-  border-radius: 10px;
+/* LOGO */
+.logo-img {
+  width: 160px;
+  margin-top: 25px;
+  border-radius: 18px;
+  box-shadow: 0 0 35px var(--neon-glow-strong);
 }
 
-/* Tabs */
-.tabs {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-  gap: 15px;
-  flex-wrap: wrap;
+/* TITLE GLOW */
+h1, h2 {
+  font-family: "Press Start 2P";
+  color: var(--blue-text);
+  text-shadow: 0 0 10px var(--blue-text), 0 0 25px var(--blue-text);
 }
 
-.tab {
-  padding: 12px 22px;
-  background: #001d3d;
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: .3s;
-  color: #89d2ff;
-}
-
-.tab:hover, .active-tab {
-  background: #003566;
-  box-shadow: 0 0 12px #00eaff;
-}
-
-/* Content */
-.content-section {
-  display: none;
-  margin-top: 30px;
-  text-align: center;
-  padding: 20px;
-}
-
-.active {
-  display: block;
-}
-
-/* Glowing Boxes */
-.box {
-  background: linear-gradient(to bottom, #003b4a, #001d2b);
-  padding: 25px;
-  border-radius: 20px;
-  margin: 15px auto;
-  width: 90%;
-  max-width: 400px;
-  box-shadow: 0 0 25px #00eaff55;
-  color: #bdf3ff;
-}
-
-.box-title {
-  font-size: 22px;
+/* NAV BUTTONS */
+.nav-btn {
+  padding: 12px 25px;
+  margin: 8px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, var(--neon-bg1), var(--neon-bg2));
+  border: 1px solid var(--neon-border);
+  color: var(--neon-text);
   font-weight: 700;
-  margin-bottom: 10px;
-  color: #afffff;
+  cursor: pointer;
+  box-shadow: 0 0 18px var(--neon-glow);
+  transition: 0.25s;
 }
 
-/* Shop Items */
-.shop-grid, .sneak-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
-  margin: 30px auto;
-  width: 90%;
+.nav-btn:hover {
+  box-shadow: 0 0 28px var(--neon-glow-strong);
+  transform: translateY(-3px);
 }
 
-.shop-item, .sneak-img {
-  background: linear-gradient(to bottom, #003b4a, #001d2b);
-  padding: 20px;
+/* TAB SECTIONS */
+.tab-section {
+  display: none;
+  margin-top: 40px;
+  padding-bottom: 40px;
+}
+
+/* IP BOX */
+.ip-box {
+  display: inline-block;
+  padding: 12px 35px;
+  font-size: 20px;
+  background: linear-gradient(180deg, var(--neon-bg1), var(--neon-bg2));
+  border: 1px solid var(--neon-border);
+  border-radius: 18px;
+  margin-top: 10px;
+  color: var(--neon-text);
+  cursor: pointer;
+  box-shadow: 0 0 20px var(--neon-glow);
+}
+
+/* SHOP CARDS (matching your image) */
+.shop-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+  margin-top: 30px;
+}
+
+.shop-card {
+  width: 280px;
+  padding: 35px 20px;
   border-radius: 22px;
   text-align: center;
-  box-shadow: 0 0 20px #00eaff55;
-  color: #bdf3ff;
+  background: linear-gradient(180deg, var(--neon-bg1), var(--neon-bg2));
+  box-shadow: 0 0 25px var(--neon-glow);
+  border: 1px solid var(--neon-border);
+  transition: 0.3s;
 }
 
-.sneak-img img {
-  width: 100%;
-  border-radius: 18px;
-  box-shadow: 0 0 20px #00eaff77;
+.shop-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 35px var(--neon-glow-strong);
 }
 
-/* Section Titles */
-.section-title {
-  font-size: 28px;
+.shop-card h3 {
+  color: var(--neon-text);
+  font-size: 1.3em;
   font-weight: 800;
-  text-shadow: 0 0 15px #00d5ff;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+}
+
+.shop-card p {
+  color: var(--neon-text);
+  font-size: 1.1em;
+  font-weight: 600;
+}
+
+/* FEATURES GRID */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  width: 80%;
+  margin: auto;
+  margin-top: 20px;
+}
+
+.feature-box {
+  background: linear-gradient(180deg, var(--neon-bg1), var(--neon-bg2));
+  border: 1px solid var(--neon-border);
+  box-shadow: 0 0 25px var(--neon-glow);
+  padding: 20px;
+  border-radius: 16px;
+  color: var(--neon-text);
+  font-weight: 700;
+  text-shadow: 0 0 10px var(--neon-text);
+}
+
+/* TEAM ROLES */
+.role-box {
+  width: 350px;
+  padding: 20px;
+  margin: 15px auto;
+  background: linear-gradient(180deg, var(--neon-bg1), var(--neon-bg2));
+  border: 1px solid var(--neon-border);
+  box-shadow: 0 0 25px var(--neon-glow);
+  border-radius: 16px;
+  color: var(--neon-text);
+  font-size: 1.1em;
+  font-weight: 700;
+}
+
+/* REVIEWS */
+.review-box {
+  width: 75%;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 18px;
+  background: linear-gradient(180deg, var(--neon-bg1), var(--neon-bg2));
+  border: 1px solid var(--neon-border);
+  box-shadow: 0 0 22px var(--neon-glow);
+  color: var(--neon-text);
+  font-size: 1.1em;
+  text-align: left;
+}
+
+.small-note {
+  margin-top: 40px;
+  color: #ccc;
+  font-size: 14px;
 }
 </style>
 
 </head>
 <body>
 
-<header>
-  <img src="Diama logo.jpg" alt="Diama SMP Logo">
-</header>
+<!-- LOGO -->
+<img src="Diama logo.jpg" class="logo-img" alt="Diama SMP Logo">
 
+<!-- TITLE -->
+<h1>Diama SMP</h1>
+<p>20+ active players • 24/7 Online • Version 1.21.6 • Modern Minecraft Community</p>
 
-<!-- Tabs -->
-<div class="tabs">
-  <div class="tab active-tab" onclick="showTab('team')">TEAM ROLES</div>
-  <div class="tab" onclick="showTab('features')">FEATURES</div>
-  <div class="tab" onclick="showTab('rules')">RULES</div>
-  <div class="tab" onclick="showTab('reviews')">REVIEWS</div>
-  <div class="tab" onclick="showTab('shop')">SHOP</div>
-  <div class="tab" onclick="showTab('sneak')">SNEAK PEAK</div>
+<!-- IP BOX -->
+<div class="ip-box" onclick="copyIP()">in01.arialnodes.in:25517</div>
+
+<!-- NAV BUTTONS -->
+<div style="margin-top: 35px;">
+  <button class="nav-btn" onclick="openTab('roles')">TEAM ROLES</button>
+  <button class="nav-btn" onclick="openTab('features')">FEATURES</button>
+  <button class="nav-btn" onclick="openTab('rules')">RULES</button>
+  <button class="nav-btn" onclick="openTab('reviews')">REVIEWS</button>
+  <button class="nav-btn" onclick="openTab('shop')">SHOP</button>
 </div>
 
+<!-- DEFAULT OPEN TAB -->
+<section id="shop" class="tab-section" style="display:block;">
+  <h2>DIAMA SMP SHOP</h2>
+
+  <div class="shop-container">
+    <div class="shop-card"><h3>ELITE</h3><p>550K OwO</p></div>
+    <div class="shop-card"><h3>OMEGA</h3><p>400K OwO</p></div>
+    <div class="shop-card"><h3>IMMORTAL</h3><p>375K OwO</p></div>
+    <div class="shop-card"><h3>BOOSTER KIT</h3><p>350K OwO</p></div>
+    <div class="shop-card"><h3>ULTRA KIT</h3><p>250K OwO</p></div>
+    <div class="shop-card"><h3>VIP KIT</h3><p>100K OwO</p></div>
+  </div>
+
+  <p class="small-note">⚠ Requirements: Must have patience. No refunds once bought.</p>
+</section>
 
 <!-- TEAM ROLES -->
-<div id="team" class="content-section active">
-  <h2 class="section-title">Team Roles</h2>
+<section id="roles" class="tab-section">
+  <h2>TEAM ROLES</h2>
 
-  <div class="box">
-    <div class="box-title">Owner</div>
-    Dhruv (Manages everything)
-  </div>
-
-  <div class="box">
-    <div class="box-title">Co-Owner</div>
-    Handles administration + decisions
-  </div>
-
-  <div class="box">
-    <div class="box-title">Developers</div>
-    Plugin management and updates
-  </div>
-
-  <div class="box">
-    <div class="box-title">Moderators</div>
-    Keep the server safe and fair
-  </div>
-</div>
-
+  <div class="role-box">👑 **Owner:** Dhruv</div>
+  <div class="role-box">🛡 **Co-Owner:** Rex</div>
+  <div class="role-box">⚔ **Admin:** Frost</div>
+  <div class="role-box">🔧 **Developer:** Stryker</div>
+  <div class="role-box">📢 **Moderator:** Blaze</div>
+  <div class="role-box">✨ **Helper:** Nova</div>
+</section>
 
 <!-- FEATURES -->
-<div id="features" class="content-section">
-  <h2 class="section-title">Lifesteal Features</h2>
+<section id="features" class="tab-section">
+  <h2>FEATURES</h2>
 
-  <div class="box">
-    <div class="box-title">1. Hearts System</div>
-    Gain hearts when you kill players
+  <div class="features-grid">
+    <div class="feature-box">❤️ Lifesteal Hearts System</div>
+    <div class="feature-box">⚔ Custom PVP Enhancements</div>
+    <div class="feature-box">🏰 Clan & Team System</div>
+
+    <div class="feature-box">💰 Balanced Economy</div>
+    <div class="feature-box">🌍 Custom World Generation</div>
+    <div class="feature-box">🎁 Daily Rewards & Crates</div>
   </div>
-
-  <div class="box">
-    <div class="box-title">2. Custom Recipes</div>
-    Craftable revive items
-  </div>
-
-  <div class="box">
-    <div class="box-title">3. Combat Log Protection</div>
-    Fair PvP for all
-  </div>
-
-  <div class="box">
-    <div class="box-title">4. Clans</div>
-    Form groups & dominate
-  </div>
-
-  <div class="box">
-    <div class="box-title">5. Safe Trading</div>
-    Secure player-to-player trades
-  </div>
-
-  <div class="box">
-    <div class="box-title">6. Events</div>
-    Weekly challenges & wars
-  </div>
-</div>
-
+</section>
 
 <!-- RULES -->
-<div id="rules" class="content-section">
-  <h2 class="section-title">Rules</h2>
-
-  <div class="box">No hacking or unfair mods</div>
-  <div class="box">No toxicity or disrespect</div>
-  <div class="box">No exploiting glitches</div>
-  <div class="box">Listen to staff instructions</div>
-  <div class="box">No griefing protected areas</div>
-</div>
-
+<section id="rules" class="tab-section">
+  <h2>RULES</h2>
+  <div class="role-box">1️⃣ No hacking or unfair advantages.</div>
+  <div class="role-box">2️⃣ No toxicity or harassment.</div>
+  <div class="role-box">3️⃣ No griefing protected builds.</div>
+  <div class="role-box">4️⃣ No duping or exploiting bugs.</div>
+  <div class="role-box">5️⃣ Respect staff decisions.</div>
+  <div class="role-box">6️⃣ Play fair and have fun!</div>
+</section>
 
 <!-- REVIEWS -->
-<div id="reviews" class="content-section">
-  <h2 class="section-title">Player Reviews</h2>
+<section id="reviews" class="tab-section">
+  <h2>PLAYER REVIEWS</h2>
 
-  <div class="box">⭐ "Best SMP I've ever played!"</div>
-  <div class="box">⭐ "Friendly staff, fun events."</div>
-  <div class="box">⭐ "The lifesteal system is perfect."</div>
-</div>
-
-
-<!-- SHOP -->
-<div id="shop" class="content-section">
-  <h2 class="section-title">Shop</h2>
-
-  <div class="shop-grid">
-
-    <div class="shop-item">
-      <div class="box-title">ULTRA KIT</div>
-      250K OwO
-    </div>
-
-    <div class="shop-item">
-      <div class="box-title">LEGEND KIT</div>
-      150K OwO
-    </div>
-
-    <div class="shop-item">
-      <div class="box-title">REVIVE HEART</div>
-      30K OwO
-    </div>
-
-    <div class="shop-item">
-      <div class="box-title">CRATE KEY</div>
-      10K OwO
-    </div>
-
+  <div class="review-box">⭐ **Amazing SMP!**  
+    The lifesteal balance is perfect and players are super friendly.
   </div>
-</div>
 
-
-<!-- SNEAK PEAK -->
-<div id="sneak" class="content-section">
-  <h2 class="section-title">Sneak Peak</h2>
-
-  <div class="sneak-grid">
-
-    <div class="sneak-img">
-      <img src="smp1.jpg">
-    </div>
-
-    <div class="sneak-img">
-      <img src="smp2.jpg">
-    </div>
-
-    <div class="sneak-img">
-      <img src="smp3.jpg">
-    </div>
-
-    <div class="sneak-img">
-      <img src="smp4.jpg">
-    </div>
-
-    <div class="sneak-img">
-      <img src="smp5.jpg">
-    </div>
-
-    <div class="sneak-img">
-      <img src="smp6.jpg">
-    </div>
-
-    <div class="sneak-img">
-      <img src="smp7.jpg">
-    </div>
-
-    <div class="sneak-img">
-      <img src="smp8.jpg">
-    </div>
-
+  <div class="review-box">⭐ **Best Server I’ve played!**  
+    Staff are active 24/7 and events are fun.
   </div>
-</div>
 
+  <div class="review-box">⭐ **Very smooth gameplay**  
+    No lag, great community, and active updates!
+  </div>
+</section>
 
 <script>
-function showTab(tab) {
-  document.querySelectorAll(".content-section").forEach(s => s.classList.remove("active"));
-  document.querySelectorAll(".tab").forEach(t => t.classList.remove("active-tab"));
+function openTab(tab) {
+  document.querySelectorAll(".tab-section").forEach(sec => sec.style.display = "none");
+  document.getElementById(tab).style.display = "block";
+}
 
-  document.getElementById(tab).classList.add("active");
-  event.target.classList.add("active-tab");
+function copyIP() {
+  navigator.clipboard.writeText("in01.arialnodes.in:25517");
+  alert("IP copied!");
 }
 </script>
 
