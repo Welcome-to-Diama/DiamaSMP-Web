@@ -16,6 +16,7 @@
   --neon-glow: #00f0ff80;
   --neon-glow-strong: #00f0ffcc;
   --blue-text: #35c9ff;
+  --role-bg: rgba(0, 20, 60, 0.5);
 }
 
 /* GLOBAL PAGE SETTINGS */
@@ -129,26 +130,66 @@ h1, h2 {
 }
 
 /* TEAM ROLES */
-#roles .role-box {
-  width: 260px;
-  padding: 20px;
-  border-radius: 16px;
-  background: linear-gradient(180deg, #00151c, #000b11);
-  border: 2px solid #00f0ff;
-  color: #aaffff;
-  font-weight: 700;
-  font-family: 'Poppins', sans-serif;
-  text-align: center;
-  box-shadow: 0 0 15px #00f0ff, 0 0 30px #00fff0;
-  transition: all 0.3s ease;
-}
-
 #roles {
   text-align: center;
   padding: 50px 20px;
-  background: #01091f; /* Dark background */
+  background: var(--neon-bg2);
 }
 
+#roles .section-title {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 28px;
+  color: var(--blue-text);
+  text-shadow: 0 0 10px var(--blue-text), 0 0 20px var(--neon-glow);
+  margin-bottom: 40px;
+}
+
+#roles .roles-container {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  align-items: center;
+}
+
+#roles .row {
+  display: flex;
+  gap: 25px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#roles .role-box {
+  width: 260px;
+  padding: 20px;
+  border: 2px solid var(--blue-text);
+  border-radius: 15px;
+  background: var(--role-bg);
+  color: var(--blue-text);
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+  box-shadow: 0 0 15px var(--blue-text), 0 0 30px var(--neon-glow);
+  transition: all 0.3s ease;
+}
+
+#roles .role-box:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 0 20px var(--neon-glow), 0 0 40px var(--blue-text);
+  border-color: var(--neon-glow);
+}
+
+/* RULES BOXES */
+#rules .role-box {
+  width: 80%;
+  margin: 10px auto;
+  padding: 15px;
+  border-radius: 15px;
+  background: var(--role-bg);
+  border: 2px solid var(--blue-text);
+  color: var(--blue-text);
+  font-weight: 700;
+  box-shadow: 0 0 15px var(--blue-text), 0 0 30px var(--neon-glow);
+}
 
 /* REVIEWS */
 .review-box {
@@ -238,100 +279,36 @@ h1, h2 {
 
   <p class="small-note">⚠ Requirements: Must have patience. No refunds once bought.</p>
 </section>
-  
+
 <!-- TEAM ROLES -->
 <section id="roles" class="tab-section">
   <h2 class="section-title">TEAM ROLES</h2>
 
   <div class="roles-container">
-
-    <!-- Owner -->
     <div class="row">
       <div class="role-box"><strong>👑 Owner</strong><br>Ahmed</div>
       <div class="role-box"><strong>👑 Owner</strong><br>Rafay</div>
     </div>
 
-    <!-- Founder -->
     <div class="row">
       <div class="role-box"><strong>🪄 Founder</strong><br>Affan</div>
       <div class="role-box"><strong>🪄 Founder</strong><br>Wizard OP</div>
     </div>
 
-    <!-- Senior Manager -->
     <div class="row">
       <div class="role-box"><strong>🛠️ Senior Manager & Developer</strong><br>iamnoobatpc</div>
       <div class="role-box"><strong>🔥 Manager</strong><br>FireX | Blaze</div>
     </div>
 
-    <!-- Admins -->
     <div class="row">
       <div class="role-box"><strong>🛡️ Admin</strong><br>Silent Slayer</div>
       <div class="role-box"><strong>🛡️ Admin</strong><br>Not Kaizen</div>
     </div>
 
-    <!-- Web Developer -->
     <div class="row">
       <div class="role-box"><strong>💻 Web Developer</strong><br>Cookie Devil</div>
     </div>
-
   </div>
-
-  <style>
-    :root {
-      --blue: #0ff;
-      --teal: #00e6ff;
-      --lightblue: #aafcff;
-      --dark-bg: #01091f;
-    }
-
-    #roles {
-      text-align: center;
-      padding: 50px 20px;
-      background: var(--dark-bg);
-    }
-
-    #roles .section-title {
-      font-family: 'Press Start 2P', cursive;
-      font-size: 28px;
-      color: var(--blue);
-      text-shadow: 0 0 10px var(--blue), 0 0 20px var(--teal);
-      margin-bottom: 40px;
-    }
-
-    #roles .roles-container {
-      display: flex;
-      flex-direction: column;
-      gap: 25px;
-      align-items: center;
-    }
-
-    #roles .row {
-      display: flex;
-      gap: 25px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    #roles .role-box {
-      width: 260px;
-      padding: 20px;
-      border: 2px solid var(--blue);
-      border-radius: 15px;
-      background: rgba(0, 20, 60, 0.5);
-      color: var(--lightblue);
-      font-weight: 700;
-      font-family: 'Poppins', sans-serif;
-      text-align: center;
-      box-shadow: 0 0 15px var(--blue), 0 0 30px var(--teal);
-      transition: all 0.3s ease;
-    }
-
-    #roles .role-box:hover {
-      transform: translateY(-7px);
-      box-shadow: 0 0 20px var(--teal), 0 0 40px var(--blue);
-      border-color: var(--teal);
-    }
-  </style>
 </section>
 
 <!-- FEATURES -->
@@ -363,41 +340,31 @@ h1, h2 {
 <section id="reviews" class="tab-section">
   <h2>PLAYER REVIEWS</h2>
 
-  <div class="review-box">⭐ New concept apart from repetitvie Lifesteal servers others offer</div>
-
+  <div class="review-box">⭐ New concept apart from repetitive Lifesteal servers others offer</div>
   <div class="review-box">⭐ Best Server I never feel bored</div>
-
   <div class="review-box">⭐ Active and experienced staff</div>
 </section>
 
-<!-- ⭐⭐⭐ SNEAK PEAK SECTION ⭐⭐⭐ -->
+<!-- SNEAK PEAK -->
 <section id="sneakpeak" class="tab-section">
   <h2>SNEAK PEAK</h2>
 
   <div class="gallery">
-
-    <!-- TOP ROW (3) -->
     <div class="gallery-row">
       <img src="smp1.jpg">
       <img src="smp2.jpg">
       <img src="smp3.jpg">
     </div>
-
-    <!-- MIDDLE ROW (2) -->
     <div class="gallery-row">
       <img src="smp4.jpg">
       <img src="smp5.jpg">
     </div>
-
-    <!-- BOTTOM ROW (3) -->
     <div class="gallery-row">
       <img src="smp6.jpg.webp">
       <img src="smp7.jpg">
       <img src="smp8.jpg">
     </div>
-
   </div>
-
 </section>
 
 <script>
