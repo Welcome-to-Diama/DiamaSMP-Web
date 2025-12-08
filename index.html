@@ -235,45 +235,84 @@ h1, h2 {
 <section id="roles" class="tab-section">
   <h2>TEAM ROLES</h2>
 
+  <div class="roles-container">
+
+    <!-- Owner -->
+    <div class="row single">
+      <div class="role-box"><strong>👑 Owner</strong><br>Ahmed</div>
+      <div class="role-box"><strong>👑 Owner</strong><br>Rafay</div>
+    </div>
+
+    <!-- Founders -->
+    <div class="row double">
+      <div class="role-box"><strong>🪄 Founder</strong><br>Affan — The Wizard OP</div>
+    </div>
+
+    <!-- Senior Manager -->
+    <div class="row single">
+      <div class="role-box"><strong>🛠️ Senior Manager & Developer</strong><br>iamnoobatpc</div>
+    </div>
+
+    <!-- Manager -->
+    <div class="row single">
+      <div class="role-box"><strong>🔥 Manager</strong><br>FireX | Blaze</div>
+    </div>
+
+    <!-- Admins -->
+    <div class="row double">
+      <div class="role-box"><strong>🛡️ Admin</strong><br>Silent Slayer</div>
+      <div class="role-box"><strong>🛡️ Admin</strong><br>Not Kaizen</div>
+    </div>
+
+    <!-- Web Dev -->
+    <div class="row single">
+      <div class="role-box"><strong>💻 Web Developer</strong><br>Cookie Devil</div>
+    </div>
+
+  </div>
+
   <style>
-    .roles-vertical {
+    #roles .roles-container {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      margin-top: 30px;
-      gap: 22px;
+      gap: 20px;
+      margin-top: 20px;
     }
 
-    .role-box {
-      width: 420px;
-      padding: 18px;
-      background: linear-gradient(180deg, #00151c, #000b11);
-      border: 1px solid #00ffe0;
-      border-radius: 18px;
-      color: #aaffee;
-      font-weight: 700;
-      font-size: 1.2rem;
-      text-shadow: 0 0 10px #00f8ff;
-      box-shadow: 0 0 20px #00eaff80;
+    #roles .row {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    #roles .row.single {
+      justify-content: center;
+    }
+
+    #roles .row.double {
+      justify-content: center;
+    }
+
+    #roles .role-box {
+      padding: 12px 20px;
+      border: 2px solid var(--blue);
+      background: rgba(0, 20, 60, 0.4);
+      color: var(--lightblue);
+      font-weight: 600;
+      border-radius: 10px;
+      width: 260px;
+      text-align: center;
+      box-shadow: 0 0 10px var(--blue);
+      transition: 0.3s ease;
+    }
+
+    #roles .role-box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 15px var(--teal);
     }
   </style>
 
-  <div class="roles-vertical">
-
-    <div class="role-box">Owner: Captain Rafay</div>
-
-    <div class="role-box">Founder: Gamer Affan</div>
-    <div class="role-box">Founder: Wizard OP</div>
-
-    <div class="role-box">Sr. Manager: I am noob at PC (kinda inactive)</div>
-    <div class="role-box">Manager: Blaze</div>
-
-    <div class="role-box">Admin: NotXKaizen</div>
-    <div class="role-box">Admin: Shadow Striker</div>
-
-    <div class="role-box">Website Developer: Cookie Devil</div>
-
-  </div>
 </section>
 
 
