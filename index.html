@@ -9,373 +9,191 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Poppins:wght@400;600;800&display=swap');
 
 :root {
-  --neon-bg1: #00151c;
-  --neon-bg2: #000b11;
-  --neon-border: #00ffe0;
-  --neon-text: #aaffee;
-  --neon-glow: #00f0ff80;
-  --neon-glow-strong: #00f0ffcc;
-  --blue-text: #35c9ff;
-  --role-bg: rgba(0, 20, 60, 0.5);
+  --neon-blue: #00eaff;
+  --soft-blue: #7dd3fc;
+  --dark-bg: #020617;
+  --card-bg: rgba(0, 20, 35, 0.7);
+  --tab-bg: rgba(0, 50, 70, 0.35);
+  --highlight: #00eaff;
 }
 
-/* GLOBAL PAGE SETTINGS */
 body {
   margin: 0;
-  font-family: "Poppins", sans-serif;
-  background: #06131f;
-  color: white;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background: var(--dark-bg);
+  color: var(--soft-blue);
+  overflow-x: hidden;
+}
+
+/* HEADER */
+header {
   text-align: center;
+  padding: 20px 0;
+  color: var(--neon-blue);
+  font-family: 'Press Start 2P', sans-serif;
+  font-size: 22px;
+  letter-spacing: 2px;
 }
 
-/* LOGO */
-.logo-img {
-  width: 160px;
-  margin-top: 25px;
-  border-radius: 18px;
-  box-shadow: 0 0 35px var(--neon-glow-strong);
+/* TAB BUTTONS */
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
 }
 
-/* TITLE GLOW */
-h1, h2 {
-  font-family: "Press Start 2P";
-  color: var(--blue-text);
-  text-shadow: 0 0 10px var(--blue-text), 0 0 25px var(--blue-text);
-}
-
-/* NAV BUTTONS */
-.nav-btn {
+.tab-btn {
   padding: 12px 25px;
-  margin: 8px;
-  border-radius: 14px;
-  background: linear-gradient(180deg, var(--neon-bg1), var(--neon-bg2));
-  border: 1px solid var(--neon-border);
-  color: var(--neon-text);
-  font-weight: 700;
+  background: var(--tab-bg);
+  border-radius: 10px;
+  color: var(--soft-blue);
+  font-weight: 600;
+  border: 1px solid var(--neon-blue);
   cursor: pointer;
-  box-shadow: 0 0 18px var(--neon-glow);
-  transition: 0.25s;
+  transition: 0.3s;
+  backdrop-filter: blur(6px);
 }
 
-.nav-btn:hover {
-  box-shadow: 0 0 28px var(--neon-glow-strong);
-  transform: translateY(-3px);
+.tab-btn:hover,
+.tab-btn.active {
+  background: rgba(0, 200, 255, 0.25);
+  color: var(--neon-blue);
 }
 
-/* TAB SECTIONS */
+/* TAB CONTENT */
 .tab-section {
   display: none;
-  margin-top: 40px;
-  padding-bottom: 40px;
+  padding: 20px;
+  width: 90%;
+  margin: auto;
+  background: var(--card-bg);
+  border-radius: 15px;
+  border: 1px solid rgba(0, 150, 200, 0.4);
+  backdrop-filter: blur(8px);
+}
+
+.tab-section.active {
+  display: block;
+}
+
+.tab-section h2 {
+  text-align: center;
+  color: var(--neon-blue);
+  font-family: 'Press Start 2P';
+  margin-bottom: 20px;
 }
 
 /* IP BOX */
 .ip-box {
-  display: inline-block;
-  padding: 12px 35px;
-  font-size: 20px;
-  background: linear-gradient(180deg, var(--neon-bg1), var(--neon-bg2));
-  border: 1px solid var(--neon-border);
-  border-radius: 18px;
-  margin-top: 10px;
-  color: var(--neon-text);
-  cursor: pointer;
-  box-shadow: 0 0 20px var(--neon-glow);
-}
-
-/* SHOP CARDS */
-.shop-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 25px;
-  margin-top: 30px;
-}
-
-.shop-card {
-  width: 280px;
-  padding: 35px 20px;
-  border-radius: 22px;
+  margin: 20px auto;
   text-align: center;
-  background: linear-gradient(180deg, var(--neon-bg1), var(--neon-bg2));
-  box-shadow: 0 0 25px var(--neon-glow);
-  border: 1px solid var(--neon-border);
+  padding: 15px;
+  width: 270px;
+  background: rgba(0, 60, 90, 0.6);
+  border-radius: 12px;
+  border: 2px solid var(--neon-blue);
+  color: var(--neon-blue);
+  font-size: 18px;
   transition: 0.3s;
 }
 
-.shop-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 0 35px var(--neon-glow-strong);
+.ip-box:hover {
+  box-shadow: 0 0 15px var(--neon-blue);
+  scale: 1.03;
 }
 
-/* FEATURES GRID */
-.features-grid {
+/* GENERAL TEXT FIX */
+p, li, span, strong {
+  color: var(--soft-blue) !important;
+}
+
+/* CARD GRID FOR FEATURES/RULES */
+.grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 25px;
-  width: 80%;
-  margin: auto;
-  margin-top: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 18px;
 }
 
-.feature-box {
-  background: linear-gradient(180deg, var(--neon-bg1), var(--neon-bg2));
-  border: 1px solid var(--neon-border);
-  box-shadow: 0 0 25px var(--neon-glow);
-  padding: 20px;
-  border-radius: 16px;
-  color: var(--neon-text);
-  font-weight: 700;
-  text-shadow: 0 0 10px var(--neon-text);
-}
-
-/* TEAM ROLES */
-#roles {
+.card {
+  background: rgba(0, 30, 50, 0.7);
+  padding: 18px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 200, 255, 0.2);
+  color: var(--soft-blue);
   text-align: center;
-  padding: 50px 20px;
-  background: var(--neon-bg2);
 }
 
-#roles .section-title {
-  font-family: 'Press Start 2P', cursive;
-  font-size: 28px;
-  color: var(--blue-text);
-  text-shadow: 0 0 10px var(--blue-text), 0 0 20px var(--neon-glow);
-  margin-bottom: 40px;
-}
-
-#roles .roles-container {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-  align-items: center;
-}
-
-#roles .row {
-  display: flex;
-  gap: 25px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-#roles .role-box {
-  width: 260px;
-  padding: 20px;
-  border: 2px solid var(--blue-text);
-  border-radius: 15px;
-  background: var(--role-bg);
-  color: var(--blue-text);
-  font-weight: 700;
-  font-family: 'Poppins', sans-serif;
-  text-align: center;
-  box-shadow: 0 0 15px var(--blue-text), 0 0 30px var(--neon-glow);
-  transition: all 0.3s ease;
-}
-
-#roles .role-box:hover {
-  transform: translateY(-7px);
-  box-shadow: 0 0 20px var(--neon-glow), 0 0 40px var(--blue-text);
-  border-color: var(--neon-glow);
-}
-
-/* RULES BOXES */
-#rules .role-box {
-  width: 80%;
-  margin: 10px auto;
-  padding: 15px;
-  border-radius: 15px;
-  background: var(--role-bg);
-  border: 2px solid var(--blue-text);
-  color: var(--blue-text);
-  font-weight: 700;
-  box-shadow: 0 0 15px var(--blue-text), 0 0 30px var(--neon-glow);
-}
-
-/* REVIEWS */
-.review-box {
-  width: 75%;
-  margin: 20px auto;
-  padding: 20px;
-  border-radius: 18px;
-  background: linear-gradient(180deg, var(--neon-bg1), var(--neon-bg2));
-  border: 1px solid var(--neon-border);
-  box-shadow: 0 0 22px var(--neon-glow);
-  color: var(--neon-text);
-  font-size: 1.1em;
-  text-align: left;
-}
-
-/* SNEAK PEAK GALLERY */
-.gallery {
-  width: 90%;
-  margin: auto;
-  margin-top: 20px;
-}
-
-.gallery-row {
-  display: flex;
-  justify-content: center;
-  gap: 25px;
-  margin-bottom: 25px;
-}
-
-.gallery img {
-  width: 260px;
-  height: 160px;
-  object-fit: cover;
-  border-radius: 18px;
-  border: 1px solid var(--neon-border);
-  box-shadow: 0 0 20px var(--neon-glow);
-  transition: 0.25s;
-}
-
-.gallery img:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 30px var(--neon-glow-strong);
-}
-
-.small-note {
-  margin-top: 40px;
-  color: #ccc;
-  font-size: 14px;
-}
+/* Hide footer SMP text if exists */
+footer { display: none !important; }
 </style>
 
 </head>
 <body>
 
-<!-- LOGO -->
-<img src="Diama logo.png" class="logo-img" alt="Diama SMP Logo">
+<header>⚔️ DIAMA SMP PORTAL ⚔️</header>
 
-<!-- TITLE -->
-<h1>Diama SMP</h1>
-<p>20+ active players • 24/7 Online • Version 1.21.6 • Modern Minecraft Community</p>
-
-<!-- IP BOX -->
-<div class="ip-box" onclick="copyIP()">in01.arialnodes.in:25517</div>
-
-<!-- NAV BUTTONS -->
-<div style="margin-top: 35px;">
-  <button class="nav-btn" onclick="openTab('roles')">TEAM ROLES</button>
-  <button class="nav-btn" onclick="openTab('features')">FEATURES</button>
-  <button class="nav-btn" onclick="openTab('rules')">RULES</button>
-  <button class="nav-btn" onclick="openTab('reviews')">REVIEWS</button>
-  <button class="nav-btn" onclick="openTab('shop')">SHOP</button>
-  <button class="nav-btn" onclick="openTab('sneakpeak')">SNEAK PEAK</button>
+<div class="tabs">
+  <button class="tab-btn active" onclick="openTab('smp1')">SMP1</button>
+  <button class="tab-btn" onclick="openTab('smp2')">SMP2</button>
+  <button class="tab-btn" onclick="openTab('smp3')">SMP3</button>
+  <button class="tab-btn" onclick="openTab('smp4')">SMP4</button>
+  <button class="tab-btn" onclick="openTab('smp5')">SMP5</button>
+  <button class="tab-btn" onclick="openTab('smp6')">SMP6</button>
+  <button class="tab-btn" onclick="openTab('smp7')">SMP7</button>
+  <button class="tab-btn" onclick="openTab('smp8')">SMP8</button>
 </div>
 
-<!-- DEFAULT OPEN TAB -->
-<section id="shop" class="tab-section" style="display:block;">
-  <h2>DIAMA SMP SHOP</h2>
+<!-- SMP SECTIONS -->
+<div id="smp1" class="tab-section active">
+  <h2>SMP 1</h2>
+  <p>This is where your SMP1 info will go.</p>
+</div>
 
-  <div class="shop-container">
-    <div class="shop-card"><h3>ELITE</h3><p>550K OwO</p></div>
-    <div class="shop-card"><h3>OMEGA</h3><p>400K OwO</p></div>
-    <div class="shop-card"><h3>IMMORTAL</h3><p>375K OwO</p></div>
-    <div class="shop-card"><h3>BOOSTER KIT</h3><p>350K OwO</p></div>
-    <div class="shop-card"><h3>ULTRA KIT</h3><p>250K OwO</p></div>
-    <div class="shop-card"><h3>VIP KIT</h3><p>100K OwO</p></div>
-  </div>
+<div id="smp2" class="tab-section">
+  <h2>SMP 2</h2>
+  <p>Details for SMP2.</p>
+</div>
 
-  <p class="small-note">⚠ Requirements: Must have patience. No refunds once bought.</p>
-</section>
+<div id="smp3" class="tab-section">
+  <h2>SMP 3</h2>
+  <p>Details for SMP3.</p>
+</div>
 
-<!-- TEAM ROLES -->
-<section id="roles" class="tab-section">
-  <h2 class="section-title">TEAM ROLES</h2>
+<div id="smp4" class="tab-section">
+  <h2>SMP 4</h2>
+  <p>Details for SMP4.</p>
+</div>
 
-  <div class="roles-container">
-    <div class="row">
-      <div class="role-box"><strong>👑 Owner</strong><br>Ahmed</div>
-      <div class="role-box"><strong>👑 Owner</strong><br>Rafay</div>
-    </div>
+<div id="smp5" class="tab-section">
+  <h2>SMP 5</h2>
+  <p>Details for SMP5.</p>
+</div>
 
-    <div class="row">
-      <div class="role-box"><strong>🪄 Founder</strong><br>Affan</div>
-      <div class="role-box"><strong>🪄 Founder</strong><br>Wizard OP</div>
-    </div>
+<div id="smp6" class="tab-section">
+  <h2>SMP 6</h2>
+  <p>Details for SMP6.</p>
+</div>
 
-    <div class="row">
-      <div class="role-box"><strong>🛠️ Senior Manager & Developer</strong><br>iamnoobatpc</div>
-      <div class="role-box"><strong>🔥 Manager</strong><br>FireX | Blaze</div>
-    </div>
+<div id="smp7" class="tab-section">
+  <h2>SMP 7</h2>
+  <p>Details for SMP7.</p>
+</div>
 
-    <div class="row">
-      <div class="role-box"><strong>🛡️ Admin</strong><br>Silent Slayer</div>
-      <div class="role-box"><strong>🛡️ Admin</strong><br>Not Kaizen</div>
-    </div>
-
-    <div class="row">
-      <div class="role-box"><strong>💻 Web Developer</strong><br>Cookie Devil</div>
-    </div>
-  </div>
-</section>
-
-<!-- FEATURES -->
-<section id="features" class="tab-section">
-  <h2>FEATURES</h2>
-
-  <div class="features-grid">
-    <div class="feature-box">Active Community</div>
-    <div class="feature-box">Trustworthy non-toxic community</div>
-    <div class="feature-box">Team System</div>
-    <div class="feature-box">Chance to Dominate and Conquer</div>
-    <div class="feature-box">Custom kits</div>
-    <div class="feature-box">Instant fixes in bugs</div>
-  </div>
-</section>
-
-<!-- RULES -->
-<section id="rules" class="tab-section">
-  <h2>RULES</h2>
-  <div class="role-box">1️⃣ No hacking or unfair advantages.</div>
-  <div class="role-box">2️⃣ No toxicity or harassment.</div>
-  <div class="role-box">3️⃣ No griefing protected builds.</div>
-  <div class="role-box">4️⃣ No duping or exploiting bugs.</div>
-  <div class="role-box">5️⃣ Respect staff decisions.</div>
-  <div class="role-box">6️⃣ Play fair and have fun!</div>
-</section>
-
-<!-- REVIEWS -->
-<section id="reviews" class="tab-section">
-  <h2>PLAYER REVIEWS</h2>
-
-  <div class="review-box">⭐ New concept apart from repetitive Lifesteal servers others offer</div>
-  <div class="review-box">⭐ Best Server I never feel bored</div>
-  <div class="review-box">⭐ Active and experienced staff</div>
-</section>
-
-<!-- SNEAK PEAK -->
-<section id="sneakpeak" class="tab-section">
-  <h2>SNEAK PEAK</h2>
-
-  <div class="gallery">
-    <div class="gallery-row">
-      <img src="smp1.jpg">
-      <img src="smp2.jpg">
-      <img src="smp3.jpg">
-    </div>
-    <div class="gallery-row">
-      <img src="smp4.jpg">
-      <img src="smp5.jpg">
-    </div>
-    <div class="gallery-row">
-      <img src="smp6.jpg.webp">
-      <img src="smp7.jpg">
-      <img src="smp8.jpg">
-    </div>
-  </div>
-</section>
+<div id="smp8" class="tab-section">
+  <h2>SMP 8</h2>
+  <p>Details for SMP8.</p>
+</div>
 
 <script>
-function openTab(tab) {
-  document.querySelectorAll(".tab-section").forEach(sec => sec.style.display = "none");
-  document.getElementById(tab).style.display = "block";
-}
+function openTab(tabName) {
+  document.querySelectorAll(".tab-section").forEach(t => t.classList.remove("active"));
+  document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
 
-function copyIP() {
-  navigator.clipboard.writeText("in01.arialnodes.in:25517");
-  alert("IP copied!");
+  document.getElementById(tabName).classList.add("active");
+  event.target.classList.add("active");
 }
 </script>
 
