@@ -1,302 +1,374 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Diama SMP Portal</title>
-<style>
-  body {
-    margin: 0;
-    font-family: "Poppins", sans-serif;
-    background: linear-gradient(135deg, #93c9ff, #1a3f6b);
-    background-attachment: fixed;
-    overflow-x: hidden;
-    color: #fff;
-    text-align: center;
-    position: relative;
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Diama SMP Portal</title>
 
-  header {
-    padding: 60px 20px 30px;
-    position: relative;
-    z-index: 2;
-  }
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Poppins:wght@400;600;800&display=swap');
 
-  header img {
-    width: 120px;
-    border-radius: 20px;
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-  }
+    :root{
+      --teal:#00e6d6;
+      --aqua:#2cc9ff;
+      --mint:#cafff6;
+      --ink:#071a21;
+      --panel: rgba(255,255,255,.76);
+      --stroke: rgba(0,255,255,.24);
+    }
 
-  h1 {
-    font-size: 3em;
-    margin: 10px 0;
-  }
+    *{ box-sizing:border-box; }
 
-  .ip-box {
-    display: inline-block;
-    background: rgba(255, 255, 255, 0.1);
-    padding: 10px 20px;
-    border-radius: 12px;
-    margin-top: 15px;
-    cursor: pointer;
-    transition: 0.3s;
-  }
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family:"Poppins",sans-serif;
+      text-align:center;
+      position:relative;
+      overflow-x:hidden;
+      color: #062129;
+      background:
+        radial-gradient(1200px 900px at 15% 10%, rgba(44,201,255,.55), transparent 62%),
+        radial-gradient(1100px 900px at 90% 15%, rgba(0,230,214,.34), transparent 64%),
+        linear-gradient(180deg, #061a22 0%, #0a2b3a 34%, #0c3c52 62%, #eefeff 100%);
+      background-attachment: fixed;
+    }
 
-  .ip-box:hover {
-    background: rgba(255, 255, 255, 0.25);
-    transform: scale(1.05);
-  }
+    body::before{
+      content:"";
+      position:fixed;
+      inset:-2px;
+      background:
+        radial-gradient(1200px 900px at 50% 0%, rgba(255,255,255,.22), transparent 64%),
+        radial-gradient(1400px 900px at 72% 30%, rgba(255,255,255,.14), transparent 68%);
+      pointer-events:none;
+      z-index:0;
+    }
 
-  nav {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 15px;
-    margin: 40px 0;
-    z-index: 2;
-    position: relative;
-  }
+    h1,h2{
+      font-family:"Press Start 2P",cursive;
+      letter-spacing:.2px;
+      color: #07303a;
+      text-shadow: 0 0 14px rgba(0,230,214,.22), 0 0 30px rgba(44,201,255,.18);
+      margin: 0.65em 0 0.35em;
+    }
 
-  nav button {
-    background: rgba(255, 255, 255, 0.15);
-    color: white;
-    border: none;
-    padding: 10px 25px;
-    border-radius: 12px;
-    font-size: 1em;
-    cursor: pointer;
-    transition: 0.3s;
-  }
+    p{ margin: .35em auto; color: rgba(6,33,41,.92); }
 
-  nav button:hover {
-    background: rgba(255, 192, 203, 0.5);
-  }
+    header{ position:relative; z-index:2; padding: 54px 18px 16px; }
 
-  nav button.active {
-    background: rgba(255, 182, 193, 0.8);
-    box-shadow: 0 0 15px rgba(255, 192, 203, 0.8);
-    transform: scale(1.05);
-  }
+    .logo{
+      width: 128px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.22);
+      border: 1px solid rgba(255,255,255,.24);
+      box-shadow: 0 0 24px rgba(0,230,214,.18), 0 0 46px rgba(44,201,255,.14);
+    }
 
-  section {
-    display: none;
-    padding: 20px;
-    animation: fadeIn 0.4s ease;
-    position: relative;
-    z-index: 2;
-  }
+    .subline{ margin-top: 10px; font-weight: 800; letter-spacing: .2px; }
 
-  section.active {
-    display: block;
-  }
+    .ip-box{
+      display:inline-block;
+      margin-top: 14px;
+      padding: 10px 18px;
+      border-radius: 12px;
+      font-weight: 900;
+      letter-spacing: .2px;
+      cursor: pointer;
+      background: linear-gradient(135deg, rgba(0,230,214,.22), rgba(44,201,255,.12));
+      border: 1px solid rgba(0,255,255,.24);
+      box-shadow: 0 0 18px rgba(0,230,214,.14);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .ip-box:hover{ transform: scale(1.06); box-shadow: 0 0 24px rgba(0,230,214,.24); }
 
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(15px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+    /* NAV */
+    nav{ position:relative; z-index:2;
+      display:flex; justify-content:center; flex-wrap:wrap; gap: 12px;
+      padding: 18px 14px 6px; margin: 0 auto; max-width: 980px;
+    }
 
-  .card-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 25px;
-    margin-top: 20px;
-  }
+    nav button{
+      type:"button";
+      border:none;
+      cursor:pointer;
+      font-family:"Press Start 2P",cursive;
+      font-size:.78em;
+      letter-spacing:.2px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      color:#061923;
+      background: linear-gradient(135deg, #7cf8ff, #2cc9ff);
+      box-shadow: 0 0 14px rgba(44,201,255,.22);
+      transition: transform .18s ease, filter .18s ease;
+      white-space: nowrap;
+    }
+    nav button:hover{ transform: scale(1.08); filter: brightness(1.03); }
+    nav button.active{ background: linear-gradient(135deg, #a6fff0, #00e6d6); box-shadow: 0 0 24px rgba(0,230,214,.35); }
 
-  .card {
-    background: linear-gradient(180deg, rgba(255,255,255,0.15), rgba(0,0,0,0.25));
-    border-radius: 15px;
-    padding: 20px;
-    width: 260px;
-    transition: 0.3s;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  }
+    main{ position:relative; z-index:2; padding: 8px 12px 28px; max-width: 1080px; margin: 0 auto; }
 
-  .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-  }
+    /* ---- IMPORTANT: default = ALL SECTIONS VISIBLE (prevents "empty" pages) ---- */
+    section{ display:block; padding: 12px 10px 6px; }
 
-  footer {
-    margin: 40px 0;
-    z-index: 2;
-    position: relative;
-  }
+    /* when JS loads successfully, it will add .has-js and then tabs behave (only active shown) */
+    body.has-js section.tab-section{ display: none; }
+    body.has-js section.tab-section.active{ display: block; }
 
-  .discord {
-    display: inline-block;
-    background: #5865f2;
-    color: #fff;
-    padding: 12px 25px;
-    border-radius: 25px;
-    text-decoration: none;
-    transition: 0.3s;
-  }
+    /* CARDS */
+    .card-container{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap: 18px;
+      margin-top: 16px;
+    }
 
-  .discord:hover {
-    background: #4752c4;
-    transform: scale(1.05);
-  }
+    .card{
+      width: 268px;
+      padding: 18px 16px;
+      border-radius: 16px;
+      background: linear-gradient(180deg, rgba(255,255,255,.86), rgba(255,255,255,.58));
+      border: 1px solid rgba(0,255,255,.24);
+      box-shadow: 0 0 18px rgba(44,201,255,.18);
+      backdrop-filter: blur(6px);
+      text-align:left;
+      transition: transform .22s ease, box-shadow .22s ease;
+    }
+    .card:hover{ transform: translateY(-4px); box-shadow: 0 0 26px rgba(0,230,214,.22); }
 
-  #rules div {
-    color: #ff8ecf;
-    font-weight: 600;
-  }
+    .card h3{ margin: 0 0 6px; font-size: .98em; letter-spacing: .2px; color: #061b22; }
+    .card p{ margin: 0; color: rgba(6,33,41,.86); }
 
-  .crystal {
-    position: fixed;
-    top: -20px;
-    width: 10px;
-    height: 10px;
-    background: linear-gradient(45deg, #b1eaff, #ffbdf3);
-    border-radius: 3px;
-    opacity: 0.9;
-    box-shadow: 0 0 12px #bff;
-    animation: floatDown linear infinite;
-    z-index: 1;
-  }
+    /* SHOP special tone */
+    #shop .card{ background: linear-gradient(180deg, rgba(0,230,214,.14), rgba(255,255,255,.64)); }
+    #shop h3{ color:#03323a; }
 
-  @keyframes floatDown {
-    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-    100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
-  }
-</style>
+    /* SNEAK PEEK gallery */
+    #sneakpeek .gallery{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 14px;
+    }
+    @media (max-width: 560px){
+      #sneakpeek .gallery{ grid-template-columns: 1fr; }
+    }
+
+    .peek{
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(0,255,255,.24);
+      background: rgba(255,255,255,.68);
+      box-shadow: 0 0 18px rgba(44,201,255,.14);
+      aspect-ratio: 16 / 10;
+      position: relative;
+    }
+
+    .peek img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .peek .cap{
+      position:absolute;
+      left: 10px;
+      bottom: 10px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(6,26,33,.76);
+      border: 1px solid rgba(255,255,255,.24);
+      font-size: .72em;
+      letter-spacing: .2px;
+      color: rgba(243,255,255,.94);
+    }
+
+    footer{ position:relative; z-index:2; margin: 34px 0 22px; }
+
+    .discord{
+      display:inline-block;
+      padding: 12px 22px;
+      border-radius: 999px;
+      text-decoration:none;
+      font-weight: 800;
+      letter-spacing:.1px;
+      background: linear-gradient(135deg, #5865f2, #2e5bff);
+      color:#fff;
+      box-shadow: 0 0 24px rgba(88,101,242,.34);
+      transition: transform .2s ease;
+    }
+    .discord:hover{ transform: scale(1.06); }
+
+    /* particles */
+    .particle{
+      position: fixed;
+      z-index: 0;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(178,255,255,.9), transparent 68%);
+      opacity: .65;
+      animation: floatUp linear infinite;
+      pointer-events: none;
+    }
+    @keyframes floatUp{
+      from{ transform: translateY(105vh) scale(.5); opacity:.55; }
+      to  { transform: translateY(-12vh) scale(1.2); opacity:0; }
+    }
+  </style>
 </head>
 
 <body>
   <header>
-    <img src="PFPDIAMA.png" alt="Diama SMP Logo" />
+    <img src="Diama logo.png" alt="Diama SMP Logo" class="logo">
     <h1>Diama SMP</h1>
-    <p>20+ active players • 24/7 online • Version 1.21.6 • Modern Minecraft Community</p>
-    <div class="ip-box" onclick="copyIP()">play.diamasmp.fun:25569</div>
+    <p class="subline">20+ active players • 24/7 online • Version 1.21.6 • Modern Minecraft Community</p>
+    <div class="ip-box" onclick="copyIP()">in01.arialnodes.in:25517</div>
   </header>
 
   <nav>
-    <button class="active" onclick="showTab('roles', this)">Team Roles</button>
-    <button onclick="showTab('features', this)">Features</button>
-    <button onclick="showTab('rules', this)">Rules</button>
-    <button onclick="showTab('shop', this)">Shop</button>
-    <button onclick="showTab('reviews', this)">Crew Reviews</button>
+    <button class="active" data-target="roles">TEAM ROLES</button>
+    <button data-target="features">FEATURES</button>
+    <button data-target="rules">RULES</button>
+    <button data-target="reviews">REVIEWS</button>
+    <button data-target="shop">SHOP</button>
+    <button data-target="sneakpeek">SNEAK PEEK</button>
   </nav>
 
-  <!-- === ROLES SECTION === -->
-  <section id="roles" class="active">
-    <h2>Team Roles</h2>
-    <div class="card-container">
-      <div class="card"><h3>Ahmed | Blaze</h3><p>Co-Owner — Creative Leadership</p></div>
-      <div class="card"><h3>⟆ GAMER ⋆ AFFAN ⟆</h3><p>Owner — Server foundation & direction</p></div>
-      <div class="card"><h3>⟆ CAPTAIN ⋆ RAFAY ⟆</h3><p>Backbone of SMP 💪</p></div>
-    </div>
-    <div class="card-container">
-      <div class="card"><h3>FireX | Blaze</h3><p>Manager — Events & player support</p></div>
-      <div class="card"><h3>🌊 Water Hashira</h3><p>Admin — Experienced Staff & support</p></div>
-    </div>
-  </section>
-
-  <!-- === FEATURES SECTION === -->
-  <section id="features">
-    <h2>Server Features</h2>
-    <div class="card-container">
-      <div class="card"><h3>🌍 Online 24/7</h3><p>Always available for grind and fun sessions.</p></div>
-      <div class="card"><h3>🛡️ Staff Support</h3><p>Active staff to help players anytime.</p></div>
-      <div class="card"><h3>⚔️ Adventure</h3><p>Engage in PvP and exploration events.</p></div>
-    </div>
-    <div class="card-container">
-      <div class="card"><h3>🧠 Strategy</h3><p>Collaborate and build empires.</p></div>
-      <div class="card"><h3>🎁 Events</h3><p>Weekly competitions and rewards.</p></div>
-    </div>
-  </section>
-
-  <!-- === RULES SECTION === -->
-  <section id="rules">
-    <h2>Server Rules ⬇️</h2>
-    <div style="max-width:800px;margin:auto;text-align:left;line-height:1.8;">
-      <p>✅ <strong>Respect everyone</strong> — no hate speech or toxicity.</p>
-      <p>❌ <strong>No hacks or exploits.</strong></p>
-      <p>🏠 <strong>No spawn killing or griefing.</strong></p>
-      <p>⚔️ <strong>Fair PvP only.</strong></p>
-      <p>💬 <strong>Keep chat clean and safe.</strong></p>
-      <p>📛 <strong>Follow staff instructions.</strong></p>
-    </div>
-  </section>
-
-  <!-- === SHOP SECTION === -->
-  <section id="shop">
-    <h2>🛒 Diama SMP Shop</h2>
-    <div class="card-container">
-      <div class="card"><h3>💎 ELITE</h3><p>550K OwO</p></div>
-      <div class="card"><h3>🔥 OMEGA</h3><p>400K OwO</p></div>
-      <div class="card"><h3>👑 IMMORTAL</h3><p>375K OwO</p></div>
-    </div>
-    <div class="card-container">
-      <div class="card"><h3>⚡ BOOSTER KIT</h3><p>350K OwO</p></div>
-      <div class="card"><h3>💥 ULTRA KIT</h3><p>250K OwO</p></div>
-      <div class="card"><h3>⭐ VIP KIT</h3><p>100K OwO</p></div>
-    </div>
-    <div style="margin-top: 20px; font-weight: 600; color: #ff8ecf;">
-      <p>📋 <strong>Requirements:</strong></p>
-      <p>• Must have patience</p>
-      <p>• No refunds once bought</p>
-    </div>
-  </section>
-
-  <!-- === REVIEWS SECTION === -->
-  <section id="reviews">
-    <h2>Crew Reviews</h2>
-    <div class="card-container">
-      <div class="card">
-        <h3>Bhalutenx</h3>
-        <p>Nice server I never feel bored</p>
+  <main>
+    <!-- 1) TEAM ROLES -->
+    <section id="roles" class="tab-section active">
+      <h2>TEAM ROLES</h2>
+      <div class="card-container">
+        <div class="card"><h3>⟆ CAPTAIN ⋆ RAFAY ⟆</h3><p>Captain | Strategist | Fearless</p></div>
+        <div class="card"><h3>⟆ GAMER ⋆ AFFAN ⟆</h3><p>Owner — Server foundation & direction</p></div>
+        <div class="card"><h3>Ahmed | Blaze</h3><p>Co-Owner — Creative Leadership</p></div>
       </div>
-      <div class="card">
-        <h3>CookieDevil</h3>
-        <p>Good server, any bugs are solved in a day without chaos</p>
+      <div class="card-container">
+        <div class="card"><h3>FireX | Blaze</h3><p>Manager — Events & player support</p></div>
+        <div class="card"><h3>🌊 Water Hashira</h3><p>Admin — Experienced Staff & support</p></div>
       </div>
-    </div>
-    <div class="card-container">
-      <div class="card">
-        <h3>Real_Legit</h3>
-        <p>Har bar ki tarah hopes se 1 kadam aage!</p>
+    </section>
+
+    <!-- 2) FEATURES -->
+    <section id="features" class="tab-section">
+      <h2>FEATURES</h2>
+      <div class="card-container">
+        <div class="card"><h3>🌍 24/7 Server</h3><p>Always available for grind and fun sessions.</p></div>
+        <div class="card"><h3>🛡️ Active Staff</h3><p>Helpful team ready anytime.</p></div>
+        <div class="card"><h3>⚔️ PvP Adventures</h3><p>Battle, raid and explore together.</p></div>
+        <div class="card"><h3>🧠 Strategy</h3><p>Collaborate and build empires.</p></div>
+        <div class="card"><h3>🎁 Events</h3><p>Weekly competitions and rewards.</p></div>
+        <div class="card"><h3>🌲 Survival Economy</h3><p>Trade, earn, and grow your in-game wealth!</p></div>
       </div>
-      <div class="card">
-        <h3>DiedGV</h3>
-        <p>Staff is loyal — koi unfair advantage nahi deta kisiko</p>
+    </section>
+
+    <!-- 3) RULES -->
+    <section id="rules" class="tab-section">
+      <h2>SERVER RULES</h2>
+      <div style="max-width:800px;margin:0 auto;text-align:left;line-height:1.9;">
+        <p>✅ <strong>Respect everyone</strong> — no hate speech or toxicity.</p>
+        <p>❌ <strong>No hacks or exploits.</strong></p>
+        <p>🏠 <strong>No spawn killing or griefing.</strong></p>
+        <p>⚔️ <strong>Fair PvP only.</strong></p>
+        <p>📛 <strong>Follow staff instructions.</strong></p>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <!-- 4) REVIEWS -->
+    <section id="reviews" class="tab-section">
+      <h2>CREW REVIEWS</h2>
+      <div class="card-container">
+        <div class="card"><h3>Bhalutenx</h3><p>Best SMP I never feel bored</p></div>
+        <div class="card"><h3>CookieDevil</h3><p>Friendly staff, active gameplay, and fun events.</p></div>
+        <div class="card"><h3>DiedGV</h3><p>Lively and loyal community — love it here!</p></div>
+      </div>
+    </section>
+
+    <!-- 5) SHOP -->
+    <section id="shop" class="tab-section">
+      <h2>🛒 DIAMA SMP SHOP</h2>
+      <div class="card-container">
+        <div class="card"><h3>ELITE</h3><p>550K OwO</p></div>
+        <div class="card"><h3>OMEGA</h3><p>400K OwO</p></div>
+        <div class="card"><h3>IMMORTAL</h3><p>375K OwO</p></div>
+        <div class="card"><h3>BOOSTER KIT</h3><p>350K OwO</p></div>
+        <div class="card"><h3>ULTRA KIT</h3><p>250K OwO</p></div>
+        <div class="card"><h3>VIP KIT</h3><p>100K OwO</p></div>
+      </div>
+      <p style="margin-top:20px; color: rgba(3,33,42,.9);">🕓 Requirements: Must have patience. No refunds once bought.</p>
+    </section>
+
+    <!-- 6) SNEAK PEEK (new section) -->
+    <section id="sneakpeek" class="tab-section">
+      <h2>SNEAK PEEK</h2>
+      <div class="gallery">
+        <div class="peek"><img src="smp1.jpg" alt="SMP preview 1"><div class="cap">SMP 01</div></div>
+        <div class="peek"><img src="smp2.jpg" alt="SMP preview 2"><div class="cap">SMP 02</div></div>
+        <div class="peek"><img src="smp3.jpg" alt="SMP preview 3"><div class="cap">SMP 03</div></div>
+        <div class="peek"><img src="smp4.jpg" alt="SMP preview 4"><div class="cap">SMP 04</div></div>
+        <div class="peek"><img src="smp5.jpg" alt="SMP preview 5"><div class="cap">SMP 05</div></div>
+        <div class="peek"><img src="smp6.jpg" alt="SMP preview 6"><div class="cap">SMP 06</div></div>
+        <div class="peek"><img src="smp7.jpg" alt="SMP preview 7"><div class="cap">SMP 07</div></div>
+        <div class="peek"><img src="smp8.jpg" alt="SMP preview 8"><div class="cap">SMP 08</div></div>
+        <div class="peek"><img src="smp9.jpg" alt="SMP preview 9"><div class="cap">SMP 09</div></div>
+      </div>
+    </section>
+  </main>
 
   <footer>
-    <a href="https://discord.gg/2UVgQdTjRZ" class="discord" target="_blank">Join Our Discord 💬</a>
+    <a class="discord" href="https://discord.gg/2UVgQdTjRZ" target="_blank">Join Our Discord 💬</a>
   </footer>
 
   <script>
-    function copyIP() {
-      navigator.clipboard.writeText("play.diamasmp.fun:25569");
+    function copyIP(){
+      navigator.clipboard.writeText("in01.arialnodes.in:25517");
       alert("✅ IP copied to clipboard!");
     }
 
-    function showTab(tab, btn) {
-      document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
-      document.querySelectorAll("nav button").forEach(b => b.classList.remove("active"));
-      document.getElementById(tab).classList.add("active");
-      btn.classList.add("active");
-    }
+    // Robust tab system (won't leave you with empty sections)
+    (function initTabs(){
+      document.body.classList.add("has-js");
 
-    // Crystal particle background
-    const numCrystals = 25;
-    for (let i = 0; i < numCrystals; i++) {
-      const crystal = document.createElement("div");
-      crystal.classList.add("crystal");
-      const size = Math.random() * 10 + 4;
-      crystal.style.width = `${size}px`;
-      crystal.style.height = `${size}px`;
-      crystal.style.left = `${Math.random() * 100}vw`;
-      crystal.style.animationDuration = `${6 + Math.random() * 6}s`;
-      crystal.style.animationDelay = `${Math.random() * 4}s`;
-      document.body.appendChild(crystal);
-    }
+      const buttons = document.querySelectorAll("nav button[data-target]");
+      const sections = document.querySelectorAll("main section.tab-section");
+
+      function activate(id, btn){
+        sections.forEach(s => s.classList.remove("active"));
+        const target = document.getElementById(id);
+        if (target) target.classList.add("active");
+
+        buttons.forEach(b => b.classList.remove("active"));
+        if (btn) btn.classList.add("active");
+
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      // ensure at least one section is active (roles)
+      if (!document.querySelector("main section.tab-section.active")) {
+        activate("roles", document.querySelector('nav button[data-target="roles"]'));
+      }
+
+      buttons.forEach(b => {
+        b.addEventListener("click", () => activate(b.getAttribute("data-target"), b));
+      });
+    })();
+
+    // particles (zephyr feel)
+    (function spawnParticles(){
+      const count = 22;
+      for (let i = 0; i < count; i++){
+        const p = document.createElement("div");
+        p.className = "particle";
+        const size = Math.random() * 9 + 4;
+        p.style.width = `${size}px`;
+        p.style.height = `${size}px`;
+        p.style.left = `${Math.random() * 100}vw`;
+        p.style.animationDuration = `${8 + Math.random() * 7}s`;
+        p.style.animationDelay = `${Math.random() * 5}s`;
+        document.body.appendChild(p);
+      }
+    })();
   </script>
 </body>
 </html>
