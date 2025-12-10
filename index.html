@@ -1,203 +1,222 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Diama SMP Portal</title>
 
 <style>
-/* FONTS */
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Poppins:wght@400;600;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Poppins:wght@300;400;600;800&display=swap');
 
-/* ROOT COLORS */
-:root {
-  --teal: #29f7e4;
-  --blue: #1e90ff;
-  --lightblue: #8ae2ff;
-  --card-bg: rgba(10, 25, 40, 0.6);
-  --card-border: rgba(0, 255, 255, 0.35);
-  --glow: 0 0 12px rgba(0,255,255,0.6);
-}
-
-/* GLOBAL */
 body {
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(180deg, #08121d, #0d2b37);
-  color: var(--lightblue);
-  text-align: center;
-  overflow-x: hidden;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #0a0f1c, #07131f, #0a1a29);
+    color: #e9faff;
+    text-align: center;
 }
 
 h1, h2 {
-  font-family: 'Press Start 2P', cursive;
-  color: var(--teal);
-  text-shadow: 0 0 12px var(--teal);
+    font-family: 'Press Start 2P', cursive;
+    text-shadow: 0 0 12px cyan;
 }
 
-section {
-  padding: 60px 0;
+.navbar {
+    margin-top: 40px;
 }
 
-/* LOGO */
-.logo {
-  width: 130px;
-  margin-top: 35px;
-  filter: drop-shadow(0 0 20px rgba(0,255,255,0.55));
+.navbar button {
+    padding: 12px 20px;
+    margin: 10px;
+    border-radius: 8px;
+    border: none;
+    background: #007bff;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 0 10px #007bff;
+    transition: 0.2s;
+}
+.navbar button.active {
+    background: #00ffaa;
+    box-shadow: 0 0 12px #00ffaa;
 }
 
-/* IP BOX */
-.ip-box {
-  background: rgba(0, 255, 255, 0.12);
-  border: 2px solid var(--teal);
-  padding: 10px 26px;
-  border-radius: 12px;
-  display: inline-block;
-  margin-top: 10px;
-  font-weight: 600;
-  color: var(--teal);
-  cursor: pointer;
-  box-shadow: 0 0 15px rgba(0,255,255,0.35);
+/* Sections */
+.section {
+    display: none;
+    padding: 40px 20px;
+}
+.section.active {
+    display: block;
 }
 
-/* NAV TABS */
-nav {
-  margin: 40px 0;
+/* Role boxes */
+.role-box {
+    background: rgba(0, 255, 255, 0.05);
+    border: 1px solid rgba(0,255,255,0.2);
+    padding: 20px;
+    width: 280px;
+    border-radius: 15px;
+    margin: 15px auto;
+    box-shadow: 0 0 15px rgba(0,255,255,0.1);
+}
+.role-title {
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 5px;
 }
 
-nav button {
-  font-family: 'Press Start 2P';
-  margin: 6px;
-  padding: 12px 22px;
-  border-radius: 14px;
-  border: none;
-  cursor: pointer;
-  font-size: 11px;
-  background: rgba(0, 140, 255, 0.25);
-  color: var(--lightblue);
-  transition: .25s;
-}
-
-nav button.active,
-nav button:hover {
-  background: var(--teal);
-  color: #00322e;
-  box-shadow: var(--glow);
-}
-
-/* CARD GRID */
+/* Grid layout for roles */
 .roles-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 25px;
-  width: 90%;
-  margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    max-width: 900px;
+    margin: auto;
 }
 
-.role-card {
-  background: var(--card-bg);
-  padding: 25px;
-  border-radius: 18px;
-  border: 1px solid var(--card-border);
-  box-shadow: 0 0 12px rgba(0,255,255,0.25);
-}
-
-.role-card h3 {
-  font-size: 18px;
-  margin-bottom: 6px;
-  color: white;
-}
-
-.role-card p {
-  font-size: 14px;
-  margin: 0;
-  opacity: 0.9;
-}
 </style>
-</head>
 
+</head>
 <body>
 
-<img src="Diama logo.png" class="logo" alt="logo">
-
+<!-- HEADER -->
+<img src="https://i.imgur.com/HJ5vGDf.png" width="130" style="margin-top:40px;">
 <h1>Diama SMP</h1>
 <p>20+ active players • 24/7 online • Version 1.21.6 • Modern Minecraft Community</p>
+<p style="margin-top:20px; font-weight:bold; color:#00ffaa;">in01.arialnodes.in:25517</p>
 
-<div class="ip-box" onclick="copyIP()">in01.arialnodes.in:25517</div>
-
-<nav>
-  <button class="active" onclick="showTab('roles', this)">TEAM ROLES</button>
-  <button onclick="showTab('features', this)">FEATURES</button>
-  <button onclick="showTab('rules', this)">RULES</button>
-  <button onclick="showTab('reviews', this)">REVIEWS</button>
-  <button onclick="showTab('shop', this)">SHOP</button>
-  <button onclick="showTab('sneakpeek', this)">SNEAK PEEK</button>
-</nav>
-
-<main>
+<!-- NAVIGATION TABS -->
+<div class="navbar">
+    <button class="tab-btn active" onclick="openTab('roles')">TEAM ROLES</button>
+    <button class="tab-btn" onclick="openTab('features')">FEATURES</button>
+    <button class="tab-btn" onclick="openTab('rules')">RULES</button>
+    <button class="tab-btn" onclick="openTab('reviews')">REVIEWS</button>
+    <button class="tab-btn" onclick="openTab('shop')">SHOP</button>
+    <button class="tab-btn" onclick="openTab('sneak')">SNEAK PEEK</button>
+</div>
 
 <!-- TEAM ROLES -->
-<section id="roles">
-  <h2>TEAM ROLES</h2>
+<div id="roles" class="section active">
+    <h2>TEAM ROLES</h2>
 
-  <div class="roles-grid">
+    <div class="roles-grid">
 
-    <!-- OWNERS -->
-    <div class="role-card">
-      <h3>∫ CAPTAIN✦RAFAY ∫</h3>
-      <p>Captain | Strategist | Fearless</p>
+        <!-- Owners -->
+        <div class="role-box">
+            <div class="role-title">👑 Captain Rafay</div>
+            Captain | Strategist | Fearless
+        </div>
+
+        <div class="role-box">
+            <div class="role-title">👑 Gamer Affan</div>
+            Owner — Server foundation & direction
+        </div>
+
+        <div class="role-box">
+            <div class="role-title">👑 Ahmed | Blaze</div>
+            Co-Owner — Creative Leadership
+        </div>
+
+        <!-- Founder -->
+        <div class="role-box">
+            <div class="role-title">🪄 WizardOP</div>
+            Founder — Original creator & inspiration
+        </div>
+
+        <!-- Prime Member -->
+        <div class="role-box">
+            <div class="role-title">🌟 Khushi</div>
+            Prime Member — Support & Community bond
+        </div>
+
+        <!-- Senior Manager -->
+        <div class="role-box">
+            <div class="role-title">⚡ iamnoobatpc</div>
+            Senior Manager — Management & oversight
+        </div>
+
+        <!-- Manager -->
+        <div class="role-box">
+            <div class="role-title">🔥 FireX | Blaze</div>
+            Manager — Activity & staff support
+        </div>
+
+        <!-- Admins -->
+        <div class="role-box">
+            <div class="role-title">🛡 Silent Slayer</div>
+            Admin — Protection & moderation
+        </div>
+
+        <div class="role-box">
+            <div class="role-title">🛡 ShadowStriker</div>
+            Admin — Community safety
+        </div>
+
+        <!-- Web Developer -->
+        <div class="role-box">
+            <div class="role-title">💻 Cookie Devil</div>
+            Web Developer — Website & UI
+        </div>
+
     </div>
+</div>
 
-    <div class="role-card">
-      <h3>∫ GAMER✦AFFAN ∫</h3>
-      <p>Owner — Server foundation & direction</p>
-    </div>
+<!-- FEATURES -->
+<div id="features" class="section">
+    <h2>FEATURES</h2>
+    <p>• Custom Lifesteal  
+    • Crates & Events  
+    • Claims Protection  
+    • Balanced Economy  
+    • Duels & PvP  
+    • No Lag servers</p>
+</div>
 
-    <div class="role-card">
-      <h3>Ahmed | Blaze</h3>
-      <p>Co-Owner — Creative Leadership</p>
-    </div>
+<!-- RULES -->
+<div id="rules" class="section">
+    <h2>RULES</h2>
+    <p>• No hacking or exploiting  
+    • Respect all players  
+    • No griefing  
+    • No toxic behavior  
+    • Follow staff instructions  
+    • No dupes / unfair mods</p>
+</div>
 
-    <!-- FOUNDER -->
-    <div class="role-card">
-      <h3>WizardOP</h3>
-      <p>Founder — Vision & Core Concepts</p>
-    </div>
+<!-- REVIEWS -->
+<div id="reviews" class="section">
+    <h2>REVIEWS</h2>
+    <p>⭐ “Best SMP I ever played!”  
+       ⭐ “Friendly community!”  
+       ⭐ “Super active team, amazing features.”</p>
+</div>
 
-    <!-- PRIME MEMBER -->
-    <div class="role-card">
-      <h3>Khushi</h3>
-      <p>Prime Member — Trusted Community Figure</p>
-    </div>
+<!-- SHOP -->
+<div id="shop" class="section">
+    <h2>SHOP</h2>
+    <p>• Ranks  
+       • Crate Keys  
+       • Cosmetics  
+       • Boosters</p>
+</div>
 
-    <!-- SR MANAGER -->
-    <div class="role-card">
-      <h3>iamnoobatpc</h3>
-      <p>Senior Manager — Server Management</p>
-    </div>
+<!-- SNEAK PEEK -->
+<div id="sneak" class="section">
+    <h2>SNEAK PEEK</h2>
+    <p>🔥 Coming Soon: BRAND NEW MAP + New Lifesteal Expansion</p>
+    <img src="https://i.imgur.com/0ZV9nAn.png" width="300">
+</div>
 
-    <!-- MANAGER -->
-    <div class="role-card">
-      <h3>FireX | Blaze</h3>
-      <p>Manager — Team Support & Moderation</p>
-    </div>
+<script>
+function openTab(tabName) {
+    document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+    document.getElementById(tabName).classList.add('active');
+    event.target.classList.add('active');
+}
+</script>
 
-    <!-- ADMINS -->
-    <div class="role-card">
-      <h3>ShadowStriker</h3>
-      <p>Admin — Protection & Enforcement</p>
-    </div>
-
-    <div class="role-card">
-      <h3>Water Hashira</h3>
-      <p>Admin — Community Discipline</p>
-    </div>
-
-    <!-- WEB DEVELOPER -->
-    <div class="role-card">
-      <h3>Cookie Devil</h3>
-      <p>Web Developer — UI/UX & Site Design</p>
-    </div>
-
-  </div>
-</section>
+</body>
+</html>
