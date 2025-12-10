@@ -1,222 +1,401 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diama SMP Portal</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Diama SMP Portal</title>
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Poppins:wght@300;400;600;800&display=swap');
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Poppins:wght@300;400;600;800&display=swap');
 
-body {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #0a0f1c, #07131f, #0a1a29);
-    color: #e9faff;
-    text-align: center;
-}
+    :root{
+      --bg1: #08121d;
+      --bg2: #0d2b37;
+      --teal: #2be7f0;
+      --cyan: #18c9ff;
+      --soft-blue: #a8e6ff;          /* the “info text” blue shade you want */
+      --soft-blue2: #76dcff;
+      --btn: #1c86ff;
+      --btn2: #00c8ff;
+      --active: #00ffcf;
+      --stroke: rgba(0,255,255,.35);
+      --card: rgba(8, 18, 29, .72);
+    }
 
-h1, h2 {
-    font-family: 'Press Start 2P', cursive;
-    text-shadow: 0 0 12px cyan;
-}
+    *{ box-sizing:border-box; }
 
-.navbar {
-    margin-top: 40px;
-}
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family:"Poppins",sans-serif;
+      background: linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 100%);
+      color: var(--soft-blue);
+      text-align:center;
+      overflow-x:hidden;
+    }
 
-.navbar button {
-    padding: 12px 20px;
-    margin: 10px;
-    border-radius: 8px;
-    border: none;
-    background: #007bff;
-    color: white;
-    cursor: pointer;
-    font-weight: bold;
-    box-shadow: 0 0 10px #007bff;
-    transition: 0.2s;
-}
-.navbar button.active {
-    background: #00ffaa;
-    box-shadow: 0 0 12px #00ffaa;
-}
+    /* soft top glow like your screenshot */
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      background:
+        radial-gradient(900px 520px at 50% 5%, rgba(0,255,255,.18), transparent 68%),
+        radial-gradient(1000px 700px at 50% 0%, rgba(0,200,255,.10), transparent 70%);
+      pointer-events:none;
+      z-index:0;
+    }
 
-/* Sections */
-.section {
-    display: none;
-    padding: 40px 20px;
-}
-.section.active {
-    display: block;
-}
+    h1, h2{
+      font-family:"Press Start 2P", cursive;
+      letter-spacing: .2px;
+      margin: 0.6em 0 0.25em;
+      color: var(--teal);
+      text-shadow: 0 0 10px rgba(0,255,255,.55);
+    }
 
-/* Role boxes */
-.role-box {
-    background: rgba(0, 255, 255, 0.05);
-    border: 1px solid rgba(0,255,255,0.2);
-    padding: 20px;
-    width: 280px;
-    border-radius: 15px;
-    margin: 15px auto;
-    box-shadow: 0 0 15px rgba(0,255,255,0.1);
-}
-.role-title {
-    font-weight: bold;
-    font-size: 18px;
-    margin-bottom: 5px;
-}
+    p{ margin: 0.2em auto; color: var(--soft-blue); }
 
-/* Grid layout for roles */
-.roles-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 20px;
-    max-width: 900px;
-    margin: auto;
-}
+    /* ===== HEADER ===== */
+    header{ position:relative; z-index:2; padding-top: 24px; }
+    .logo{ width: 92px; filter: drop-shadow(0 0 18px rgba(0,255,255,.22)); }
 
-</style>
+    .topline{ margin-top: 6px; font-weight: 600; color: var(--soft-blue); }
 
+    /* ===== IP BOX ===== */
+    .ip-box{
+      display:inline-block;
+      margin-top: 12px;
+      padding: 10px 22px;
+      border-radius: 12px;
+      font-weight: 800;
+      letter-spacing: .2px;
+      cursor: pointer;
+      color: #06232a;
+      background: linear-gradient(135deg, var(--active), var(--teal));
+      border: 2px solid rgba(255,255,255,.55);
+      box-shadow: 0 0 22px rgba(0,255,255,.38);
+      transition: transform .18s ease, box-shadow .18s ease;
+      user-select: none;
+    }
+    .ip-box:hover{ transform: scale(1.06); box-shadow: 0 0 30px rgba(0,255,255,.55); }
+
+    /* ===== NAV TABS ===== */
+    nav{ position:relative; z-index:2; margin: 20px auto 0; display:flex; justify-content:center; gap: 10px; flex-wrap: wrap; }
+
+    .tab-btn{
+      border: none;
+      cursor: pointer;
+      font-family:"Press Start 2P", cursive;
+      font-size: 11px;
+      letter-spacing: .2px;
+      padding: 10px 18px;
+      border-radius: 12px;
+      color: #041e26;
+      background: linear-gradient(135deg, var(--btn2), var(--btn));
+      box-shadow: 0 0 12px rgba(0,200,255,.28);
+      transition: transform .18s ease, filter .18s ease;
+      white-space: nowrap;
+    }
+    .tab-btn:hover{ transform: scale(1.06); filter: brightness(1.05); }
+
+    .tab-btn.active{
+      background: linear-gradient(135deg, var(--active), #05ffe1);
+      box-shadow: 0 0 22px rgba(0,255,220,.55);
+    }
+
+    /* ===== MAIN + SECTIONS ===== */
+    main{ position:relative; z-index:2; max-width: 1120px; margin: 0 auto; padding: 10px 12px 30px; }
+
+    .tab-section{ display:none; padding-top: 12px; }
+    .tab-section.active{ display:block; }
+
+    /* ===== CARD / GRID ===== */
+    .grid{ display:grid; gap: 18px; width: 92%; margin: 12px auto 0; }
+    .grid.roles{ grid-template-columns: repeat(3, minmax(240px, 1fr)); }
+    .grid.generic{ grid-template-columns: repeat(3, minmax(240px, 1fr)); }
+
+    @media (max-width: 860px){
+      .grid.roles, .grid.generic{ grid-template-columns: 1fr; }
+    }
+
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(0,0,0,.22));
+      border: 1px solid rgba(0,255,255,.30);
+      border-radius: 16px;
+      padding: 18px 16px;
+      box-shadow: 0 0 18px rgba(0,200,255,.14);
+      backdrop-filter: blur(6px);
+      text-align: left;
+    }
+
+    .card h3{
+      margin: 0 0 6px;
+      font-size: 14px;
+      letter-spacing: .18px;
+      color: #eaffff; /* titles keep bright */
+    }
+
+    .card p{ margin: 0; color: var(--soft-blue); }
+
+    /* ===== SNEAK PEEK (SMP 1..8 only) ===== */
+    .peek-grid{
+      width: 94%;
+      margin: 12px auto 0;
+      display: grid;
+      gap: 14px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    @media (max-width: 980px){ .peek-grid{ grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    @media (max-width: 640px){ .peek-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+    .peek{
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(0,255,255,.28);
+      background: rgba(255,255,255,.08);
+      box-shadow: 0 0 18px rgba(0,200,255,.14);
+      aspect-ratio: 16 / 10;
+      position: relative;
+    }
+
+    .peek img{ width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .peek .cap{
+      position: absolute;
+      left: 10px;
+      bottom: 10px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: rgba(5, 18, 24, .76);
+      border: 1px solid rgba(255,255,255,.22);
+      font-size: 12px;
+      letter-spacing: .2px;
+      color: var(--soft-blue);
+    }
+
+    /* ===== FOOTER ===== */
+    footer{ position:relative; z-index:2; margin: 26px 0 24px; }
+    .discord{
+      display:inline-block;
+      padding: 10px 20px;
+      border-radius: 999px;
+      text-decoration:none;
+      font-weight: 800;
+      letter-spacing: .1px;
+      background: linear-gradient(135deg, #5865f2, #2e5bff);
+      color:#fff;
+      box-shadow: 0 0 24px rgba(88,101,242,.34);
+      transition: transform .18s ease;
+    }
+    .discord:hover{ transform: scale(1.06); }
+
+    /* ===== PARTICLES (subtle) ===== */
+    .particle{
+      position: fixed;
+      z-index: 0;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(178,255,255,.9), transparent 68%);
+      opacity: .65;
+      animation: floatUp linear infinite;
+      pointer-events: none;
+    }
+    @keyframes floatUp{
+      from{ transform: translateY(105vh) scale(.5); opacity: .55; }
+      to  { transform: translateY(-12vh) scale(1.2); opacity: 0; }
+    }
+  </style>
 </head>
+
 <body>
+  <header>
+    <img class="logo" src="Diama logo.png" alt="Diama SMP logo">
+    <h1>Diama SMP</h1>
+    <p class="topline">20+ active players • 24/7 online • Version 1.21.6 • Modern Minecraft Community</p>
+    <div class="ip-box" onclick="copyIP()">in01.arialnodes.in:25517</div>
+  </header>
 
-<!-- HEADER -->
-<img src="https://i.imgur.com/HJ5vGDf.png" width="130" style="margin-top:40px;">
-<h1>Diama SMP</h1>
-<p>20+ active players • 24/7 online • Version 1.21.6 • Modern Minecraft Community</p>
-<p style="margin-top:20px; font-weight:bold; color:#00ffaa;">in01.arialnodes.in:25517</p>
+  <!-- TABS (order as you want) -->
+  <nav>
+    <button class="tab-btn active" data-target="roles">TEAM ROLES</button>
+    <button class="tab-btn" data-target="features">FEATURES</button>
+    <button class="tab-btn" data-target="rules">RULES</button>
+    <button class="tab-btn" data-target="reviews">REVIEWS</button>
+    <button class="tab-btn" data-target="shop">SHOP</button>
+    <button class="tab-btn" data-target="sneakpeek">SNEAK PEEK</button>
+  </nav>
 
-<!-- NAVIGATION TABS -->
-<div class="navbar">
-    <button class="tab-btn active" onclick="openTab('roles')">TEAM ROLES</button>
-    <button class="tab-btn" onclick="openTab('features')">FEATURES</button>
-    <button class="tab-btn" onclick="openTab('rules')">RULES</button>
-    <button class="tab-btn" onclick="openTab('reviews')">REVIEWS</button>
-    <button class="tab-btn" onclick="openTab('shop')">SHOP</button>
-    <button class="tab-btn" onclick="openTab('sneak')">SNEAK PEEK</button>
-</div>
+  <main>
+    <!-- 1) TEAM ROLES (your exact order) -->
+    <section id="roles" class="tab-section active">
+      <h2>TEAM ROLES</h2>
 
-<!-- TEAM ROLES -->
-<div id="roles" class="section active">
-    <h2>TEAM ROLES</h2>
-
-    <div class="roles-grid">
-
-        <!-- Owners -->
-        <div class="role-box">
-            <div class="role-title">👑 Captain Rafay</div>
-            Captain | Strategist | Fearless
+      <div class="grid roles">
+        <!-- OWNERS -->
+        <div class="card">
+          <h3>⟆ CAPTAIN✦RAFAY ⟆</h3>
+          <p>Captain | Strategist | Fearless</p>
+        </div>
+        <div class="card">
+          <h3>⟆ GAMER✦AFFAN ⟆</h3>
+          <p>Owner — Server foundation & direction</p>
+        </div>
+        <div class="card">
+          <h3>Ahmed | Blaze</h3>
+          <p>Co-Owner — Creative Leadership</p>
         </div>
 
-        <div class="role-box">
-            <div class="role-title">👑 Gamer Affan</div>
-            Owner — Server foundation & direction
+        <!-- FOUNDER -->
+        <div class="card">
+          <h3>WizardOP</h3>
+          <p>Founder — Original creator & vision</p>
         </div>
 
-        <div class="role-box">
-            <div class="role-title">👑 Ahmed | Blaze</div>
-            Co-Owner — Creative Leadership
+        <!-- PRIME MEMBER -->
+        <div class="card">
+          <h3>Khushi</h3>
+          <p>Prime Member — Trusted community member</p>
         </div>
 
-        <!-- Founder -->
-        <div class="role-box">
-            <div class="role-title">🪄 WizardOP</div>
-            Founder — Original creator & inspiration
+        <!-- SENIOR MANAGER -->
+        <div class="card">
+          <h3>iamnoobatpc</h3>
+          <p>Senior Manager — Server management & operations</p>
         </div>
 
-        <!-- Prime Member -->
-        <div class="role-box">
-            <div class="role-title">🌟 Khushi</div>
-            Prime Member — Support & Community bond
+        <!-- MANAGER -->
+        <div class="card">
+          <h3>FireX | Blaze</h3>
+          <p>Manager — Events & player support</p>
         </div>
 
-        <!-- Senior Manager -->
-        <div class="role-box">
-            <div class="role-title">⚡ iamnoobatpc</div>
-            Senior Manager — Management & oversight
+        <!-- ADMINS -->
+        <div class="card">
+          <h3>Water Hashira</h3>
+          <p>Admin — Experienced staff & support</p>
         </div>
-
-        <!-- Manager -->
-        <div class="role-box">
-            <div class="role-title">🔥 FireX | Blaze</div>
-            Manager — Activity & staff support
+        <div class="card">
+          <h3>ShadowStriker</h3>
+          <p>Admin — Protection & enforcement</p>
         </div>
+      </div>
+    </section>
 
-        <!-- Admins -->
-        <div class="role-box">
-            <div class="role-title">🛡 Silent Slayer</div>
-            Admin — Protection & moderation
-        </div>
+    <!-- 2) FEATURES (your previous info) -->
+    <section id="features" class="tab-section">
+      <h2>FEATURES</h2>
+      <div class="grid generic">
+        <div class="card"><h3>🌍 24/7 Server</h3><p>Always available for grind and fun sessions.</p></div>
+        <div class="card"><h3>🛡️ Active Staff</h3><p>Helpful team ready anytime.</p></div>
+        <div class="card"><h3>⚔️ PvP Adventures</h3><p>Battle, raid and explore together.</p></div>
+        <div class="card"><h3>🧠 Strategy</h3><p>Collaborate and build empires.</p></div>
+        <div class="card"><h3>🎁 Events</h3><p>Weekly competitions and rewards.</p></div>
+        <div class="card"><h3>🌲 Survival Economy</h3><p>Trade, earn, and grow your in-game wealth!</p></div>
+      </div>
+    </section>
 
-        <div class="role-box">
-            <div class="role-title">🛡 ShadowStriker</div>
-            Admin — Community safety
-        </div>
+    <!-- 3) RULES (your previous info) -->
+    <section id="rules" class="tab-section">
+      <h2>RULES</h2>
+      <div class="grid generic">
+        <div class="card"><h3>✅ Respect everyone</h3><p>No hate speech or toxicity.</p></div>
+        <div class="card"><h3>❌ No hacks</h3><p>No exploits or unfair mods.</p></div>
+        <div class="card"><h3>🏠 No griefing</h3><p>No spawn killing or destruction.</p></div>
+        <div class="card"><h3>⚔️ Fair PvP</h3><p>Keep fights clean and fair.</p></div>
+        <div class="card"><h3>📛 Follow staff</h3><p>Listen to staff instructions.</p></div>
+      </div>
+    </section>
 
-        <!-- Web Developer -->
-        <div class="role-box">
-            <div class="role-title">💻 Cookie Devil</div>
-            Web Developer — Website & UI
-        </div>
+    <!-- 4) REVIEWS (your previous info) -->
+    <section id="reviews" class="tab-section">
+      <h2>REVIEWS</h2>
+      <div class="grid generic">
+        <div class="card"><h3>★ “Best SMP I ever played!”</h3><p>— Community praise</p></div>
+        <div class="card"><h3>★ “Friendly community!”</h3><p>— Helpful staff & active players</p></div>
+        <div class="card"><h3>★ “Super active team, amazing features.”</h3><p>— Events, gameplay & support</p></div>
+      </div>
+    </section>
 
-    </div>
-</div>
+    <!-- 5) SHOP (your previous info) -->
+    <section id="shop" class="tab-section">
+      <h2>SHOP</h2>
+      <div class="grid generic">
+        <div class="card"><h3>ELITE</h3><p>550K OwO</p></div>
+        <div class="card"><h3>OMEGA</h3><p>400K OwO</p></div>
+        <div class="card"><h3>IMMORTAL</h3><p>375K OwO</p></div>
+        <div class="card"><h3>BOOSTER KIT</h3><p>350K OwO</p></div>
+        <div class="card"><h3>ULTRA KIT</h3><p>250K OwO</p></div>
+        <div class="card"><h3>VIP KIT</h3><p>100K OwO</p></div>
+      </div>
+      <p style="margin-top:16px; color: var(--soft-blue);">🕓 Requirements: Must have patience. No refunds once bought.</p>
+    </section>
 
-<!-- FEATURES -->
-<div id="features" class="section">
-    <h2>FEATURES</h2>
-    <p>• Custom Lifesteal  
-    • Crates & Events  
-    • Claims Protection  
-    • Balanced Economy  
-    • Duels & PvP  
-    • No Lag servers</p>
-</div>
+    <!-- 6) SNEAK PEEK (SMP 1 to SMP 8 ONLY) -->
+    <section id="sneakpeek" class="tab-section">
+      <h2>SNEAK PEEK</h2>
+      <div class="peek-grid">
+        <div class="peek"><img src="smp1.jpg" alt="SMP 01"><div class="cap">SMP 01</div></div>
+        <div class="peek"><img src="smp2.jpg" alt="SMP 02"><div class="cap">SMP 02</div></div>
+        <div class="peek"><img src="smp3.jpg" alt="SMP 03"><div class="cap">SMP 03</div></div>
+        <div class="peek"><img src="smp4.jpg" alt="SMP 04"><div class="cap">SMP 04</div></div>
+        <div class="peek"><img src="smp5.jpg" alt="SMP 05"><div class="cap">SMP 05</div></div>
+        <div class="peek"><img src="smp6.jpg" alt="SMP 06"><div class="cap">SMP 06</div></div>
+        <div class="peek"><img src="smp7.jpg" alt="SMP 07"><div class="cap">SMP 07</div></div>
+        <div class="peek"><img src="smp8.jpg" alt="SMP 08"><div class="cap">SMP 08</div></div>
+      </div>
+    </section>
+  </main>
 
-<!-- RULES -->
-<div id="rules" class="section">
-    <h2>RULES</h2>
-    <p>• No hacking or exploiting  
-    • Respect all players  
-    • No griefing  
-    • No toxic behavior  
-    • Follow staff instructions  
-    • No dupes / unfair mods</p>
-</div>
+  <footer>
+    <a class="discord" href="https://discord.gg/2UVgQdTjRZ" target="_blank">Join Our Discord 💬</a>
+  </footer>
 
-<!-- REVIEWS -->
-<div id="reviews" class="section">
-    <h2>REVIEWS</h2>
-    <p>⭐ “Best SMP I ever played!”  
-       ⭐ “Friendly community!”  
-       ⭐ “Super active team, amazing features.”</p>
-</div>
+  <script>
+    function copyIP(){
+      navigator.clipboard.writeText("in01.arialnodes.in:25517");
+      alert("✅ IP copied to clipboard!");
+    }
 
-<!-- SHOP -->
-<div id="shop" class="section">
-    <h2>SHOP</h2>
-    <p>• Ranks  
-       • Crate Keys  
-       • Cosmetics  
-       • Boosters</p>
-</div>
+    // TAB SYSTEM (works every time)
+    (function () {
+      const buttons = document.querySelectorAll(".tab-btn");
+      const sections = document.querySelectorAll(".tab-section");
 
-<!-- SNEAK PEEK -->
-<div id="sneak" class="section">
-    <h2>SNEAK PEEK</h2>
-    <p>🔥 Coming Soon: BRAND NEW MAP + New Lifesteal Expansion</p>
-    <img src="https://i.imgur.com/0ZV9nAn.png" width="300">
-</div>
+      function activate(id, btn){
+        sections.forEach(s => s.classList.remove("active"));
+        buttons.forEach(b => b.classList.remove("active"));
 
-<script>
-function openTab(tabName) {
-    document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
-    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-    document.getElementById(tabName).classList.add('active');
-    event.target.classList.add('active');
-}
-</script>
+        const target = document.getElementById(id);
+        if (target) target.classList.add("active");
+        if (btn) btn.classList.add("active");
 
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      // default: roles active (already set in HTML). still safe:
+      if (!document.querySelector(".tab-section.active")) activate("roles", document.querySelector('[data-target="roles"]'));
+
+      buttons.forEach(b => {
+        b.addEventListener("click", () => activate(b.getAttribute("data-target"), b));
+      });
+    })();
+
+    // particles (light)
+    (function spawn(){
+      const n = 22;
+      for (let i = 0; i < n; i++){
+        const p = document.createElement("div");
+        p.className = "particle";
+        const size = Math.random() * 9 + 4;
+        p.style.width = size + "px";
+        p.style.height = size + "px";
+        p.style.left = (Math.random() * 100) + "vw";
+        p.style.animationDuration = (8 + Math.random() * 7) + "s";
+        p.style.animationDelay = (Math.random() * 5) + "s";
+        document.body.appendChild(p);
+      }
+    })();
+  </script>
 </body>
 </html>
