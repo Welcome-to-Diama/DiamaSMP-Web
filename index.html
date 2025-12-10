@@ -1,349 +1,302 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Diama SMP Portal</title>
-
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Poppins:wght@400;600;800&display=swap');
+  body {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(135deg, #93c9ff, #1a3f6b);
+    background-attachment: fixed;
+    overflow-x: hidden;
+    color: #fff;
+    text-align: center;
+    position: relative;
+  }
 
-:root {
-  --neon-bg1: #00151c;
-  --neon-bg2: #000b11;
-  --neon-border: #00ffe0;
-  --neon-text: #aaffee;
-  --neon-glow: #00f0ff80;
-  --neon-glow-strong: #00f0ffcc;
-  --blue-text: #35c9ff;
-  --role-bg: rgba(0, 20, 60, 0.5);
-}
+  header {
+    padding: 60px 20px 30px;
+    position: relative;
+    z-index: 2;
+  }
 
-/* GLOBAL PAGE SETTINGS */
-body {
-  margin: 0;
-  font-family: "Poppins", sans-serif;
-  background: #06131f;
-  color: white;
-  text-align: center;
-}
+  header img {
+    width: 120px;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+  }
 
-/* LOGO */
-.logo-img {
-  width: 160px;
-  margin-top: 25px;
-  border-radius: 18px;
-  box-shadow: 0 0 35px var(--neon-glow-strong);
-}
+  h1 {
+    font-size: 3em;
+    margin: 10px 0;
+  }
 
-/* TITLE GLOW */
-h1, h2 {
-  font-family: "Press Start 2P";
-  color: var(--blue-text);
-  text-shadow: 0 0 10px var(--blue-text), 0 0 25px var(--blue-text);
-}
+  .ip-box {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px 20px;
+    border-radius: 12px;
+    margin-top: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
 
-/* NAV BUTTONS */
-.nav-btn {
-  padding: 12px 25px;
-  margin: 8px;
-  border-radius: 14px;
-  background: linear-gradient(180deg, var(--neon-bg1), var(--neon-bg2));
-  border: 1px solid var(--neon-border);
-  color: var(--neon-text);
-  font-weight: 700;
-  cursor: pointer;
-  box-shadow: 0 0 18px var(--neon-glow);
-  transition: 0.25s;
-}
+  .ip-box:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: scale(1.05);
+  }
 
-.nav-btn:hover {
-  box-shadow: 0 0 28px var(--neon-glow-strong);
-  transform: translateY(-3px);
-}
+  nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin: 40px 0;
+    z-index: 2;
+    position: relative;
+  }
 
-/* TAB SECTIONS */
-.tab-section {
-  display: none;
-  margin-top: 40px;
-  padding-bottom: 40px;
-}
+  nav button {
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 12px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: 0.3s;
+  }
 
-/* IP BOX */
-.ip-box {
-  display: inline-block;
-  padding: 12px 35px;
-  font-size: 20px;
-  background: linear-gradient(180deg, var(--neon-bg1), var(--neon-bg2));
-  border: 1px solid var(--neon-border);
-  border-radius: 18px;
-  margin-top: 10px;
-  color: var(--neon-text);
-  cursor: pointer;
-  box-shadow: 0 0 20px var(--neon-glow);
-}
+  nav button:hover {
+    background: rgba(255, 192, 203, 0.5);
+  }
 
-/* SHOP CARDS */
-.shop-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 25px;
-  margin-top: 30px;
-}
+  nav button.active {
+    background: rgba(255, 182, 193, 0.8);
+    box-shadow: 0 0 15px rgba(255, 192, 203, 0.8);
+    transform: scale(1.05);
+  }
 
-.shop-card {
-  width: 280px;
-  padding: 35px 20px;
-  border-radius: 22px;
-  text-align: center;
-  background: linear-gradient(180deg, var(--neon-bg1), var(--neon-bg2));
-  box-shadow: 0 0 25px var(--neon-glow);
-  border: 1px solid var(--neon-border);
-  transition: 0.3s;
-}
+  section {
+    display: none;
+    padding: 20px;
+    animation: fadeIn 0.4s ease;
+    position: relative;
+    z-index: 2;
+  }
 
-.shop-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 0 35px var(--neon-glow-strong);
-}
+  section.active {
+    display: block;
+  }
 
-/* FEATURES GRID */
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 25px;
-  width: 80%;
-  margin: auto;
-  margin-top: 20px;
-}
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 
-.feature-box {
-  background: linear-gradient(180deg, var(--neon-bg1), var(--neon-bg2));
-  border: 1px solid var(--neon-border);
-  box-shadow: 0 0 25px var(--neon-glow);
-  padding: 20px;
-  border-radius: 16px;
-  color: var(--neon-text);
-  font-weight: 700;
-  text-shadow: 0 0 10px var(--neon-text);
-}
+  .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+    margin-top: 20px;
+  }
 
-/* TEAM ROLES */
-.rules {
-  width: 75%;
-  margin: 20px auto;
-  padding: 20px;
-  border-radius: 18px;
-  background: linear-gradient(180deg, var(--neon-bg1), var(--neon-bg2));
-  border: 1px solid var(--neon-border);
-  box-shadow: 0 0 22px var(--neon-glow);
-  color: var(--neon-text);
-  font-size: 1.1em;
-  text-align: left;
-}
+  .card {
+    background: linear-gradient(180deg, rgba(255,255,255,0.15), rgba(0,0,0,0.25));
+    border-radius: 15px;
+    padding: 20px;
+    width: 260px;
+    transition: 0.3s;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
 
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  }
 
-/* RULES BOXES */
-#rules .role-box {
-  width: 80%;
-  margin: 10px auto;
-  padding: 15px;
-  border-radius: 15px;
-  background: var(--role-bg);
-  border: 2px solid var(--blue-text);
-  color: var(--blue-text);
-  font-weight: 700;
-  box-shadow: 0 0 15px var(--blue-text), 0 0 30px var(--neon-glow);
-}
+  footer {
+    margin: 40px 0;
+    z-index: 2;
+    position: relative;
+  }
 
-/* REVIEWS */
-.review-box {
-  width: 75%;
-  margin: 20px auto;
-  padding: 20px;
-  border-radius: 18px;
-  background: linear-gradient(180deg, var(--neon-bg1), var(--neon-bg2));
-  border: 1px solid var(--neon-border);
-  box-shadow: 0 0 22px var(--neon-glow);
-  color: var(--neon-text);
-  font-size: 1.1em;
-  text-align: left;
-}
+  .discord {
+    display: inline-block;
+    background: #5865f2;
+    color: #fff;
+    padding: 12px 25px;
+    border-radius: 25px;
+    text-decoration: none;
+    transition: 0.3s;
+  }
 
-/* SNEAK PEAK GALLERY */
-.gallery {
-  width: 90%;
-  margin: auto;
-  margin-top: 20px;
-}
+  .discord:hover {
+    background: #4752c4;
+    transform: scale(1.05);
+  }
 
-.gallery-row {
-  display: flex;
-  justify-content: center;
-  gap: 25px;
-  margin-bottom: 25px;
-}
+  #rules div {
+    color: #ff8ecf;
+    font-weight: 600;
+  }
 
-.gallery img {
-  width: 260px;
-  height: 160px;
-  object-fit: cover;
-  border-radius: 18px;
-  border: 1px solid var(--neon-border);
-  box-shadow: 0 0 20px var(--neon-glow);
-  transition: 0.25s;
-}
+  .crystal {
+    position: fixed;
+    top: -20px;
+    width: 10px;
+    height: 10px;
+    background: linear-gradient(45deg, #b1eaff, #ffbdf3);
+    border-radius: 3px;
+    opacity: 0.9;
+    box-shadow: 0 0 12px #bff;
+    animation: floatDown linear infinite;
+    z-index: 1;
+  }
 
-.gallery img:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 30px var(--neon-glow-strong);
-}
-
-.small-note {
-  margin-top: 40px;
-  color: #ccc;
-  font-size: 14px;
-}
+  @keyframes floatDown {
+    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+  }
 </style>
-
 </head>
+
 <body>
+  <header>
+    <img src="PFPDIAMA.png" alt="Diama SMP Logo" />
+    <h1>Diama SMP</h1>
+    <p>20+ active players • 24/7 online • Version 1.21.6 • Modern Minecraft Community</p>
+    <div class="ip-box" onclick="copyIP()">play.diamasmp.fun:25569</div>
+  </header>
 
-<!-- LOGO -->
-<img src="Diama logo.png" class="logo-img" alt="Diama SMP Logo">
+  <nav>
+    <button class="active" onclick="showTab('roles', this)">Team Roles</button>
+    <button onclick="showTab('features', this)">Features</button>
+    <button onclick="showTab('rules', this)">Rules</button>
+    <button onclick="showTab('shop', this)">Shop</button>
+    <button onclick="showTab('reviews', this)">Crew Reviews</button>
+  </nav>
 
-<!-- TITLE -->
-<h1>Diama SMP</h1>
-<p>20+ active players • 24/7 Online • Version 1.21.6 • Modern Minecraft Community</p>
-
-<!-- IP BOX -->
-<div class="ip-box" onclick="copyIP()">in01.arialnodes.in:25517</div>
-
-<!-- NAV BUTTONS -->
-<div style="margin-top: 35px;">
-  <button class="nav-btn" onclick="openTab('roles')">TEAM ROLES</button>
-  <button class="nav-btn" onclick="openTab('features')">FEATURES</button>
-  <button class="nav-btn" onclick="openTab('rules')">RULES</button>
-  <button class="nav-btn" onclick="openTab('reviews')">REVIEWS</button>
-  <button class="nav-btn" onclick="openTab('shop')">SHOP</button>
-  <button class="nav-btn" onclick="openTab('sneakpeak')">SNEAK PEAK</button>
-</div>
-
-<!-- DEFAULT OPEN TAB -->
-<section id="shop" class="tab-section" style="display:block;">
-  <h2>DIAMA SMP SHOP</h2>
-
-  <div class="shop-container">
-    <div class="shop-card"><h3>ELITE</h3><p>550K OwO</p></div>
-    <div class="shop-card"><h3>OMEGA</h3><p>400K OwO</p></div>
-    <div class="shop-card"><h3>IMMORTAL</h3><p>375K OwO</p></div>
-    <div class="shop-card"><h3>BOOSTER KIT</h3><p>350K OwO</p></div>
-    <div class="shop-card"><h3>ULTRA KIT</h3><p>250K OwO</p></div>
-    <div class="shop-card"><h3>VIP KIT</h3><p>100K OwO</p></div>
-  </div>
-
-  <p class="small-note">⚠ Requirements: Must have patience. No refunds once bought.</p>
-</section>
-
-<!-- TEAM ROLES -->
-<section id="roles" class="tab-section">
-  <h2 class="section-title">TEAM ROLES</h2>
-
-  <div class="roles-container">
-    <div class="row">
-      <div class="role-box"><strong>👑 Owner</strong><br>Ahmed</div>
-      <div class="role-box"><strong>👑 Owner</strong><br>Rafay</div>
+  <!-- === ROLES SECTION === -->
+  <section id="roles" class="active">
+    <h2>Team Roles</h2>
+    <div class="card-container">
+      <div class="card"><h3>Ahmed | Blaze</h3><p>Co-Owner — Creative Leadership</p></div>
+      <div class="card"><h3>⟆ GAMER ⋆ AFFAN ⟆</h3><p>Owner — Server foundation & direction</p></div>
+      <div class="card"><h3>⟆ CAPTAIN ⋆ RAFAY ⟆</h3><p>Backbone of SMP 💪</p></div>
     </div>
-
-    <div class="row">
-      <div class="role-box"><strong>🪄 Founder</strong><br>Affan</div>
-      <div class="role-box"><strong>🪄 Founder</strong><br>Wizard OP</div>
+    <div class="card-container">
+      <div class="card"><h3>FireX | Blaze</h3><p>Manager — Events & player support</p></div>
+      <div class="card"><h3>🌊 Water Hashira</h3><p>Admin — Experienced Staff & support</p></div>
     </div>
+  </section>
 
-    <div class="row">
-      <div class="role-box"><strong>🛠️ Senior Manager & Developer</strong><br>iamnoobatpc</div>
-      <div class="role-box"><strong>🔥 Manager</strong><br>FireX | Blaze</div>
+  <!-- === FEATURES SECTION === -->
+  <section id="features">
+    <h2>Server Features</h2>
+    <div class="card-container">
+      <div class="card"><h3>🌍 Online 24/7</h3><p>Always available for grind and fun sessions.</p></div>
+      <div class="card"><h3>🛡️ Staff Support</h3><p>Active staff to help players anytime.</p></div>
+      <div class="card"><h3>⚔️ Adventure</h3><p>Engage in PvP and exploration events.</p></div>
     </div>
-
-    <div class="row">
-      <div class="role-box"><strong>🛡️ Admin</strong><br>Silent Slayer</div>
-      <div class="role-box"><strong>🛡️ Admin</strong><br>Not Kaizen</div>
+    <div class="card-container">
+      <div class="card"><h3>🧠 Strategy</h3><p>Collaborate and build empires.</p></div>
+      <div class="card"><h3>🎁 Events</h3><p>Weekly competitions and rewards.</p></div>
     </div>
+  </section>
 
-    <div class="row">
-      <div class="role-box"><strong>💻 Web Developer</strong><br>Cookie Devil</div>
+  <!-- === RULES SECTION === -->
+  <section id="rules">
+    <h2>Server Rules ⬇️</h2>
+    <div style="max-width:800px;margin:auto;text-align:left;line-height:1.8;">
+      <p>✅ <strong>Respect everyone</strong> — no hate speech or toxicity.</p>
+      <p>❌ <strong>No hacks or exploits.</strong></p>
+      <p>🏠 <strong>No spawn killing or griefing.</strong></p>
+      <p>⚔️ <strong>Fair PvP only.</strong></p>
+      <p>💬 <strong>Keep chat clean and safe.</strong></p>
+      <p>📛 <strong>Follow staff instructions.</strong></p>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- FEATURES -->
-<section id="features" class="tab-section">
-  <h2>FEATURES</h2>
-
-  <div class="features-grid">
-    <div class="feature-box">Active Community</div>
-    <div class="feature-box">Trustworthy non-toxic community</div>
-    <div class="feature-box">Team System</div>
-    <div class="feature-box">Chance to Dominate and Conquer</div>
-    <div class="feature-box">Custom kits</div>
-    <div class="feature-box">Instant fixes in bugs</div>
-  </div>
-</section>
-
-<!-- RULES -->
-<section id="rules" class="tab-section">
-  <h2>RULES</h2>
-  <div class="role-box">1️⃣ No hacking or unfair advantages.</div>
-  <div class="role-box">2️⃣ No toxicity or harassment.</div>
-  <div class="role-box">3️⃣ No griefing protected builds.</div>
-  <div class="role-box">4️⃣ No duping or exploiting bugs.</div>
-  <div class="role-box">5️⃣ Respect staff decisions.</div>
-  <div class="role-box">6️⃣ Play fair and have fun!</div>
-</section>
-
-<!-- REVIEWS -->
-<section id="reviews" class="tab-section">
-  <h2>PLAYER REVIEWS</h2>
-
-  <div class="review-box">⭐ New concept apart from repetitive Lifesteal servers others offer</div>
-  <div class="review-box">⭐ Best Server I never feel bored</div>
-  <div class="review-box">⭐ Active and experienced staff</div>
-</section>
-
-<!-- SNEAK PEAK -->
-<section id="sneakpeak" class="tab-section">
-  <h2>SNEAK PEAK</h2>
-
-  <div class="gallery">
-    <div class="gallery-row">
-      <img src="smp1.jpg">
-      <img src="smp2.jpg">
-      <img src="smp3.jpg">
+  <!-- === SHOP SECTION === -->
+  <section id="shop">
+    <h2>🛒 Diama SMP Shop</h2>
+    <div class="card-container">
+      <div class="card"><h3>💎 ELITE</h3><p>550K OwO</p></div>
+      <div class="card"><h3>🔥 OMEGA</h3><p>400K OwO</p></div>
+      <div class="card"><h3>👑 IMMORTAL</h3><p>375K OwO</p></div>
     </div>
-    <div class="gallery-row">
-      <img src="smp4.jpg">
-      <img src="smp5.jpg">
+    <div class="card-container">
+      <div class="card"><h3>⚡ BOOSTER KIT</h3><p>350K OwO</p></div>
+      <div class="card"><h3>💥 ULTRA KIT</h3><p>250K OwO</p></div>
+      <div class="card"><h3>⭐ VIP KIT</h3><p>100K OwO</p></div>
     </div>
-    <div class="gallery-row">
-      <img src="smp6.jpg.webp">
-      <img src="smp7.jpg">
-      <img src="smp8.jpg">
+    <div style="margin-top: 20px; font-weight: 600; color: #ff8ecf;">
+      <p>📋 <strong>Requirements:</strong></p>
+      <p>• Must have patience</p>
+      <p>• No refunds once bought</p>
     </div>
-  </div>
-</section>
+  </section>
 
-<script>
-function openTab(tab) {
-  document.querySelectorAll(".tab-section").forEach(sec => sec.style.display = "none");
-  document.getElementById(tab).style.display = "block";
-}
+  <!-- === REVIEWS SECTION === -->
+  <section id="reviews">
+    <h2>Crew Reviews</h2>
+    <div class="card-container">
+      <div class="card">
+        <h3>Bhalutenx</h3>
+        <p>Nice server I never feel bored</p>
+      </div>
+      <div class="card">
+        <h3>CookieDevil</h3>
+        <p>Good server, any bugs are solved in a day without chaos</p>
+      </div>
+    </div>
+    <div class="card-container">
+      <div class="card">
+        <h3>Real_Legit</h3>
+        <p>Har bar ki tarah hopes se 1 kadam aage!</p>
+      </div>
+      <div class="card">
+        <h3>DiedGV</h3>
+        <p>Staff is loyal — koi unfair advantage nahi deta kisiko</p>
+      </div>
+    </div>
+  </section>
 
-function copyIP() {
-  navigator.clipboard.writeText("in01.arialnodes.in:25517");
-  alert("IP copied!");
-}
-</script>
+  <footer>
+    <a href="https://discord.gg/2UVgQdTjRZ" class="discord" target="_blank">Join Our Discord 💬</a>
+  </footer>
 
+  <script>
+    function copyIP() {
+      navigator.clipboard.writeText("play.diamasmp.fun:25569");
+      alert("✅ IP copied to clipboard!");
+    }
+
+    function showTab(tab, btn) {
+      document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
+      document.querySelectorAll("nav button").forEach(b => b.classList.remove("active"));
+      document.getElementById(tab).classList.add("active");
+      btn.classList.add("active");
+    }
+
+    // Crystal particle background
+    const numCrystals = 25;
+    for (let i = 0; i < numCrystals; i++) {
+      const crystal = document.createElement("div");
+      crystal.classList.add("crystal");
+      const size = Math.random() * 10 + 4;
+      crystal.style.width = `${size}px`;
+      crystal.style.height = `${size}px`;
+      crystal.style.left = `${Math.random() * 100}vw`;
+      crystal.style.animationDuration = `${6 + Math.random() * 6}s`;
+      crystal.style.animationDelay = `${Math.random() * 4}s`;
+      document.body.appendChild(crystal);
+    }
+  </script>
 </body>
 </html>
