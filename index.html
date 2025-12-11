@@ -5,281 +5,208 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Diama SMP Portal</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
-
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Poppins:wght@400;600;800&display=swap');
 
-/* ========= GLOBAL ========= */
-body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Poppins', sans-serif;
-  background: #020817;
-  color: #fff;
-  text-align: center;
-  scroll-behavior: smooth;
+:root{
+  --aqua1:#00eaff;
+  --aqua2:#00c8ff;
+  --aqua3:#009dff;
+  --dark:#050505;
 }
 
-h2 {
-  font-family: 'Press Start 2P';
-  color: #00eaff;
-  text-shadow: 0 0 20px #00eaff;
+body{
+  margin:0;
+  font-family:"Poppins",sans-serif;
+  background:#000;
+  color:white;
+  overflow-x:hidden;
 }
 
-/* ========= NAVIGATION ========= */
-nav {
-  width: 100%;
-  padding: 20px 0;
-  background: rgba(0,0,0,0.3);
-  position: fixed;
-  top: 0;
-  z-index: 1000;
-  backdrop-filter: blur(8px);
+header{
+  text-align:center;
+  padding:40px 20px;
+  background:linear-gradient(135deg,var(--aqua1),var(--aqua3));
+  color:#000;
+  font-family:'Press Start 2P';
+  font-size:22px;
+  text-shadow:0 0 8px #fff;
 }
 
-nav a {
-  margin: 0 20px;
-  color: #00eaff;
-  font-weight: 600;
-  text-decoration: none;
-  text-shadow: 0 0 10px #00eaff;
-  font-size: 18px;
+nav{
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  background:#0b0b0b;
+  padding:15px;
+  flex-wrap:wrap;
 }
 
-nav a:hover {
-  color: white;
-  text-shadow: 0 0 20px #00eaff;
+nav button{
+  background:linear-gradient(135deg,var(--aqua2),var(--aqua3));
+  border:none;
+  padding:12px 20px;
+  border-radius:10px;
+  color:#000;
+  font-weight:700;
+  cursor:pointer;
+  transition:0.3s;
 }
 
-/* ========= SECTION SPACING ========= */
-section {
-  padding: 120px 0;
+nav button:hover{
+  transform:scale(1.05);
 }
 
-/* ========= FEATURES ========= */
-.features {
-  width: 80%;
-  margin: auto;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 40px;
+/* TAB SECTIONS */
+.tab{
+  display:none;
+  padding:40px 20px;
+  animation:fade 0.4s ease;
 }
 
-.feature-box {
-  padding: 30px;
-  border-radius: 16px;
-  background: rgba(0,255,255,0.08);
-  box-shadow: 0 0 25px rgba(0,255,255,0.25);
-  font-size: 18px;
+@keyframes fade{
+  from{opacity:0;}
+  to{opacity:1;}
 }
 
-.feature-box:hover {
-  transform: scale(1.06);
-  transition: 0.3s;
+/* TEAM ROLES */
+.role-box{
+  background:rgba(0,238,255,0.15);
+  border:1px solid var(--aqua1);
+  padding:20px;
+  border-radius:14px;
+  margin:10px 0;
+  backdrop-filter:blur(6px);
 }
 
-/* ========= RULES ========= */
-.rules {
-  width: 80%;
-  margin: auto;
-  font-size: 20px;
-  line-height: 40px;
+/* SNEAK PEEK GRID */
+.sneak-container{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+  max-width:900px;
+  margin:auto;
+  position:relative;
 }
 
-/* ========= TEAM ROLES ========= */
-.roles-container {
-  width: 80%;
-  margin: auto;
-  display: grid;
-  gap: 20px;
+.sneak-container img{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+  border-radius:12px;
+  border:2px solid var(--aqua1);
+  box-shadow:0 0 15px var(--aqua1);
 }
 
-.role-box {
-  padding: 20px;
-  border-radius: 16px;
-  background: rgba(0,255,255,0.08);
-  box-shadow: 0 0 22px rgba(0,255,255,0.2);
-  font-size: 20px;
+/* CENTER TEXT */
+.sneak-center-text{
+  grid-column:1 / 4;
+  text-align:center;
+  font-family:'Press Start 2P';
+  font-size:26px;
+  color:var(--aqua1);
+  text-shadow:0 0 10px var(--aqua1);
+  margin:10px 0 15px 0;
 }
-
-/* ========= SHOP ========= */
-.shop {
-  width: 80%;
-  margin: auto;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 40px;
-}
-
-.shop-item {
-  padding: 30px;
-  border-radius: 12px;
-  background: rgba(0,255,255,0.08);
-  box-shadow: 0 0 25px rgba(0,255,255,0.2);
-}
-
-/* ========= JOIN BUTTON ========= */
-.join-btn {
-  margin-top: 50px;
-  padding: 18px 50px;
-  border-radius: 12px;
-  background: #00eaff;
-  color: #000;
-  font-size: 22px;
-  font-weight: 700;
-  text-decoration: none;
-  box-shadow: 0 0 25px #00eaff;
-}
-.join-btn:hover {
-  background: white;
-  box-shadow: 0 0 40px white;
-}
-
-/* ========= SNEAK PEEK ========= */
-#sneak {
-  padding: 120px 0;
-}
-
-.sneak-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  width: 90%;
-  gap: 70px;
-  margin: auto;
-  justify-items: center;
-  align-items: center;
-}
-
-.sneak-grid img {
-  width: 260px;
-  border-radius: 18px;
-  box-shadow: 0 0 40px rgba(0,255,255,0.55);
-  transition: 0.3s;
-}
-
-.sneak-grid img:hover {
-  transform: scale(1.15);
-  box-shadow: 0 0 65px #00eaff;
-}
-
-/* Center title */
-.center-title {
-  grid-column: 2;
-  grid-row: 2;
-  font-size: 38px;
-  font-family: 'Press Start 2P';
-  color: #00eaff;
-  text-shadow: 0 0 20px #00eaff, 0 0 40px #00eaff;
-}
-
-/* Grid positioning */
-.i1 { grid-column: 1; grid-row: 1; }
-.i2 { grid-column: 2; grid-row: 1; }
-.i3 { grid-column: 3; grid-row: 1; }
-
-.i4 { grid-column: 1; grid-row: 2; }
-.i5 { grid-column: 3; grid-row: 2; }
-
-.i6 { grid-column: 1; grid-row: 3; }
-.i7 { grid-column: 2; grid-row: 3; }
-.i8 { grid-column: 3; grid-row: 3; }
-
 </style>
+
+<script>
+function openTab(tab){
+  document.querySelectorAll('.tab').forEach(t=>t.style.display='none');
+  document.getElementById(tab).style.display='block';
+}
+</script>
 </head>
+
 <body>
 
-<!-- ========= NAV ========= -->
+<header>DIAMA SMP PORTAL</header>
+
 <nav>
-  <a href="#home">Home</a>
-  <a href="#features">Features</a>
-  <a href="#rules">Rules</a>
-  <a href="#team">Team</a>
-  <a href="#shop">Shop</a>
-  <a href="#sneak">Sneak Peek</a>
+  <button onclick="openTab('home')">HOME</button>
+  <button onclick="openTab('features')">FEATURES</button>
+  <button onclick="openTab('rules')">RULES</button>
+  <button onclick="openTab('team')">TEAM ROLES</button>
+  <button onclick="openTab('shop')">SHOP</button>
+  <button onclick="openTab('sneak')">SNEAK PEEK</button>
 </nav>
 
-<!-- ========= HOME ========= -->
-<section id="home">
-  <h2>WELCOME TO DIAMA SMP</h2>
-  <p style="font-size:20px;">The ultimate Minecraft SMP experience.</p>
-</section>
+<!-- HOME -->
+<div id="home" class="tab" style="display:block;">
+  <h1>Welcome to Diama SMP</h1>
+  <p>Your adventure begins now!</p>
+</div>
 
-<!-- ========= FEATURES ========= -->
-<section id="features">
-  <h2>FEATURES</h2>
+<!-- FEATURES -->
+<div id="features" class="tab">
+  <h1>FEATURES</h1>
+  <ul>
+    <li>⚔ Lifesteal System</li>
+    <li>🏰 Claims</li>
+    <li>🔥 Custom Items</li>
+    <li>🐉 Boss Events</li>
+    <li>💱 Trading System</li>
+    <li>🛡 Anti-Grief System</li>
+  </ul>
+</div>
 
-  <div class="features">
-    <div class="feature-box">❤️ Lifesteal → Lose hearts when dying</div>
-    <div class="feature-box">⚔️ Custom PvP Features</div>
-    <div class="feature-box">🏰 Clans & Territories</div>
-    <div class="feature-box">🔮 Special Enchants</div>
-    <div class="feature-box">💰 Economy System</div>
-    <div class="feature-box">🌍 Massive Custom Map</div>
-  </div>
-</section>
+<!-- RULES -->
+<div id="rules" class="tab">
+  <h1>RULES</h1>
+  <ul>
+    <li>No hacking.</li>
+    <li>No griefing.</li>
+    <li>No abusing bugs.</li>
+    <li>Be respectful.</li>
+  </ul>
+</div>
 
-<!-- ========= RULES ========= -->
-<section id="rules">
-  <h2>RULES</h2>
+<!-- TEAM ROLES -->
+<div id="team" class="tab">
+  <h1>TEAM ROLES</h1>
 
-  <div class="rules">
-    • No hacking<br>
-    • No griefing<br>
-    • No abusing bugs<br>
-    • Respect all players<br>
-    • Follow moderation team instructions<br>
-  </div>
-</section>
+  <div class="role-box">👑 Owner — Affan</div>
+  <div class="role-box">👑 Owner — Rafay</div>
+  <div class="role-box">🪄 Founder — The Wizard</div>
+  <div class="role-box">🛠 Senior Dev — iamnoobatpc</div>
+  <div class="role-box">🔥 Manager — FireX</div>
+  <div class="role-box">🛡 Admin — Silent Slayer</div>
+  <div class="role-box">⚙ Moderator — PlayerX</div>
+  <div class="role-box">🎮 Staff — GamerPro</div>
+  <div class="role-box">🧪 Tester — Shadow</div>
+</div>
 
-<!-- ========= TEAM ========= -->
-<section id="team">
-  <h2>TEAM ROLES</h2>
+<!-- SHOP -->
+<div id="shop" class="tab">
+  <h1>SHOP</h1>
+  <p>Coming soon!</p>
+</div>
 
-  <div class="roles-container">
-    <div class="role-box"><strong>👑 Owner</strong><br>Ahmed</div>
-    <div class="role-box"><strong>👑 Owner</strong><br>Rafay</div>
-    <div class="role-box"><strong>🪄 Founder</strong><br>Affan</div>
-    <div class="role-box"><strong>🛠️ Senior Developer</strong><br>iamnoobatpc</div>
-    <div class="role-box"><strong>🔥 Manager</strong><br>FireX | Blaze</div>
-    <div class="role-box"><strong>🛡️ Admin</strong><br>Silent Slayer</div>
-  </div>
-</section>
+<!-- SNEAK PEEK -->
+<div id="sneak" class="tab">
+  <h1>SNEAK PEEK</h1>
 
-<!-- ========= SHOP ========= -->
-<section id="shop">
-  <h2>SHOP</h2>
+  <div class="sneak-container">
 
-  <div class="shop">
-    <div class="shop-item">💎 Rank A</div>
-    <div class="shop-item">💎 Rank B</div>
-    <div class="shop-item">💎 Rank C</div>
-  </div>
+    <!-- Row 1 -->
+    <img src="smp1.jpg">
+    <img src="smp2.jpg">
+    <img src="smp3.jpg">
 
-  <a class="join-btn" href="#">Join Discord</a>
-</section>
+    <!-- Center Text -->
+    <div class="sneak-center-text">Sneak Peak</div>
 
-<!-- ========= SNEAK PEEK ========= -->
-<section id="sneak">
+    <!-- Row 2 -->
+    <img src="smp4.jpg">
+    <img src="smp5.jpg">
+    <img src="smp6.jpg">
 
-  <div class="sneak-grid">
-
-    <img src="smp1.jpg" class="item i1">
-    <img src="smp2.jpg" class="item i2">
-    <img src="smp3.jpg" class="item i3">
-
-    <img src="smp4.jpg" class="item i4">
-
-    <h2 class="center-title">SNEAK PEEK</h2>
-
-    <img src="smp5.jpg" class="item i5">
-
-    <img src="smp6.jpg" class="item i6">
-    <img src="smp7.jpg" class="item i7">
-    <img src="smp8.jpg" class="item i8">
-
+    <!-- Row 3 -->
+    <img src="smp7.jpg">
+    <img src="smp8.jpg">
   </div>
 
-</section>
+</div>
 
 </body>
 </html>
