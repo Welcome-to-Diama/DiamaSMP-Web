@@ -9,239 +9,163 @@
 
 <style>
   :root{
-    --bg-deep:#061a22;
-    --bg-mid:#0b3c51;
-    --accent:#00e6d6;
-    --accent-2:#2cc9ff;
-    --soft-blue:#9ad4ff;
-    --card-bg: rgba(255,255,255,0.04);
+    --cascade-1: #0b3b5a; /* deep cascade top */
+    --cascade-2: #0f6a7d;
+    --aqua: #0a9bb5;      /* aqua bottom */
+    --accent: #00e6d6;
+    --soft-blue: #9ad4ff;
+    --panel: rgba(255,255,255,0.04);
   }
 
   *{ box-sizing:border-box; }
-  html,body{ height:100%; }
+  html,body{ height:100%; margin:0; font-family:"Poppins",sans-serif; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+
+  /* page background: Cascade -> Aqua (Option A) */
   body{
-    margin:0;
-    font-family:"Poppins",sans-serif;
-    color:var(--soft-blue);
-    background:
-      radial-gradient(1200px 900px at 15% 10%, rgba(44,201,255,.36), transparent 60%),
-      radial-gradient(1100px 900px at 90% 15%, rgba(0,230,214,.26), transparent 62%),
-      linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-mid) 55%, #e9fbff 100%);
-    background-attachment: fixed;
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
+    background: linear-gradient(180deg, var(--cascade-1) 0%, var(--cascade-2) 45%, var(--aqua) 100%);
+    color: var(--soft-blue);
+    text-align:center;
   }
 
-  /* soft mist overlay */
+  /* soft zephyr mist overlay */
   body::before{
     content:"";
     position:fixed;
     inset:-2px;
     background:
-      radial-gradient(1200px 900px at 50% 0%, rgba(255,255,255,.08), transparent 60%),
-      radial-gradient(1400px 900px at 72% 30%, rgba(255,255,255,.06), transparent 68%);
+      radial-gradient(900px 600px at 10% 10%, rgba(255,255,255,0.04), transparent 45%),
+      radial-gradient(1200px 900px at 85% 20%, rgba(255,255,255,0.03), transparent 60%);
     pointer-events:none;
     z-index:0;
   }
 
-  header{
-    position:relative;
-    z-index:2;
-    text-align:center;
-    padding:48px 18px 18px;
-  }
+  /* header / home */
+  header{ position:relative; z-index:2; padding:48px 18px 18px; }
+  .logo{ width:120px; border-radius:18px; display:block; margin:0 auto; box-shadow: 0 0 28px rgba(0,230,214,.12); border:1px solid rgba(255,255,255,0.05); background: rgba(255,255,255,0.02); }
+  h1{ font-family:"Press Start 2P",cursive; color:var(--accent); text-shadow:0 0 18px rgba(0,230,214,.28); margin:14px 0 6px; font-size:34px; }
+  .subline{ color: rgba(232,251,255,.9); margin-bottom:14px; font-weight:600; }
 
-  .logo{
-    width:120px;
-    border-radius:18px;
-    display:block;
-    margin:0 auto;
-    box-shadow: 0 0 28px rgba(0,230,214,.14), 0 6px 30px rgba(0,0,0,.4);
-    border:1px solid rgba(255,255,255,.06);
-    background: rgba(255,255,255,.02);
-  }
-
-  h1{
-    font-family:"Press Start 2P",cursive;
-    color:var(--accent);
-    text-shadow: 0 0 18px rgba(0,230,214,.35), 0 0 40px rgba(44,201,255,.18);
-    margin:14px 0 6px;
-    font-size:34px;
-  }
-
-  .subline{
-    color: rgba(232,251,255,.9);
-    margin-bottom:14px;
-    font-weight:600;
-  }
-
-  /* IP box */
+  /* IP box with highlight */
   .ip-box{
     display:inline-block;
-    background: linear-gradient(135deg, rgba(0,230,214,.12), rgba(44,201,255,.06));
     padding:12px 20px;
     border-radius:14px;
-    border:2px solid rgba(0,255,255,.22);
-    box-shadow: 0 0 20px rgba(0,230,214,.12);
+    background: linear-gradient(135deg, rgba(0,230,214,0.12), rgba(12,160,185,0.06));
+    border:2px solid rgba(0,255,255,0.18);
+    box-shadow: 0 0 22px rgba(0,230,214,.12);
     backdrop-filter: blur(6px);
     margin-bottom:18px;
     text-align:center;
+    z-index:2;
   }
-  .ip-text{
-    color:#e8fbff;
-    font-weight:800;
-    letter-spacing:.2px;
-    font-size:15px;
-  }
+  .ip-text{ color:#e8fbff; font-weight:800; letter-spacing:.2px; font-size:15px; }
   .copy-btn{
     margin-top:8px;
     display:inline-block;
-    background:linear-gradient(135deg,var(--accent),var(--accent-2));
+    background:linear-gradient(135deg,var(--accent),#2cc9ff);
     color:#042026;
     font-weight:800;
     padding:8px 14px;
     border-radius:12px;
     border:none;
     cursor:pointer;
-    box-shadow: 0 0 18px rgba(0,230,214,.2);
-    transition: transform .12s ease, box-shadow .12s ease;
-  }
-  .copy-btn:hover{ transform:translateY(-3px); box-shadow: 0 0 26px rgba(0,230,214,.28); }
-
-  /* NAV */
-  nav{
-    display:flex;
-    justify-content:center;
-    gap:12px;
-    padding:18px 12px;
-    z-index:2;
-  }
-  .nav-btn{
-    border:0;
-    cursor:pointer;
-    font-family:"Press Start 2P",cursive;
-    padding:10px 16px;
-    border-radius:12px;
-    background: linear-gradient(135deg,#7cf8ff,#2cc9ff);
-    color:#042026;
-    box-shadow: 0 0 14px rgba(44,201,255,.18);
+    box-shadow: 0 0 18px rgba(0,230,214,.12);
     transition: transform .12s ease;
+  }
+  .copy-btn:hover{ transform: translateY(-3px); box-shadow: 0 0 26px rgba(0,230,214,.18); }
+
+  /* nav tabs (order fixed) */
+  nav{ display:flex; justify-content:center; gap:12px; padding:18px 12px; z-index:2; position:relative; }
+  .nav-btn{
+    border:0; cursor:pointer; font-family:"Press Start 2P",cursive; padding:10px 14px; border-radius:12px;
+    background: linear-gradient(135deg,#7cf8ff,#2cc9ff); color:#042026; box-shadow: 0 0 14px rgba(44,201,255,.12); transition: transform .12s;
     white-space:nowrap;
   }
-  .nav-btn:hover{ transform:scale(1.06); }
-  .nav-btn.active{ background: linear-gradient(135deg,#a6fff0,#00e6d6); box-shadow: 0 0 30px rgba(0,230,214,.3); }
+  .nav-btn:hover{ transform: scale(1.06); }
+  .nav-btn.active{ background: linear-gradient(135deg,#a6fff0,#00e6d6); box-shadow: 0 0 28px rgba(0,230,214,.22); }
 
-  main{
-    position:relative;
-    z-index:2;
-    max-width:1100px;
-    margin: 8px auto 60px;
-    padding: 8px;
-  }
+  /* container */
+  main{ max-width:1100px; margin:10px auto 60px; padding:8px; position:relative; z-index:2; }
 
-  /* Sections: default visible if JS disabled; when JS present, tab behavior will hide others */
-  section{
-    padding:18px 12px 28px;
-    margin-top: 10px;
-    border-radius:14px;
-    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    border:1px solid rgba(255,255,255,0.03);
-  }
+  /* sections: default visible if JS disabled; with JS they behave as tabs */
+  section{ padding:18px 12px 28px; margin-top:10px; border-radius:14px; background: rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.03); }
   body.has-js section.tab-section{ display:none; }
   body.has-js section.tab-section.active{ display:block; }
 
-  section h2{
-    font-family:"Press Start 2P",cursive;
-    color:var(--accent);
-    text-shadow: 0 0 10px rgba(0,230,214,.22);
-    margin: 6px 0 12px;
-    font-size:28px;
-  }
+  section h2{ font-family:"Press Start 2P",cursive; color:var(--accent); text-shadow: 0 0 10px rgba(0,230,214,0.18); margin:6px 0 12px; font-size:28px; }
 
-  /* soft-blue for readable text */
+  /* text color adjustments */
   section, section p, .card p, .peek .cap { color: var(--soft-blue); }
 
-  /* Cards */
-  .card-container{
-    display:flex;
-    flex-wrap:wrap;
-    gap:16px;
-    justify-content:center;
-    margin-top:8px;
-  }
+  /* cards layout */
+  .card-container{ display:flex; flex-wrap:wrap; gap:16px; justify-content:center; margin-top:8px; }
   .card{
-    width: 320px;
-    max-width: calc(33% - 20px);
-    min-width:240px;
-    padding:18px;
-    border-radius:12px;
+    width:320px; max-width: calc(33% - 20px); min-width:240px; padding:18px; border-radius:12px;
     background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-    border:1px solid rgba(0,255,255,.12);
-    box-shadow: 0 10px 30px rgba(2,10,12,.18);
-    transition: transform .14s ease, box-shadow .14s ease;
-    text-align:left;
+    border:1px solid rgba(0,255,255,0.10); box-shadow: 0 10px 30px rgba(0,0,0,0.16);
+    text-align:left; transition: transform .14s ease, box-shadow .14s ease;
   }
   .card h3{ margin:0 0 6px; color:#e8fbff; font-size:1.02em; }
   .card p{ margin:0; opacity:.95; }
-  .card:hover{ transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,.32); }
+  .card:hover{ transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,.28); }
 
-  @media (max-width:980px){ .card{ max-width: 46%; } }
-  @media (max-width:620px){ .card{ max-width: 100%; } }
+  @media (max-width:980px){ .card{ max-width:46%; } }
+  @media (max-width:620px){ .card{ max-width:100%; } }
 
-  #shop .card{ background: linear-gradient(180deg, rgba(0,230,214,0.06), rgba(0,0,0,0.06)); border:1px solid rgba(0,255,255,.12);}
+  /* shop style */
+  #shop .card{ background: linear-gradient(180deg, rgba(0,230,214,0.06), rgba(0,0,0,0.04)); border:1px solid rgba(0,255,255,.10); }
   #shop .card h3{ color: #cafff6; }
 
-  /* SNEAK PEEK: Zephyr Mist background + 3-2-3 layout */
+  /* SNEAK PEEK section with Zephyr Mist background and 3-2-3 layout using CSS grid areas */
   #sneakpeek{
-    padding:32px;
+    padding:28px;
     border-radius:18px;
-    background: linear-gradient(180deg, #0b3b5a 0%, #0f6a7d 50%, #0a9bb5 100%);
-    border:1px solid rgba(255,255,255,0.04);
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border:1px solid rgba(255,255,255,0.03);
   }
 
   .sneak-grid{
     display:grid;
-    gap:20px;
+    gap:18px;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-areas:
       "i1 i2 i3"
       ". i4 i5"
       "i6 i7 i8";
-    align-items: center;
+    align-items:center;
     margin-top:10px;
   }
 
-  .sneak-grid .sneak-item{ border-radius:12px; overflow:hidden; position:relative; background: rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.05); box-shadow: 0 10px 30px rgba(2,10,12,.18); aspect-ratio: 16/10; display:flex; align-items:center; justify-content:center; }
-  .sneak-grid .sneak-item img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .sneak-item{ border-radius:12px; overflow:hidden; position:relative; background: rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.04); box-shadow: 0 8px 26px rgba(0,0,0,.12); aspect-ratio: 16/10; display:flex; align-items:center; justify-content:center; }
+  .sneak-item img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .sneak-item .cap{ position:absolute; left:12px; bottom:12px; background: rgba(0,0,0,0.64); padding:6px 12px; border-radius:999px; color:var(--soft-blue); font-weight:700; font-size:13px; border:1px solid rgba(255,255,255,0.04); }
 
-  .sneak-grid .s1{ grid-area: i1; } .sneak-grid .s2{ grid-area: i2; } .sneak-grid .s3{ grid-area: i3; }
-  .sneak-grid .s4{ grid-area: i4; } .sneak-grid .s5{ grid-area: i5; }
-  .sneak-grid .s6{ grid-area: i6; } .sneak-grid .s7{ grid-area: i7; } .sneak-grid .s8{ grid-area: i8; }
-
-  .sneak-item .cap{ position:absolute; left:12px; bottom:12px; background: rgba(0,0,0,0.65); padding:6px 12px; border-radius:999px; color:var(--soft-blue); font-weight:700; font-size:14px; border:1px solid rgba(255,255,255,0.04); }
+  .s1{ grid-area:i1; } .s2{ grid-area:i2; } .s3{ grid-area:i3; }
+  .s4{ grid-area:i4; } .s5{ grid-area:i5; } .s6{ grid-area:i6; }
+  .s7{ grid-area:i7; } .s8{ grid-area:i8; }
 
   @media (max-width:760px){
     .sneak-grid{ grid-template-columns: 1fr 1fr; grid-template-areas: "i1 i2" "i3 i4" "i5 i6" "i7 i8"; }
-    .sneak-grid .s1{ grid-area: i1; } .sneak-grid .s2{ grid-area: i2; } .sneak-grid .s3{ grid-area: i3; } .sneak-grid .s4{ grid-area: i4; }
-    .sneak-grid .s5{ grid-area: i5; } .sneak-grid .s6{ grid-area: i6; } .sneak-grid .s7{ grid-area: i7; } .sneak-grid .s8{ grid-area: i8; }
   }
-
   @media (max-width:420px){
     .sneak-grid{ grid-template-columns: 1fr; grid-template-areas: "i1" "i2" "i3" "i4" "i5" "i6" "i7" "i8"; }
   }
 
+  /* footer */
   footer{ text-align:center; margin:36px 0 60px; z-index:2; position:relative; }
-  .discord{ display:inline-block; padding:12px 20px; border-radius:999px; background: linear-gradient(135deg,#5865f2,#2e5bff); color:#fff; font-weight:700; text-decoration:none; box-shadow: 0 0 28px rgba(46,91,255,.16); }
+  .discord{ display:inline-block; padding:12px 20px; border-radius:999px; background: linear-gradient(135deg,#5865f2,#2e5bff); color:#fff; font-weight:700; text-decoration:none; box-shadow: 0 0 28px rgba(46,91,255,.12); }
 
-  /* Particles */
-  .particle{ position:fixed; z-index:0; border-radius:50%; background: radial-gradient(circle, rgba(178,255,255,.9), transparent 68%); opacity:.62; animation: floatUp linear infinite; pointer-events:none; }
-  @keyframes floatUp{ from{ transform: translateY(105vh) scale(.6); opacity:.6; } to{ transform: translateY(-12vh) scale(1.2); opacity:0; } }
-
-  /* hide failed images */
+  /* small helpers */
   img.error{ display:none; }
+  .center-row { display:flex; justify-content:center; gap:16px; flex-wrap:wrap; }
+  .muted { color: rgba(232,251,255,0.65); }
+
+  /* fade animation for sections */
+  @keyframes fadeIn { from {opacity:0; transform: translateY(6px)} to {opacity:1; transform: translateY(0)} }
 </style>
 </head>
 <body>
+  <!-- Header / Home -->
   <header>
     <img src="Diama logo.png" alt="Diama SMP Logo" class="logo">
     <h1>DIAMA SMP</h1>
@@ -253,6 +177,7 @@
     </div>
   </header>
 
+  <!-- NAV -->
   <nav>
     <button class="nav-btn active" data-target="roles">TEAM ROLES</button>
     <button class="nav-btn" data-target="features">FEATURES</button>
@@ -263,12 +188,12 @@
   </nav>
 
   <main>
-    <!-- TEAM ROLES -->
+    <!-- 1) TEAM ROLES -->
     <section id="roles" class="tab-section active">
       <h2>TEAM ROLES</h2>
       <div class="card-container">
-        <div class="card"><h3>⟆ CAPTAIN ⋆ RAFAY ⟆</h3><p>Captain | Strategist | Fearless</p></div>
-        <div class="card"><h3>⟆ GAMER ⋆ AFFAN ⟆</h3><p>Founder — Original creator & vision</p></div>
+        <div class="card"><h3>∫ CAPTAIN ✦ RAFAY ∫</h3><p>Captain | Strategist | Fearless</p></div>
+        <div class="card"><h3>∫ GAMER ✦ AFFAN ∫</h3><p>Founder — Original creator & vision</p></div>
         <div class="card"><h3>Cpt.Ahmed!</h3><p>Owner — Creative Leadership</p></div>
 
         <div class="card"><h3>WizardOP</h3><p>Founder — Original creator & vision</p></div>
@@ -281,7 +206,7 @@
       </div>
     </section>
 
-    <!-- FEATURES -->
+    <!-- 2) FEATURES -->
     <section id="features" class="tab-section">
       <h2>FEATURES</h2>
       <div class="card-container">
@@ -295,7 +220,7 @@
       </div>
     </section>
 
-    <!-- RULES -->
+    <!-- 3) RULES -->
     <section id="rules" class="tab-section">
       <h2>SERVER RULES</h2>
       <div style="max-width:900px;margin:0 auto;text-align:left;line-height:1.9;">
@@ -307,7 +232,7 @@
       </div>
     </section>
 
-    <!-- REVIEWS -->
+    <!-- 4) REVIEWS -->
     <section id="reviews" class="tab-section">
       <h2>CREW REVIEWS</h2>
       <div class="card-container">
@@ -317,7 +242,7 @@
       </div>
     </section>
 
-    <!-- SHOP -->
+    <!-- 5) SHOP -->
     <section id="shop" class="tab-section">
       <h2>🛒 DIAMA SMP SHOP</h2>
       <div class="card-container">
@@ -332,7 +257,7 @@
       <p style="margin-top:14px; color: rgba(232,251,255,.9);">🕓 Requirements: Must have patience. No refunds once bought.</p>
     </section>
 
-    <!-- SNEAK PEEK -->
+    <!-- 6) SNEAK PEEK (3 - 2 - 3) -->
     <section id="sneakpeek" class="tab-section">
       <h2>SNEAK PEEK</h2>
 
@@ -356,12 +281,11 @@
     <a class="discord" href="https://discord.gg/2UVgQdTjRZ" target="_blank" rel="noopener">Join Our Discord 💬</a>
   </footer>
 
-<!-- SCRIPTS -->
 <script>
-  // mark JS present (so sections hide until activated)
+  // mark JS present
   document.body.classList.add('has-js');
 
-  // Tab system
+  // robust tab system
   (function(){
     const buttons = document.querySelectorAll('.nav-btn');
     const sections = document.querySelectorAll('main .tab-section');
@@ -374,44 +298,27 @@
       if(target) target.classList.add('active');
       if(btn) btn.classList.add('active');
 
-      // ensure visible on small screens
+      // scroll to top so content is visible on mobile
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // default active: roles (already set in HTML)
-    buttons.forEach(btn => {
-      btn.addEventListener('click', function(){
-        activate(btn.getAttribute('data-target'), btn);
-      });
+    // default: roles already has "active" in HTML, but ensure buttons match
+    document.querySelectorAll('.nav-btn').forEach(b => {
+      b.addEventListener('click', () => activate(b.getAttribute('data-target'), b));
     });
   })();
 
-  // particles (subtle zephyr feel)
-  (function spawnParticles(){
-    const count = 22;
-    for(let i=0;i<count;i++){
-      const p = document.createElement('div');
-      p.className = 'particle';
-      const size = Math.random() * 10 + 6;
-      p.style.width = size + 'px';
-      p.style.height = size + 'px';
-      p.style.left = (Math.random() * 100) + 'vw';
-      p.style.animationDuration = (8 + Math.random() * 7) + 's';
-      p.style.animationDelay = (Math.random() * 5) + 's';
-      document.body.appendChild(p);
-    }
-  })();
-
-  // copy IP
+  // copy IP with small in-place feedback
   function copyIP(){
     const ip = document.getElementById('serverIP').innerText.trim();
+    const btn = document.querySelector('.copy-btn');
     if(navigator.clipboard){
       navigator.clipboard.writeText(ip).then(()=>{
-        const btn = document.querySelector('.copy-btn');
-        const orig = btn.innerText;
+        const old = btn.innerText;
         btn.innerText = 'COPIED';
-        setTimeout(()=> btn.innerText = orig, 1200);
-      }).catch(()=> alert('Copy failed — please copy manually: ' + ip));
+        btn.disabled = true;
+        setTimeout(()=>{ btn.innerText = old; btn.disabled = false; }, 1200);
+      }).catch(()=> alert('Copy failed. IP: ' + ip));
     } else {
       alert('Copy not supported. IP: ' + ip);
     }
