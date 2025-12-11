@@ -192,21 +192,64 @@
     from { transform: translateY(100vh) scale(0.5); opacity: 0.6; }
     to { transform: translateY(-10vh) scale(1.2); opacity: 0; }
   }
+
+  /* === SNEAK PEEK GRID === */
+  #sneak-peek {
+    padding: 30px 20px;
+  }
+
+  #sneak-peek h2 {
+    color: #00ffff;
+    text-shadow: 0 0 15px #00ffff, 0 0 30px rgba(0, 255, 255, 0.5);
+    margin-bottom: 20px;
+  }
+
+  .sneak-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, auto);
+    gap: 15px;
+    justify-items: center;
+    align-items: center;
+  }
+
+  /* Custom placement to match requested layout */
+  .sneak-grid img:nth-child(1) { grid-column: 1; grid-row: 1; }
+  .sneak-grid img:nth-child(2) { grid-column: 2; grid-row: 1; }
+  .sneak-grid img:nth-child(3) { grid-column: 3; grid-row: 1; }
+  .sneak-grid img:nth-child(4) { grid-column: 2; grid-row: 2; }
+  .sneak-grid img:nth-child(5) { grid-column: 3; grid-row: 2; }
+  .sneak-grid img:nth-child(6) { grid-column: 1; grid-row: 3; }
+  .sneak-grid img:nth-child(7) { grid-column: 2; grid-row: 3; }
+  .sneak-grid img:nth-child(8) { grid-column: 3; grid-row: 3; }
+
+  .sneak-grid img {
+    width: 100px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+    transition: 0.3s;
+    cursor: pointer;
+  }
+
+  .sneak-grid img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 25px #00ffff;
+  }
+
 </style>
 </head>
-
 <body>
   <header>
-<header>
-  <img src="Diama logo.png" alt="Diama SMP Logo" class="logo">
-  <h1>Diama SMP</h1>
-  <p>20+ active players • 24/7 online • Version 1.21.6 • Modern Minecraft Community</p>
-  <div class="ip-box" onclick="copyIP()">DiamaSMP.aternos.me:12050</div>
-</header>
+    <img src="Diama logo.png" alt="Diama SMP Logo" class="logo">
+    <h1>Diama SMP</h1>
+    <p>20+ active players • 24/7 online • Version 1.21.6 • Modern Minecraft Community</p>
+    <div class="ip-box" onclick="copyIP()">DiamaSMP.aternos.me:12050</div>
+  </header>
 
-    <nav>
+  <nav>
     <button class="active" onclick="showTab('roles', this)">TEAM ROLES</button>
     <button onclick="showTab('features', this)">FEATURES</button>
+    <button onclick="showTab('sneak-peek', this)">SNEAK PEEK</button>
     <button onclick="showTab('rules', this)">RULES</button>
     <button onclick="showTab('reviews', this)">REVIEWS</button>
     <button onclick="showTab('shop', this)">SHOP</button>
@@ -216,7 +259,7 @@
   <section id="roles" class="active">
     <h2>TEAM ROLES</h2>
     <div class="card-container">
-      <div class="card"><h3>⟆ CAPTAIN ⋆ RAFAY ⟆</h3><p> 𝐂𝐚𝐩𝐭𝐚𝐢𝐧 | 𝐒𝐭𝐫𝐚𝐭𝐞𝐠𝐢𝐬𝐭 | 𝐅𝐞𝐚𝐫𝐥𝐞𝐬𝐬</p></div>
+      <div class="card"><h3>⟆ CAPTAIN ⋆ RAFAY ⟆</h3><p>𝐂𝐚𝐩𝐭𝐚𝐢𝐧 | 𝐒𝐭𝐫𝐚𝐭𝐞𝐠𝐢𝐬𝐭 | 𝐅𝐞𝐚𝐫𝐥𝐞𝐬𝐬</p></div>
       <div class="card"><h3>⟆ GAMER ⋆ AFFAN ⟆</h3><p>Owner — Server foundation & direction</p></div>
       <div class="card"><h3>Ahmed | Blaze</h3><p>Co-Owner — Creative Leadership</p></div>
     </div>
@@ -226,45 +269,53 @@
     </div>
   </section>
 
-<!-- === FEATURES === -->
-<section id="features">
-  <h2>FEATURES</h2>
-  <div class="card-container">
-
-    <div class="card">
-      <h3>🌍 24/7 Server</h3>
-      <p>Always available for grind and fun sessions.</p>
+  <!-- === FEATURES === -->
+  <section id="features">
+    <h2>FEATURES</h2>
+    <div class="card-container">
+      <div class="card">
+        <h3>🌍 24/7 Server</h3>
+        <p>Always available for grind and fun sessions.</p>
+      </div>
+      <div class="card">
+        <h3>🛡️ Active Staff</h3>
+        <p>Helpful team ready anytime.</p>
+      </div>
+      <div class="card">
+        <h3>⚔️ PvP Adventures</h3>
+        <p>Battle, raid and explore together.</p>
+      </div>
+      <div class="card">
+        <h3>🧠 Strategy</h3>
+        <p>Collaborate and build empires.</p>
+      </div>
+      <div class="card">
+        <h3>🎁 Events</h3>
+        <p>Weekly competitions and rewards.</p>
+      </div>
+      <div class="card">
+        <h3>🌲 Survival Economy</h3>
+        <p>Trade, earn, and grow your in-game wealth!</p>
+      </div>
     </div>
+  </section>
 
-    <div class="card">
-      <h3>🛡️ Active Staff</h3>
-      <p>Helpful team ready anytime.</p>
+  <!-- === SNEAK PEEK === -->
+  <section id="sneak-peek">
+    <h2>SNEAK PEEK</h2>
+    <div class="sneak-grid">
+      <img src="smp1.jpg" alt="SMP 1">
+      <img src="smp2.jpg" alt="SMP 2">
+      <img src="smp3.jpg" alt="SMP 3">
+      <img src="smp4.jpg" alt="SMP 4">
+      <img src="smp5.jpg" alt="SMP 5">
+      <img src="hulululu.png" alt="Hulululu">
+      <img src="smp7.jpg" alt="SMP 7">
+      <img src="smp8.jpg" alt="SMP 8">
     </div>
+  </section>
 
-    <div class="card">
-      <h3>⚔️ PvP Adventures</h3>
-      <p>Battle, raid and explore together.</p>
-    </div>
-
-    <div class="card">
-      <h3>🧠 Strategy</h3>
-      <p>Collaborate and build empires.</p>
-    </div>
-
-    <div class="card">
-      <h3>🎁 Events</h3>
-      <p>Weekly competitions and rewards.</p>
-    </div>
-
-    <div class="card">
-      <h3>🌲 Survival Economy</h3>
-      <p>Trade, earn, and grow your in-game wealth!</p>
-    </div>
-
-  </div>
-</section>
-
-  <!-- === RULES (5 items) === -->
+  <!-- === RULES === -->
   <section id="rules">
     <h2>SERVER RULES</h2>
     <div style="max-width:800px;margin:auto;text-align:left;line-height:1.8;">
@@ -304,7 +355,7 @@
     <a href="https://discord.gg/2UVgQdTjRZ" class="discord" target="_blank">Join Our Discord 💬</a>
   </footer>
 
-  <!-- === WORKING FADE + TAB SCRIPT === -->
+  <!-- === SCRIPT === -->
   <script>
     function copyIP() {
       navigator.clipboard.writeText("DiamaSMP.aternos.me:12050");
@@ -354,7 +405,7 @@
       document.body.appendChild(p);
     }
 
-    // Ensure initial section visibility (helps on some hosts)
+    // Ensure initial section visibility
     document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('section').forEach(s => {
         if (s.classList.contains('active')) s.style.display = 'block';
