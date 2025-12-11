@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Diama SMP Portal</title>
 
-<!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
 
 <style>
@@ -14,39 +13,37 @@
     --bg-mid:#0b3c51;
     --accent:#00e6d6;
     --accent-2:#2cc9ff;
-    --soft-blue: #9ad4ff; /* text color for sections */
-    --card-bg: rgba(255,255,255,0.06);
-    --glass: rgba(255,255,255,0.08);
+    --soft-blue:#9ad4ff;
+    --card-bg: rgba(255,255,255,0.04);
   }
 
-  *{box-sizing:border-box}
-  html,body{height:100%;}
+  *{ box-sizing:border-box; }
+  html,body{ height:100%; }
   body{
     margin:0;
     font-family:"Poppins",sans-serif;
     color:var(--soft-blue);
     background:
-      radial-gradient(1200px 900px at 15% 10%, rgba(44,201,255,.40), transparent 60%),
-      radial-gradient(1100px 900px at 90% 15%, rgba(0,230,214,.28), transparent 62%),
+      radial-gradient(1200px 900px at 15% 10%, rgba(44,201,255,.36), transparent 60%),
+      radial-gradient(1100px 900px at 90% 15%, rgba(0,230,214,.26), transparent 62%),
       linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-mid) 55%, #e9fbff 100%);
     background-attachment: fixed;
     -webkit-font-smoothing:antialiased;
     -moz-osx-font-smoothing:grayscale;
   }
 
-  /* Mist overlay */
+  /* soft mist overlay */
   body::before{
     content:"";
     position:fixed;
     inset:-2px;
     background:
       radial-gradient(1200px 900px at 50% 0%, rgba(255,255,255,.08), transparent 60%),
-      radial-gradient(1400px 900px at 70% 30%, rgba(255,255,255,.06), transparent 68%);
+      radial-gradient(1400px 900px at 72% 30%, rgba(255,255,255,.06), transparent 68%);
     pointer-events:none;
     z-index:0;
   }
 
-  /* Header / Home */
   header{
     position:relative;
     z-index:2;
@@ -60,7 +57,7 @@
     display:block;
     margin:0 auto;
     box-shadow: 0 0 28px rgba(0,230,214,.14), 0 6px 30px rgba(0,0,0,.4);
-    border:1px solid rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.06);
     background: rgba(255,255,255,.02);
   }
 
@@ -78,20 +75,20 @@
     font-weight:600;
   }
 
-  /* IP box (highlighted) */
+  /* IP box */
   .ip-box{
     display:inline-block;
     background: linear-gradient(135deg, rgba(0,230,214,.12), rgba(44,201,255,.06));
-    padding:10px 20px;
+    padding:12px 20px;
     border-radius:14px;
-    border:2px solid rgba(0,255,255,.24);
-    box-shadow: 0 0 20px rgba(0,230,214,.14);
+    border:2px solid rgba(0,255,255,.22);
+    box-shadow: 0 0 20px rgba(0,230,214,.12);
     backdrop-filter: blur(6px);
     margin-bottom:18px;
+    text-align:center;
   }
   .ip-text{
-    display:block;
-    color: #e8fbff;
+    color:#e8fbff;
     font-weight:800;
     letter-spacing:.2px;
     font-size:15px;
@@ -106,10 +103,10 @@
     border-radius:12px;
     border:none;
     cursor:pointer;
-    box-shadow: 0 0 20px rgba(0,230,214,.25);
-    transition: transform .14s ease, box-shadow .14s ease;
+    box-shadow: 0 0 18px rgba(0,230,214,.2);
+    transition: transform .12s ease, box-shadow .12s ease;
   }
-  .copy-btn:hover{ transform:translateY(-3px); box-shadow: 0 0 28px rgba(0,230,214,.34); }
+  .copy-btn:hover{ transform:translateY(-3px); box-shadow: 0 0 26px rgba(0,230,214,.28); }
 
   /* NAV */
   nav{
@@ -134,7 +131,6 @@
   .nav-btn:hover{ transform:scale(1.06); }
   .nav-btn.active{ background: linear-gradient(135deg,#a6fff0,#00e6d6); box-shadow: 0 0 30px rgba(0,230,214,.3); }
 
-  /* Layout container */
   main{
     position:relative;
     z-index:2;
@@ -143,7 +139,7 @@
     padding: 8px;
   }
 
-  /* SECTION style */
+  /* Sections: default visible if JS disabled; when JS present, tab behavior will hide others */
   section{
     padding:18px 12px 28px;
     margin-top: 10px;
@@ -151,8 +147,6 @@
     background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
     border:1px solid rgba(255,255,255,0.03);
   }
-
-  /* when JS present, only active tab-section shown */
   body.has-js section.tab-section{ display:none; }
   body.has-js section.tab-section.active{ display:block; }
 
@@ -164,7 +158,7 @@
     font-size:28px;
   }
 
-  /* soft-blue text for section content (not harsh white) */
+  /* soft-blue for readable text */
   section, section p, .card p, .peek .cap { color: var(--soft-blue); }
 
   /* Cards */
@@ -189,103 +183,76 @@
   }
   .card h3{ margin:0 0 6px; color:#e8fbff; font-size:1.02em; }
   .card p{ margin:0; opacity:.95; }
-
   .card:hover{ transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,.32); }
 
-  /* make cards responsive */
-  @media (max-width:980px){
-    .card{ max-width: 46%; }
-  }
-  @media (max-width:620px){
-    .card{ max-width: 100%; }
-  }
+  @media (max-width:980px){ .card{ max-width: 46%; } }
+  @media (max-width:620px){ .card{ max-width: 100%; } }
 
-  /* Shop cards smaller style */
   #shop .card{ background: linear-gradient(180deg, rgba(0,230,214,0.06), rgba(0,0,0,0.06)); border:1px solid rgba(0,255,255,.12);}
   #shop .card h3{ color: #cafff6; }
 
-  /* SNEAK PEEK gallery (3x3 grid, only smp1..smp8 used - 3 columns) */
-  .gallery{
-    display:grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap:14px;
-    margin-top:8px;
-  }
-  @media (max-width:760px){
-    .gallery{ grid-template-columns: repeat(2, 1fr); }
-  }
-  @media (max-width:420px){
-    .gallery{ grid-template-columns: 1fr; }
-  }
-
-  .peek{
-    border-radius:12px;
-    overflow:hidden;
-    border:1px solid rgba(255,255,255,0.06);
-    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    position:relative;
-    aspect-ratio: 16/10;
-    box-shadow: 0 8px 26px rgba(2,10,12,.18);
-  }
-  .peek img{ width:100%; height:100%; object-fit:cover; display:block; }
-  .peek .cap{
-    position:absolute;
-    left:10px; bottom:10px;
-    background: rgba(3,23,28,.78);
-    color: var(--soft-blue);
-    padding:6px 10px;
-    border-radius:999px;
-    font-weight:700;
-    font-size:0.85em;
+  /* SNEAK PEEK: Zephyr Mist background + 3-2-3 layout */
+  #sneakpeek{
+    padding:32px;
+    border-radius:18px;
+    background: linear-gradient(180deg, #0b3b5a 0%, #0f6a7d 50%, #0a9bb5 100%);
     border:1px solid rgba(255,255,255,0.04);
   }
 
-  /* Footer / discord button */
-  footer{ text-align:center; margin:38px 0 60px; }
-  .discord{
-    display:inline-block;
-    padding:12px 20px;
-    border-radius:999px;
-    background: linear-gradient(135deg,#5865f2,#2e5bff);
-    color:#fff;
-    font-weight:700;
-    text-decoration:none;
-    box-shadow: 0 0 28px rgba(46,91,255,.16);
+  .sneak-grid{
+    display:grid;
+    gap:20px;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas:
+      "i1 i2 i3"
+      ". i4 i5"
+      "i6 i7 i8";
+    align-items: center;
+    margin-top:10px;
   }
+
+  .sneak-grid .sneak-item{ border-radius:12px; overflow:hidden; position:relative; background: rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.05); box-shadow: 0 10px 30px rgba(2,10,12,.18); aspect-ratio: 16/10; display:flex; align-items:center; justify-content:center; }
+  .sneak-grid .sneak-item img{ width:100%; height:100%; object-fit:cover; display:block; }
+
+  .sneak-grid .s1{ grid-area: i1; } .sneak-grid .s2{ grid-area: i2; } .sneak-grid .s3{ grid-area: i3; }
+  .sneak-grid .s4{ grid-area: i4; } .sneak-grid .s5{ grid-area: i5; }
+  .sneak-grid .s6{ grid-area: i6; } .sneak-grid .s7{ grid-area: i7; } .sneak-grid .s8{ grid-area: i8; }
+
+  .sneak-item .cap{ position:absolute; left:12px; bottom:12px; background: rgba(0,0,0,0.65); padding:6px 12px; border-radius:999px; color:var(--soft-blue); font-weight:700; font-size:14px; border:1px solid rgba(255,255,255,0.04); }
+
+  @media (max-width:760px){
+    .sneak-grid{ grid-template-columns: 1fr 1fr; grid-template-areas: "i1 i2" "i3 i4" "i5 i6" "i7 i8"; }
+    .sneak-grid .s1{ grid-area: i1; } .sneak-grid .s2{ grid-area: i2; } .sneak-grid .s3{ grid-area: i3; } .sneak-grid .s4{ grid-area: i4; }
+    .sneak-grid .s5{ grid-area: i5; } .sneak-grid .s6{ grid-area: i6; } .sneak-grid .s7{ grid-area: i7; } .sneak-grid .s8{ grid-area: i8; }
+  }
+
+  @media (max-width:420px){
+    .sneak-grid{ grid-template-columns: 1fr; grid-template-areas: "i1" "i2" "i3" "i4" "i5" "i6" "i7" "i8"; }
+  }
+
+  footer{ text-align:center; margin:36px 0 60px; z-index:2; position:relative; }
+  .discord{ display:inline-block; padding:12px 20px; border-radius:999px; background: linear-gradient(135deg,#5865f2,#2e5bff); color:#fff; font-weight:700; text-decoration:none; box-shadow: 0 0 28px rgba(46,91,255,.16); }
 
   /* Particles */
-  .particle{
-    position:fixed;
-    z-index:0;
-    border-radius:50%;
-    background: radial-gradient(circle, rgba(178,255,255,.9), transparent 68%);
-    opacity:.62;
-    animation: floatUp linear infinite;
-    pointer-events:none;
-  }
-  @keyframes floatUp{
-    from{ transform: translateY(105vh) scale(.6); opacity:.6;}
-    to{ transform: translateY(-12vh) scale(1.2); opacity:0;}
-  }
+  .particle{ position:fixed; z-index:0; border-radius:50%; background: radial-gradient(circle, rgba(178,255,255,.9), transparent 68%); opacity:.62; animation: floatUp linear infinite; pointer-events:none; }
+  @keyframes floatUp{ from{ transform: translateY(105vh) scale(.6); opacity:.6; } to{ transform: translateY(-12vh) scale(1.2); opacity:0; } }
 
-  /* small helper to hide images that fail to load gracefully */
-  img.error { display:none; }
+  /* hide failed images */
+  img.error{ display:none; }
 </style>
 </head>
 <body>
-  <!-- Header / Home -->
   <header>
     <img src="Diama logo.png" alt="Diama SMP Logo" class="logo">
     <h1>DIAMA SMP</h1>
     <div class="subline">20+ active players • 24/7 online • Version 1.21.6 • Modern Minecraft Community</div>
 
-    <div class="ip-box" role="button" aria-label="Copy IP to clipboard">
+    <div class="ip-box" role="button" aria-label="Copy IP">
       <div class="ip-text" id="serverIP">DiamaSMP.aternos.me:12050</div>
       <button class="copy-btn" onclick="copyIP()">COPY IP</button>
     </div>
   </header>
 
-  <!-- NAV: in the requested order -->
   <nav>
     <button class="nav-btn active" data-target="roles">TEAM ROLES</button>
     <button class="nav-btn" data-target="features">FEATURES</button>
@@ -296,7 +263,7 @@
   </nav>
 
   <main>
-    <!-- TEAM ROLES (1) -->
+    <!-- TEAM ROLES -->
     <section id="roles" class="tab-section active">
       <h2>TEAM ROLES</h2>
       <div class="card-container">
@@ -314,7 +281,7 @@
       </div>
     </section>
 
-    <!-- FEATURES (2) 3 up / 3 down -->
+    <!-- FEATURES -->
     <section id="features" class="tab-section">
       <h2>FEATURES</h2>
       <div class="card-container">
@@ -328,7 +295,7 @@
       </div>
     </section>
 
-    <!-- RULES (3) -->
+    <!-- RULES -->
     <section id="rules" class="tab-section">
       <h2>SERVER RULES</h2>
       <div style="max-width:900px;margin:0 auto;text-align:left;line-height:1.9;">
@@ -340,7 +307,7 @@
       </div>
     </section>
 
-    <!-- REVIEWS (4) -->
+    <!-- REVIEWS -->
     <section id="reviews" class="tab-section">
       <h2>CREW REVIEWS</h2>
       <div class="card-container">
@@ -350,7 +317,7 @@
       </div>
     </section>
 
-    <!-- SHOP (5) -->
+    <!-- SHOP -->
     <section id="shop" class="tab-section">
       <h2>🛒 DIAMA SMP SHOP</h2>
       <div class="card-container">
@@ -365,20 +332,21 @@
       <p style="margin-top:14px; color: rgba(232,251,255,.9);">🕓 Requirements: Must have patience. No refunds once bought.</p>
     </section>
 
-    <!-- SNEAK PEEK (6) - only smp1..smp8 -->
+    <!-- SNEAK PEEK -->
     <section id="sneakpeek" class="tab-section">
       <h2>SNEAK PEEK</h2>
-      <div class="gallery">
-        <div class="peek"><img src="smp1.jpg" alt="SMP 01" onerror="this.classList.add('error')"><div class="cap">SMP 01</div></div>
-        <div class="peek"><img src="smp2.jpg" alt="SMP 02" onerror="this.classList.add('error')"><div class="cap">SMP 02</div></div>
-        <div class="peek"><img src="smp3.jpg" alt="SMP 03" onerror="this.classList.add('error')"><div class="cap">SMP 03</div></div>
 
-        <div class="peek"><img src="smp4.jpg" alt="SMP 04" onerror="this.classList.add('error')"><div class="cap">SMP 04</div></div>
-        <div class="peek"><img src="smp5.jpg" alt="SMP 05" onerror="this.classList.add('error')"><div class="cap">SMP 05</div></div>
-        <div class="peek"><img src="smp6.jpg" alt="SMP 06" onerror="this.classList.add('error')"><div class="cap">SMP 06</div></div>
+      <div class="sneak-grid">
+        <div class="sneak-item s1"><img src="smp1.jpg" alt="SMP 01" onerror="this.classList.add('error')"><div class="cap">SMP 01</div></div>
+        <div class="sneak-item s2"><img src="smp2.jpg" alt="SMP 02" onerror="this.classList.add('error')"><div class="cap">SMP 02</div></div>
+        <div class="sneak-item s3"><img src="smp3.jpg" alt="SMP 03" onerror="this.classList.add('error')"><div class="cap">SMP 03</div></div>
 
-        <div class="peek"><img src="smp7.jpg" alt="SMP 07" onerror="this.classList.add('error')"><div class="cap">SMP 07</div></div>
-        <div class="peek"><img src="smp8.jpg" alt="SMP 08" onerror="this.classList.add('error')"><div class="cap">SMP 08</div></div>
+        <div class="sneak-item s4"><img src="smp4.jpg" alt="SMP 04" onerror="this.classList.add('error')"><div class="cap">SMP 04</div></div>
+        <div class="sneak-item s5"><img src="smp5.jpg" alt="SMP 05" onerror="this.classList.add('error')"><div class="cap">SMP 05</div></div>
+
+        <div class="sneak-item s6"><img src="hulululu.png" alt="SMP 06" onerror="this.classList.add('error')"><div class="cap">SMP 06</div></div>
+        <div class="sneak-item s7"><img src="smp7.jpg" alt="SMP 07" onerror="this.classList.add('error')"><div class="cap">SMP 07</div></div>
+        <div class="sneak-item s8"><img src="smp8.jpg" alt="SMP 08" onerror="this.classList.add('error')"><div class="cap">SMP 08</div></div>
       </div>
     </section>
 
@@ -388,68 +356,66 @@
     <a class="discord" href="https://discord.gg/2UVgQdTjRZ" target="_blank" rel="noopener">Join Our Discord 💬</a>
   </footer>
 
-  <!-- SCRIPTS: tabs, particles, copy-ip -->
-  <script>
-    // Prevent flash-of-empty: mark JS present
-    document.body.classList.add('has-js');
+<!-- SCRIPTS -->
+<script>
+  // mark JS present (so sections hide until activated)
+  document.body.classList.add('has-js');
 
-    // TAB SYSTEM
-    (function(){
-      const buttons = document.querySelectorAll('.nav-btn');
-      const sections = document.querySelectorAll('main .tab-section');
+  // Tab system
+  (function(){
+    const buttons = document.querySelectorAll('.nav-btn');
+    const sections = document.querySelectorAll('main .tab-section');
 
-      function activate(id, btn){
-        sections.forEach(s => s.classList.remove('active'));
-        buttons.forEach(b => b.classList.remove('active'));
+    function activate(id, btn){
+      sections.forEach(s => s.classList.remove('active'));
+      buttons.forEach(b => b.classList.remove('active'));
 
-        const target = document.getElementById(id);
-        if(target) target.classList.add('active');
-        if(btn) btn.classList.add('active');
+      const target = document.getElementById(id);
+      if(target) target.classList.add('active');
+      if(btn) btn.classList.add('active');
 
-        // scroll to top for mobile / small screens
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
-
-      // initial: roles active (already set in HTML)
-      buttons.forEach(btn => {
-        btn.addEventListener('click', function(){
-          const id = btn.getAttribute('data-target');
-          activate(id, btn);
-        });
-      });
-    })();
-
-    // PARTICLES (zephyr feel)
-    (function spawnParticles(){
-      const count = 22;
-      for(let i=0;i<count;i++){
-        const p = document.createElement('div');
-        p.className = 'particle';
-        const size = Math.random() * 10 + 5;
-        p.style.width = size + 'px';
-        p.style.height = size + 'px';
-        p.style.left = (Math.random() * 100) + 'vw';
-        p.style.animationDuration = (8 + Math.random() * 7) + 's';
-        p.style.animationDelay = (Math.random() * 5) + 's';
-        document.body.appendChild(p);
-      }
-    })();
-
-    // COPY IP button
-    function copyIP(){
-      const ip = document.getElementById('serverIP').innerText.trim();
-      if(navigator.clipboard){
-        navigator.clipboard.writeText(ip).then(()=>{
-          // subtle in-page confirmation (not alert)
-          const b = document.querySelector('.copy-btn');
-          const orig = b.innerText;
-          b.innerText = 'COPIED';
-          setTimeout(()=> b.innerText = orig, 1300);
-        }).catch(()=> alert('Could not copy. Please copy manually: ' + ip));
-      } else {
-        alert('Copy not supported. IP: ' + ip);
-      }
+      // ensure visible on small screens
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-  </script>
+
+    // default active: roles (already set in HTML)
+    buttons.forEach(btn => {
+      btn.addEventListener('click', function(){
+        activate(btn.getAttribute('data-target'), btn);
+      });
+    });
+  })();
+
+  // particles (subtle zephyr feel)
+  (function spawnParticles(){
+    const count = 22;
+    for(let i=0;i<count;i++){
+      const p = document.createElement('div');
+      p.className = 'particle';
+      const size = Math.random() * 10 + 6;
+      p.style.width = size + 'px';
+      p.style.height = size + 'px';
+      p.style.left = (Math.random() * 100) + 'vw';
+      p.style.animationDuration = (8 + Math.random() * 7) + 's';
+      p.style.animationDelay = (Math.random() * 5) + 's';
+      document.body.appendChild(p);
+    }
+  })();
+
+  // copy IP
+  function copyIP(){
+    const ip = document.getElementById('serverIP').innerText.trim();
+    if(navigator.clipboard){
+      navigator.clipboard.writeText(ip).then(()=>{
+        const btn = document.querySelector('.copy-btn');
+        const orig = btn.innerText;
+        btn.innerText = 'COPIED';
+        setTimeout(()=> btn.innerText = orig, 1200);
+      }).catch(()=> alert('Copy failed — please copy manually: ' + ip));
+    } else {
+      alert('Copy not supported. IP: ' + ip);
+    }
+  }
+</script>
 </body>
 </html>
