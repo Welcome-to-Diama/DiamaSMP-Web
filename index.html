@@ -1,83 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Diama SMP Portal</title>
 
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Poppins:wght@400;600;800&display=swap');
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
 
+<style>
+  /* ================= GLOBAL THEME (Cascade Aqua Neon) ================= */
+  :root{
+    --bg1: #0d1b2a;
+    --bg2: #000814;
+    --aqua: #00f7ff;
+    --aqua-20: rgba(0,247,255,0.12);
+    --card: rgba(255,255,255,0.04);
+    --glass-border: rgba(0,255,255,0.18);
+    --accent-shadow: 0 0 30px rgba(0,247,255,0.14);
+  }
+
+  * { box-sizing: border-box; }
   body {
     margin: 0;
     font-family: "Poppins", sans-serif;
-    background: radial-gradient(circle at top, #0d1b2a, #000814 70%);
-    background-attachment: fixed;
-    overflow-x: hidden;
-    color: #fff;
-    text-align: center;
-    position: relative;
+    background: radial-gradient(circle at top, var(--bg1), var(--bg2) 70%);
+    color: #e9fbff;
     min-height: 100vh;
+    text-align: center;
+    overflow-x: hidden;
   }
 
-  h1, h2 {
+  /* Header */
+  header {
+    padding: 48px 20px 10px;
+    position: relative;
+    z-index: 5;
+  }
+  .logo {
+    width: 120px;
+    border-radius: 18px;
+    box-shadow: 0 0 30px rgba(0,247,255,0.18);
+    display: block;
+    margin: 0 auto 10px;
+  }
+  h1 {
     font-family: "Press Start 2P", cursive;
-    text-shadow: 0 0 15px #00ffff, 0 0 30px rgba(0, 255, 255, 0.5);
-    color: #00ffff;
+    color: var(--aqua);
+    margin: 6px 0;
+    font-size: 28px;
+    text-shadow: 0 0 12px var(--aqua), 0 0 36px rgba(0,247,255,0.3);
+  }
+  header p {
+    margin: 4px 0 12px;
+    color: #bfeff3;
   }
 
-  header img {
-    width: 130px;
-    border-radius: 20px;
-    box-shadow: 0 0 25px rgba(0, 255, 255, 0.5);
-  }
-
+  /* IP box */
   .ip-box {
-    display: inline-block;
-    background: rgba(0, 255, 255, 0.15);
-    padding: 12px 25px;
+    display:inline-block;
+    background: linear-gradient(180deg, rgba(0,255,255,0.06), rgba(0,0,0,0.12));
+    color: var(--aqua);
+    padding: 10px 18px;
     border-radius: 12px;
-    margin-top: 15px;
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 6px 24px rgba(0,247,255,0.06);
     cursor: pointer;
-    box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
-    transition: 0.3s;
-    font-weight: 600;
-    color: #00ffff;
+    font-weight: 700;
   }
-  .ip-box:hover { transform: scale(1.07); background: rgba(0,255,255,0.3); }
+  .ip-box:hover { transform: scale(1.05); }
 
   /* NAV */
   nav {
-    display: flex;
-    justify-content: center;
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    margin: 28px 12px;
     flex-wrap: wrap;
-    gap: 15px;
-    margin: 40px 0;
+    z-index: 5;
+    position: relative;
   }
-
   nav button {
-    background: linear-gradient(135deg, #00c6ff, #0077ff);
-    color: white;
+    background: linear-gradient(135deg,#00c6ff,#0077ff);
+    color:#fff;
     border: none;
-    padding: 10px 20px;
+    padding: 10px 18px;
     border-radius: 12px;
-    font-size: 0.9em;
     cursor: pointer;
+    font-weight: 700;
     font-family: "Press Start 2P", cursive;
-    transition: 0.3s;
-    box-shadow: 0 0 12px rgba(0, 200, 255, 0.4);
+    box-shadow: 0 6px 18px rgba(0,200,255,0.12);
+    transition: transform .18s ease, box-shadow .18s ease;
+  }
+  nav button:hover { transform: translateY(-4px); box-shadow: 0 10px 32px rgba(0,200,255,0.18); }
+  nav button.active {
+    background: linear-gradient(135deg,#00ffaa,#00ffff);
+    box-shadow: 0 12px 40px rgba(0,255,170,0.16);
   }
 
-  nav button:hover { transform: scale(1.1); background: linear-gradient(135deg,#00ffff,#00ff88); }
-  nav button.active { background: linear-gradient(135deg, #00ffaa, #00ffff); }
-
-  /* SECTIONS */
+  /* Sections with fade */
   section {
     display: none;
     opacity: 0;
-    transform: translateY(10px);
-    transition: 0.4s ease;
-    padding: 20px;
+    transform: translateY(12px);
+    transition: opacity .36s ease, transform .36s ease;
+    padding: 18px 20px 60px;
+    position: relative;
+    z-index: 3;
   }
   section.active {
     display: block;
@@ -85,168 +113,326 @@
     transform: translateY(0);
   }
 
+  /* Cards */
   .card-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 25px;
-    margin-top: 20px;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:22px;
+    margin-top:18px;
   }
-
   .card {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(0,255,255,0.2);
-    border-radius: 15px;
-    padding: 20px;
     width: 260px;
-    transition: 0.3s;
-    box-shadow: 0 0 20px rgba(0,255,255,0.15);
+    padding:18px;
+    border-radius:14px;
+    background: var(--card);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--accent-shadow);
+    text-align:left;
+    transition: transform .25s ease, box-shadow .25s ease;
   }
-  .card:hover { transform: translateY(-5px); box-shadow: 0 0 25px #00ffff; }
+  .card:hover { transform: translateY(-6px); box-shadow: 0 0 40px rgba(0,247,255,0.18); }
+  .card h3 { margin:0 0 8px; color:#d7ffff; font-size:14px; }
 
-  /* === SNEAK PEEK SUPER LARGE IMAGES === */
+  /* Shop specific */
+  #shop .card { background: linear-gradient(180deg, rgba(0,255,200,0.06), rgba(0,0,0,0.18)); }
+
+  /* Footer / discord */
+  footer { margin: 40px 0 90px; z-index:5; position: relative; }
+  .discord {
+    display:inline-block;
+    padding:12px 22px;
+    border-radius:24px;
+    background: linear-gradient(135deg,#5865f2,#3a45c9);
+    color:#fff;
+    text-decoration:none;
+    font-weight:700;
+    box-shadow: 0 10px 40px rgba(88,101,242,0.12);
+  }
+
+  /* ====== SNEAK PEEK (3-2-3 DIAMOND LAYOUT) ====== */
+  #sneak-peek { padding-top:36px; }
+  #sneak-peek h2 {
+    font-family: "Press Start 2P";
+    color: var(--aqua);
+    margin-bottom: 20px;
+    text-shadow: 0 0 12px var(--aqua), 0 0 36px rgba(0,247,255,0.22);
+    font-size: 30px;
+  }
+
   .sneak-grid {
+    width: 92%;
+    margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, auto);
-    gap: 55px;
-    justify-items: center;
+    grid-template-rows: auto auto auto;
+    gap: 56px;
     align-items: center;
-    margin-top: 25px;
+    justify-items: center;
+    position: relative;
   }
 
+  /* Named areas approach (visual map)
+     Row1: p1 p2 p3
+     Row2: .  p4 p5   (p4 on col2, p5 on col3)
+     Row3: p6 p7 p8
+  */
+  .sneak-grid img { 
+    width: 300px;             /* BIG images */
+    max-width: 92%;
+    border-radius: 18px;
+    box-shadow: 0 0 56px rgba(0,247,255,0.22);
+    transition: transform .25s ease, box-shadow .25s ease;
+    cursor: pointer;
+    display:block;
+  }
+  .sneak-grid img:hover { transform: scale(1.06); box-shadow: 0 0 84px rgba(0,247,255,0.28); }
+
+  /* Place each image in grid explicitly */
   .sneak-grid img:nth-child(1) { grid-column: 1; grid-row: 1; }
   .sneak-grid img:nth-child(2) { grid-column: 2; grid-row: 1; }
   .sneak-grid img:nth-child(3) { grid-column: 3; grid-row: 1; }
-  .sneak-grid img:nth-child(4) { grid-column: 2; grid-row: 2; }
+
+  .sneak-grid img:nth-child(4) { grid-column: 2; grid-row: 2; transform-origin: center; margin-left: 0; }
   .sneak-grid img:nth-child(5) { grid-column: 3; grid-row: 2; }
+
   .sneak-grid img:nth-child(6) { grid-column: 1; grid-row: 3; }
   .sneak-grid img:nth-child(7) { grid-column: 2; grid-row: 3; }
   .sneak-grid img:nth-child(8) { grid-column: 3; grid-row: 3; }
 
-  .sneak-grid img {
-    width: 230px;
-    border-radius: 15px;
-    box-shadow: 0 0 40px rgba(0,255,255,0.6);
-    transition: 0.3s;
-    cursor: pointer;
+  /* small screen responsiveness */
+  @media (max-width: 1100px) {
+    .sneak-grid img { width: 240px; }
+    .card { width: 220px; }
+    .card-container { gap:16px; }
   }
 
-  .sneak-grid img:hover {
-    transform: scale(1.2);
-    box-shadow: 0 0 55px #00ffff;
+  @media (max-width: 820px) {
+    nav { gap: 10px; padding: 0 8px; }
+    .sneak-grid {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: auto auto auto auto;
+      gap: 28px;
+      width: 96%;
+    }
+    /* remap to stack nicely on 2-col layout */
+    .sneak-grid img:nth-child(1) { grid-column: 1; grid-row: 1; }
+    .sneak-grid img:nth-child(2) { grid-column: 2; grid-row: 1; }
+    .sneak-grid img:nth-child(3) { grid-column: 1; grid-row: 2; }
+    .sneak-grid img:nth-child(4) { grid-column: 2; grid-row: 2; }
+    .sneak-grid img:nth-child(5) { grid-column: 1; grid-row: 3; }
+    .sneak-grid img:nth-child(6) { grid-column: 2; grid-row: 3; }
+    .sneak-grid img:nth-child(7) { grid-column: 1; grid-row: 4; }
+    .sneak-grid img:nth-child(8) { grid-column: 2; grid-row: 4; }
   }
 
-  /* FOOTER */
-  .discord {
-    background: linear-gradient(135deg, #5865f2, #3a45c9);
-    color: #fff;
-    padding: 12px 25px;
-    border-radius: 25px;
-    text-decoration: none;
-    transition: 0.3s;
+  @media (max-width: 460px) {
+    .sneak-grid img { width: 92%; }
+    .card { width: 92%; }
+    h1 { font-size: 18px; }
+    #sneak-peek h2 { font-size: 20px; margin-bottom: 18px; }
   }
-  .discord:hover { transform: scale(1.1); }
+
+  /* Floating particle style (keeps behind content) */
+  .particle {
+    position: fixed;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,247,255,0.9), transparent);
+    opacity: 0.5;
+    animation: float linear infinite;
+    z-index: 0;
+    pointer-events: none;
+  }
+  @keyframes float {
+    from { transform: translateY(100vh) scale(0.6); opacity: 0.6; }
+    to { transform: translateY(-10vh) scale(1.1); opacity: 0; }
+  }
 </style>
 </head>
 
 <body>
+  <header>
+    <img src="Diama logo.png" alt="Diama SMP Logo" class="logo">
+    <h1>Diama SMP</h1>
+    <p>20+ active players • 24/7 online • Version 1.21.6 • Modern Minecraft Community</p>
+    <div class="ip-box" onclick="copyIP()">DiamaSMP.aternos.me:12050</div>
+  </header>
 
-<header>
-  <img src="Diama logo.png" />
-  <h1>Diama SMP</h1>
-  <p>20+ active players • 24/7 online • Version 1.21.6</p>
-  <div class="ip-box" onclick="copyIP()">DiamaSMP.aternos.me:12050</div>
-</header>
+  <nav>
+    <button class="active" onclick="showTab('roles', this)">TEAM ROLES</button>
+    <button onclick="showTab('features', this)">FEATURES</button>
+    <button onclick="showTab('sneak-peek', this)">SNEAK PEEK</button>
+    <button onclick="showTab('rules', this)">RULES</button>
+    <button onclick="showTab('reviews', this)">REVIEWS</button>
+    <button onclick="showTab('shop', this)">SHOP</button>
+  </nav>
 
-<nav>
-  <button class="active" onclick="showTab('roles',this)">TEAM ROLES</button>
-  <button onclick="showTab('features',this)">FEATURES</button>
-  <button onclick="showTab('sneak',this)">SNEAK PEEK</button>
-  <button onclick="showTab('rules',this)">RULES</button>
-  <button onclick="showTab('reviews',this)">REVIEWS</button>
-  <button onclick="showTab('shop',this)">SHOP</button>
-</nav>
+  <!-- TEAM ROLES -->
+  <section id="roles" class="active">
+    <h2 style="font-family:'Press Start 2P'; color:var(--aqua); margin-bottom:8px;">TEAM ROLES</h2>
+    <div class="card-container">
+      <div class="card">
+        <h3>⟆ CAPTAIN ⋆ RAFAY ⟆</h3>
+        <p>Captain — Strategy & leadership</p>
+      </div>
+      <div class="card">
+        <h3>⟆ GAMER ⋆ AFFAN ⟆</h3>
+        <p>Founder — Server direction & vision</p>
+      </div>
+      <div class="card">
+        <h3>Ahmed | Blaze</h3>
+        <p>Co-Owner — Creative leadership</p>
+      </div>
+    </div>
 
-<!-- ROLES -->
-<section id="roles" class="active">
-  <h2>TEAM ROLES</h2>
-  <div class="card-container">
-    <div class="card"><h3>⟆ CAPTAIN ⋆ RAFAY ⟆</h3><p>Fearless strategist</p></div>
-    <div class="card"><h3>⟆ GAMER ⋆ AFFAN ⟆</h3><p>Owner — Foundation lead</p></div>
-    <div class="card"><h3>Ahmed | Blaze</h3><p>Co-Owner — Creative Lead</p></div>
-  </div>
-</section>
+    <div class="card-container" style="margin-top:12px;">
+      <div class="card">
+        <h3>FireX | Blaze</h3><p>Manager — Events & player support</p>
+      </div>
+      <div class="card">
+        <h3>🌊 Water Hashira</h3><p>Admin — Experienced staff</p>
+      </div>
+    </div>
+  </section>
 
-<!-- FEATURES -->
-<section id="features">
-  <h2>FEATURES</h2>
-  <div class="card-container">
-    <div class="card"><h3>🌍 24/7 Server</h3><p>Always online</p></div>
-    <div class="card"><h3>🛡 Active Staff</h3><p>Always helpful</p></div>
-    <div class="card"><h3>⚔ PvP</h3><p>Fight & explore</p></div>
-    <div class="card"><h3>🧠 Strategy</h3><p>Empire building</p></div>
-    <div class="card"><h3>🎁 Events</h3><p>Weekly rewards</p></div>
-    <div class="card"><h3>🌲 Economy</h3><p>Trade & grow</p></div>
-  </div>
-</section>
+  <!-- FEATURES -->
+  <section id="features">
+    <h2 style="font-family:'Press Start 2P'; color:var(--aqua); margin-bottom:8px;">FEATURES</h2>
+    <div class="card-container">
+      <div class="card"><h3>🌍 24/7 Server</h3><p>Always online for you.</p></div>
+      <div class="card"><h3>🛡️ Active Staff</h3><p>Helpful and friendly team.</p></div>
+      <div class="card"><h3>⚔️ PvP Adventures</h3><p>Fights, raids & fun.</p></div>
+      <div class="card"><h3>🧠 Strategy</h3><p>Collaborate & build empires.</p></div>
+      <div class="card"><h3>🎁 Events</h3><p>Weekly competitions & rewards.</p></div>
+      <div class="card"><h3>🌲 Survival Economy</h3><p>Trade, earn, and grow.</p></div>
+    </div>
+  </section>
 
-<!-- SNEAK PEEK -->
-<section id="sneak">
-  <h2>SNEAK PEEK</h2>
+  <!-- SNEAK PEEK -->
+  <section id="sneak-peek">
+    <h2>SNEAK PEEK</h2>
 
-  <div class="sneak-grid">
-    <img src="smp1.jpg">
-    <img src="smp2.jpg">
-    <img src="smp3.jpg">
-    <img src="smp4.jpg">
-    <img src="smp5.jpg">
-    <img src="hulululu.png">
-    <img src="smp7.jpg">
-    <img src="smp8.jpg">
-  </div>
-</section>
+    <div class="sneak-grid">
+      <!-- Order matters to match layout -->
+      <img src="smp1.jpg" alt="photo1">
+      <img src="smp2.jpg" alt="photo2">
+      <img src="smp3.jpg" alt="photo3">
+      <img src="smp4.jpg" alt="photo4">
+      <img src="smp5.jpg" alt="photo5">
+      <img src="hulululu.png" alt="photo6">
+      <img src="smp7.jpg" alt="photo7">
+      <img src="smp8.jpg" alt="photo8">
+    </div>
+  </section>
 
-<!-- RULES -->
-<section id="rules">
-  <h2>SERVER RULES</h2>
-  <p>Be respectful.</p>
-</section>
+  <!-- RULES -->
+  <section id="rules">
+    <h2 style="font-family:'Press Start 2P'; color:var(--aqua); margin-bottom:8px;">SERVER RULES</h2>
+    <div style="max-width:900px;margin:0 auto;text-align:left;line-height:1.8;padding:0 12px;">
+      <p>✅ <strong>Respect everyone</strong> — no hate speech or toxicity.</p>
+      <p>❌ <strong>No hacks or exploits.</strong></p>
+      <p>🏠 <strong>No spawn killing or griefing.</strong></p>
+      <p>⚔️ <strong>Fair PvP only.</strong></p>
+      <p>📛 <strong>Follow staff instructions.</strong></p>
+    </div>
+  </section>
 
-<!-- REVIEWS -->
-<section id="reviews">
-  <h2>REVIEWS</h2>
-  <div class="card-container">
-    <div class="card"><h3>Bhalutenx</h3><p>Never boring!</p></div>
-  </div>
-</section>
+  <!-- REVIEWS -->
+  <section id="reviews">
+    <h2 style="font-family:'Press Start 2P'; color:var(--aqua); margin-bottom:8px;">REVIEWS</h2>
+    <div class="card-container">
+      <div class="card"><h3>Bhalutenx</h3><p>Best SMP — never bored.</p></div>
+      <div class="card"><h3>CookieDevil</h3><p>Friendly staff & fun events.</p></div>
+      <div class="card"><h3>DiedGV</h3><p>Lively and loyal community.</p></div>
+    </div>
+  </section>
 
-<!-- SHOP -->
-<section id="shop">
-  <h2>SHOP</h2>
-  <div class="card-container">
-    <div class="card"><h3>ELITE</h3><p>550K OwO</p></div>
-  </div>
-</section>
+  <!-- SHOP -->
+  <section id="shop">
+    <h2 style="font-family:'Press Start 2P'; color:var(--aqua); margin-bottom:8px;">DIAMA SMP SHOP</h2>
+    <div class="card-container">
+      <div class="card"><h3>ELITE</h3><p>550K OwO</p></div>
+      <div class="card"><h3>OMEGA</h3><p>400K OwO</p></div>
+      <div class="card"><h3>IMMORTAL</h3><p>375K OwO</p></div>
+      <div class="card"><h3>BOOSTER KIT</h3><p>350K OwO</p></div>
+      <div class="card"><h3>ULTRA KIT</h3><p>250K OwO</p></div>
+      <div class="card"><h3>VIP KIT</h3><p>100K OwO</p></div>
+    </div>
+    <p style="color:#9fffd8;margin-top:18px;">🕓 Requirements: Must have patience. No refunds once bought.</p>
+  </section>
 
-<footer>
-  <a href="https://discord.gg/2UVgQdTjRZ" class="discord">Join Discord</a>
-</footer>
+  <footer>
+    <a class="discord" href="https://discord.gg/2UVgQdTjRZ" target="_blank">Join Our Discord 💬</a>
+  </footer>
 
-<script>
-  function copyIP() {
-    navigator.clipboard.writeText("DiamaSMP.aternos.me:12050");
-    alert("IP Copied!");
-  }
+  <!-- Floating particles (kept from your original style) -->
+  <script>
+    // generate particles behind everything
+    const particleCount = 22;
+    for (let i=0;i<particleCount;i++){
+      const p = document.createElement('div');
+      p.className = 'particle';
+      const size = Math.random()*10 + 6;
+      p.style.width = size + 'px';
+      p.style.height = size + 'px';
+      p.style.left = Math.random()*100 + 'vw';
+      p.style.top = (100 + Math.random()*20) + 'vh';
+      p.style.animationDuration = (10 + Math.random()*10) + 's';
+      p.style.animationDelay = (Math.random()*4) + 's';
+      document.body.appendChild(p);
+    }
 
-  function showTab(id, btn) {
-    document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
-    document.getElementById(id).classList.add("active");
+    // basic tab system with fade
+    function showTab(tabId, btn){
+      const all = document.querySelectorAll('section');
+      const buttons = document.querySelectorAll('nav button');
 
-    document.querySelectorAll("nav button").forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-  }
-</script>
+      // disable briefly to prevent spam
+      buttons.forEach(b => b.disabled = true);
 
+      const current = document.querySelector('section.active');
+      if (current) {
+        current.classList.remove('active');
+        current.classList.add('fade-out');
+      }
+
+      setTimeout(() => {
+        all.forEach(s => {
+          s.style.display = 'none';
+          s.classList.remove('active','fade-out');
+        });
+
+        const next = document.getElementById(tabId);
+        if (next) {
+          next.style.display = 'block';
+          // small delay to allow CSS to animate
+          requestAnimationFrame(()=> next.classList.add('active'));
+        }
+
+        buttons.forEach(b => b.classList.remove('active'));
+        if (btn) btn.classList.add('active');
+        buttons.forEach(b => b.disabled = false);
+      }, 260);
+    }
+
+    // initial section visibility for hosts that hide block elements
+    document.addEventListener('DOMContentLoaded', ()=>{
+      document.querySelectorAll('section').forEach(s=>{
+        if (s.classList.contains('active')) s.style.display = 'block';
+        else s.style.display = 'none';
+      });
+    });
+
+    // copy IP
+    function copyIP(){
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText('DiamaSMP.aternos.me:12050').then(()=>{
+          alert('✅ IP copied to clipboard!');
+        });
+      } else {
+        alert('Copy: DiamaSMP.aternos.me:12050');
+      }
+    }
+  </script>
 </body>
 </html>
