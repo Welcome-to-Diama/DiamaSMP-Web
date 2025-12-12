@@ -1,303 +1,245 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Diama SMP Portal</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diama SMP — Official Portal</title>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap');
 
 :root{
-  --aqua: #00eaff;
-  --dark: #021b2c;
+  --a1:#00eaff;
+  --a2:#00bfff;
+  --bg:#050505;
+  --glass:rgba(255,255,255,0.08);
 }
 
-/* GLOBAL */
-body{
+*{
   margin:0;
-  font-family:'Poppins',sans-serif;
-  background: radial-gradient(circle at top, #03293f, #021b2c 60%);
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  background:var(--bg);
+  font-family:"Poppins",sans-serif;
   color:white;
   overflow-x:hidden;
 }
 
-h1,h2,h3{
-  text-shadow:0 0 15px var(--aqua);
-}
-
-section{
-  display:none;
-  padding:70px 20px;
-  text-align:center;
-}
-
-section.active{
-  display:block;
-}
-
-/* NAVIGATION */
-nav{
+/* HERO SECTION */
+.hero{
+  height:90vh;
+  background:linear-gradient(135deg,#00d0ff33,#0095ff33), url('banner.jpg');
+  background-size:cover;
+  background-position:center;
   display:flex;
+  align-items:center;
   justify-content:center;
-  gap:20px;
+  text-align:center;
   padding:20px;
-  background:#031f31aa;
-  backdrop-filter:blur(6px);
-  position:sticky;
-  top:0;
-  z-index:10;
 }
 
-nav button{
-  background:none;
-  border:2px solid var(--aqua);
-  padding:10px 18px;
-  color:var(--aqua);
-  cursor:pointer;
-  font-weight:600;
-  transition:0.3s;
-  border-radius:10px;
+.hero h1{
+  font-size:54px;
+  font-weight:800;
+  letter-spacing:2px;
+  text-shadow:0 0 20px #00eaff;
 }
 
-nav button:hover{
-  background:var(--aqua);
-  color:#000;
+.hero p{
+  font-size:20px;
+  margin-top:10px;
+  opacity:0.8;
 }
 
-/* HERO */
-.hero-container{
-  margin-top:80px;
-}
-
-.hero-logo{
-  width:300px;
-  filter:drop-shadow(0 0 25px rgba(0,255,255,0.7));
-  margin-bottom:20px;
-}
-
-.join-btn{
-  background:var(--aqua);
-  color:#000;
-  font-weight:600;
+.button{
+  margin-top:25px;
+  padding:12px 24px;
+  background:linear-gradient(135deg,var(--a1),var(--a2));
   border:none;
-  padding:12px 25px;
-  border-radius:10px;
+  border-radius:12px;
+  color:#000;
+  font-weight:700;
   cursor:pointer;
-  font-size:16px;
-  margin-top:15px;
+  font-size:18px;
   transition:0.3s;
 }
 
-.join-btn:hover{
-  opacity:0.75;
+.button:hover{
+  transform:scale(1.05);
 }
 
-/* FEATURES */
-.features-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:25px;
-  max-width:1100px;
-  margin:auto;
+/* SECTIONS */
+section{
+  padding:70px 10%;
 }
 
-.feature-box{
-  background:#032033;
+/* GLASS CARD */
+.card{
+  background:var(--glass);
   padding:25px;
-  border-radius:15px;
-  border:2px solid #00eaff44;
-  box-shadow:0 0 15px #00eaff22 inset;
+  border-radius:14px;
+  border:1px solid #00eaff44;
+  box-shadow:0 0 15px #00eaff55;
+  backdrop-filter:blur(8px);
+  transition:0.3s;
 }
 
-/* SHOP */
-.shop-grid{
+.card:hover{
+  transform:translateY(-5px);
+}
+
+/* FEATURES GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:25px;
+}
+
+/* HEADERS */
+h2{
+  text-align:center;
+  font-size:38px;
+  margin-bottom:40px;
+  text-shadow:0 0 10px var(--a1);
+  font-weight:800;
+}
+
+/* DEVELOPER SECTION */
+.dev-box{
+  display:flex;
+  gap:30px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+
+.dev-box img{
+  width:180px;
+  height:180px;
+  object-fit:cover;
+  border-radius:50%;
+  border:3px solid var(--a1);
+  box-shadow:0 0 20px var(--a1);
+}
+
+.dev-box div{
+  max-width:500px;
+}
+
+/* SNEAK PEEK GALLERY */
+.gallery{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:25px;
-  max-width:1100px;
-  margin:auto;
+  gap:20px;
 }
 
-.shop-card{
-  background:#032033;
-  padding:20px;
-  border-radius:15px;
-  border:2px solid #00eaff66;
-  box-shadow:0 0 15px #00eaff33;
-}
-
-.shop-card h3{
-  margin:0;
-  font-size:22px;
-}
-
-.price{
-  font-size:18px;
-  margin-top:8px;
-  color:var(--aqua);
-  font-weight:700;
-}
-
-/* TEAM ROLES */
-.roles-box{
-  background:#032033;
-  border:2px solid #00eaff55;
-  padding:20px;
-  border-radius:15px;
-  margin:10px auto;
-  max-width:700px;
-  box-shadow:0 0 15px #00eaff22 inset;
-}
-
-/* SNEAK PEEK (unchanged layout except text & images) */
-.sneak-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:25px;
-  max-width:1100px;
-  margin:auto;
-}
-
-.sneak-img{
+.gallery img{
   width:100%;
-  height:200px;
+  height:180px;
   object-fit:cover;
-  border-radius:20px;
-  box-shadow:0 0 15px #00eaff33;
-  border:2px solid #00eaff55;
+  border-radius:12px;
+  border:2px solid var(--a1);
+  box-shadow:0 0 12px var(--a1);
 }
 
 /* FOOTER */
 footer{
-  margin-top:60px;
-  padding:20px;
   text-align:center;
-  color:#9bdfff;
+  padding:20px;
+  background:#000;
+  margin-top:40px;
+  opacity:0.6;
 }
-
 </style>
-
-<script>
-function switchTab(tab){
-  document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
-  document.getElementById(tab).classList.add("active");
-}
-</script>
 
 </head>
 <body>
 
-<!-- NAVIGATION -->
-<nav>
-  <button onclick="switchTab('home')">Home</button>
-  <button onclick="switchTab('features')">Features</button>
-  <button onclick="switchTab('rules')">Rules</button>
-  <button onclick="switchTab('roles')">Team</button>
-  <button onclick="switchTab('shop')">Shop</button>
-  <button onclick="switchTab('sneak')">Sneak Peek</button>
-</nav>
-
-<!-- HOME -->
-<section id="home" class="active">
-  <div class="hero-container">
-      <img src="Diama logo.png" class="hero-logo" alt="Diama Logo">
-      <h1>DIAMA SMP</h1>
-      <p>The most advanced, feature-packed Minecraft SMP experience.</p>
-      <button class="join-btn">Join Discord</button>
+<!-- HERO -->
+<div class="hero">
+  <div>
+    <h1>DIAMA SMP</h1>
+    <p>The most advanced, feature-packed Minecraft SMP experience.</p>
+    <button class="button">Join Discord</button>
   </div>
-</section>
+</div>
 
 <!-- FEATURES -->
-<section id="features">
-  <h2>FEATURES</h2>
-  <div class="features-grid">
-    <div class="feature-box">● Lifesteal System</div>
-    <div class="feature-box">● Custom Enchants</div>
-    <div class="feature-box">● Balanced Economy</div>
-    <div class="feature-box">● Crates & Rewards</div>
-    <div class="feature-box">● SMP + Events</div>
-    <div class="feature-box">● Anti-Grief Protection</div>
+<section>
+<h2>⚡ FEATURES</h2>
+<div class="grid">
+  <div class="card">⚔ Lifesteal System<br><small>Dynamic gameplay balance.</small></div>
+  <div class="card">🏰 Protected Claims<br><small>Your builds stay safe.</small></div>
+  <div class="card">🔥 Custom Items<br><small>Unique crafting additions.</small></div>
+  <div class="card">🛡 Anti-Grief System<br><small>Play without worry.</small></div>
+  <div class="card">🐉 Dungeon Events<br><small>Boss fights + rare loot.</small></div>
+  <div class="card">💱 Trade System<br><small>Economy made fair.</small></div>
+</div>
+</section>
+
+<!-- DEVELOPER -->
+<section>
+<h2>💻 DEVELOPER</h2>
+
+<div class="dev-box">
+  <img src="developer.jpg">
+  <div>
+    <h3 style="font-size:28px;color:var(--a1);">You — Lead Developer</h3>
+    <p>
+      You are the mastermind behind Diama SMP’s systems, plugins, features, and overall experience.
+      Your work powers the server’s unique gameplay, custom mechanics, anti-grief safety,
+      and premium-quality events.
+    </p>
   </div>
+</div>
 </section>
 
-<!-- RULES -->
-<section id="rules">
-  <h2>RULES</h2>
-  <p>No hacking, no griefing, no toxicity, respect all players.</p>
+<!-- TEAM ROLES -->
+<section>
+<h2>🛡 TEAM ROLES</h2>
+<div class="grid">
+  <div class="card">👑 Owner — Affan</div>
+  <div class="card">👑 Owner — Rafay</div>
+  <div class="card">🪄 Founder — Wizard OP</div>
+  <div class="card">🛠 Senior Dev — You</div>
+  <div class="card">🔥 Manager — FireX</div>
+  <div class="card">🛡 Admin — Silent Slayer</div>
+  <div class="card">⚙ Moderator — IceStorm</div>
+  <div class="card">🎮 Staff — GamerPro</div>
+</div>
 </section>
 
-<!-- TEAM -->
-<section id="roles">
-  <h2>TEAM ROLES</h2>
-
-  <div class="roles-box"><strong>Owner:</strong> Ahmed</div>
-  <div class="roles-box"><strong>Owner:</strong> Rafay</div>
-  <div class="roles-box"><strong>Founder:</strong> Affan</div>
-  <div class="roles-box"><strong>Senior Dev:</strong> iamnoobatpc</div>
-  <div class="roles-box"><strong>Manager:</strong> FireX</div>
-  <div class="roles-box"><strong>Admin:</strong> Silent Slayer</div>
-  <div class="roles-box"><strong>Moderator:</strong> Frosty</div>
-  <div class="roles-box"><strong>Helper:</strong> Nova</div>
-  <div class="roles-box"><strong>Support:</strong> Pixel</div>
-
+<!-- SNEAK PEEK -->
+<section>
+<h2>👀 SNEAK PEEK</h2>
+<div class="gallery">
+  <img src="smp1.jpg">
+  <img src="smp2.jpg">
+  <img src="smp3.jpg">
+  <img src="smp4.jpg">
+  <img src="smp5.jpg">
+  <img src="smp6.jpg">
+  <img src="smp7.jpg">
+  <img src="smp8.jpg">
+</div>
 </section>
 
 <!-- SHOP -->
-<section id="shop">
-  <h2>SHOP</h2>
-  <div class="shop-grid">
-
-    <div class="shop-card">
-      <h3>Elite Rank</h3>
-      <div class="price">550k OwO</div>
-    </div>
-
-    <div class="shop-card">
-      <h3>Omega Rank</h3>
-      <div class="price">400k OwO</div>
-    </div>
-
-    <div class="shop-card">
-      <h3>Immortal Rank</h3>
-      <div class="price">375k OwO</div>
-    </div>
-
-    <div class="shop-card">
-      <h3>Booster Kit</h3>
-      <div class="price">350k OwO</div>
-    </div>
-
-    <div class="shop-card">
-      <h3>Ultra Kit</h3>
-      <div class="price">250k OwO</div>
-    </div>
-
-    <div class="shop-card">
-      <h3>VIP Kit</h3>
-      <div class="price">100k OwO</div>
-    </div>
-
-  </div>
+<section>
+<h2>🛒 SHOP</h2>
+<div class="grid">
+  <div class="card">Rank — Knight</div>
+  <div class="card">Rank — Emperor</div>
+  <div class="card">Rank — Titan</div>
+  <div class="card">Custom Tags</div>
+</div>
 </section>
 
-<!-- SNEAK PEEK (your images kept as-is) -->
-<section id="sneak">
-  <h2>SNEAK PEEK</h2>
-  <div class="sneak-grid">
-    <img src="smp1.jpg" class="sneak-img">
-    <img src="smp2.jpg" class="sneak-img">
-    <img src="smp3.jpg" class="sneak-img">
-    <img src="smp4.jpg" class="sneak-img">
-    <img src="smp5.jpg" class="sneak-img">
-    <img src="smp6.jpg" class="sneak-img">
-    <img src="smp7.jpg" class="sneak-img">
-    <img src="smp8.jpg" class="sneak-img">
-  </div>
-</section>
-
+<!-- FOOTER -->
 <footer>
-  © 2025 Diama SMP — Developed by You
+  © 2025 Diama SMP — All Rights Reserved.
 </footer>
 
 </body>
