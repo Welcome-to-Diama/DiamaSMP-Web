@@ -5,11 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Diama SMP | Official Portal</title>
 
-<!-- FONTS -->
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
 
 <style>
-/* ROOT COLORS */
 :root{
   --cyan:#00eaff;
   --cyan-soft:#00eaff88;
@@ -30,14 +28,16 @@ h1,h2,h3{
   font-family:'Press Start 2P', cursive;
 }
 
-/* HERO FULLSCREEN */
+/* HERO WITH LOGO IMAGE */
 .hero{
+  position:relative;
   height:100vh;
   width:100%;
   background:
-    linear-gradient(180deg, #03121fbb, #000000dd),
-    url('banner.jpg');
-  background-size:cover;
+    linear-gradient(180deg, #03121fcc, #000000ee),
+    url('Diama logo.png');
+  background-size:contain;
+  background-repeat:no-repeat;
   background-position:center;
   background-attachment:fixed;
   display:flex;
@@ -45,21 +45,36 @@ h1,h2,h3{
   justify-content:center;
   text-align:center;
   padding:20px;
-  box-shadow: inset 0 0 150px #000;
+  box-shadow: inset 0 0 200px #000;
+}
+
+/* EXTRA DIM LAYER (for premium look) */
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle at center, transparent 40%, #000 85%);
+  z-index:1;
+}
+
+/* HERO CONTENT */
+.hero-content{
+  position:relative;
+  z-index:2;
 }
 
 .hero h1{
-  font-size:60px;
-  font-weight:800;
+  font-size:56px;
+  margin-bottom:10px;
   text-shadow:0 0 25px var(--cyan), 0 0 50px var(--cyan-soft);
 }
 
 .hero p{
   font-size:22px;
   opacity:0.85;
-  margin-top:10px;
 }
 
+/* BUTTON */
 .button{
   margin-top:25px;
   padding:15px 40px;
@@ -90,7 +105,7 @@ h2{
   text-shadow:0 0 15px var(--cyan);
 }
 
-/* GRID SECTIONS */
+/* GRID */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
@@ -111,7 +126,7 @@ h2{
   box-shadow:0 0 35px #00eaffaa;
 }
 
-/* DEVELOPER */
+/* DEV */
 .dev-box{
   display:flex;
   justify-content:center;
@@ -129,7 +144,7 @@ h2{
   box-shadow:0 0 25px var(--cyan);
 }
 
-/* SNEAK GALLERY */
+/* GALLERY */
 .gallery{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
@@ -160,7 +175,7 @@ footer{
 
 <!-- HERO -->
 <div class="hero">
-  <div>
+  <div class="hero-content">
     <h1>DIAMA SMP</h1>
     <p>The most advanced, feature-packed Minecraft SMP experience.</p>
     <button class="button">Join Discord</button>
@@ -183,15 +198,12 @@ footer{
 <!-- DEVELOPER -->
 <section>
   <h2>💻 DEVELOPER</h2>
-
   <div class="dev-box">
     <img src="developer.jpg">
     <div style="max-width:500px;">
-      <h3 style="color:var(--cyan);font-size:22px;">You — Lead Developer</h3>
+      <h3 style="color:var(--cyan);">You — Lead Developer</h3>
       <p>
-        You are the mastermind behind Diama SMP’s systems, plugins, features, and overall experience.
-        Your work powers the server’s unique gameplay, custom mechanics, anti-grief safety,
-        and premium-quality events.
+        You are the mastermind behind Diama SMP’s systems, plugins, and features.
       </p>
     </div>
   </div>
@@ -216,14 +228,8 @@ footer{
 <section>
   <h2>👀 SNEAK PEEK</h2>
   <div class="gallery">
-    <img src="smp1.jpg">
-    <img src="smp2.jpg">
-    <img src="smp3.jpg">
-    <img src="smp4.jpg">
-    <img src="smp5.jpg">
-    <img src="smp6.jpg">
-    <img src="smp7.jpg">
-    <img src="smp8.jpg">
+    <img src="smp1.jpg"><img src="smp2.jpg"><img src="smp3.jpg"><img src="smp4.jpg">
+    <img src="smp5.jpg"><img src="hulululu.png"><img src="smp7.jpg"><img src="smp8.jpg">
   </div>
 </section>
 
@@ -240,7 +246,6 @@ footer{
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   © 2025 Diama SMP — All Rights Reserved.
 </footer>
